@@ -1,3 +1,5 @@
+/*
+
 package inf112.moustachmania.app;
 
 import com.badlogic.gdx.ApplicationListener;
@@ -107,3 +109,5 @@ public class HelloWorld implements ApplicationListener {
 	public void resume() {
 	}
 }
+
+*/
