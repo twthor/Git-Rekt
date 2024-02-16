@@ -19,26 +19,24 @@ public class Model {
     }
 
     public void updatePosition() {
-        // Create a new rectangle to represent the sprite's potential new position for X movement
         Rectangle tempRectX = new Rectangle(spriteRect);
-        tempRectX.x += (int) dx; // Attempt to move in the X direction
+        tempRectX.x += (int) dx; // Forsøke å gå i X retning
 
-        // Check if the new position is within the screen bounds in the X direction
+        // Sjekke ny posisjon er innenfor skjermen
         if (screenRect.contains(tempRectX)) {
-            spriteRect.x += (int) dx; // Apply movement if within bounds
+            spriteRect.x += (int) dx; // Dersom innenfor skjermen, forsøk å bevege seg.
         } else {
-            dx = -dx; // Reverse direction if out of bounds
+            dx = -dx; // motsatt retning om ikke innenfor skjermen
         }
 
-        // Create a new rectangle for the Y movement, similar to the X direction
+        // Samme som for X-retning, men her for Y-retning
         Rectangle tempRectY = new Rectangle(spriteRect);
-        tempRectY.y += (int) dy; // Attempt to move in the Y direction
+        tempRectY.y += (int) dy;
 
-        // Check if the new position is within the screen bounds in the Y direction
         if (screenRect.contains(tempRectY)) {
-            spriteRect.y += (int) dy; // Apply movement if within bounds
+            spriteRect.y += (int) dy;
         } else {
-            dy = -dy; // Reverse direction if out of bounds
+            dy = -dy;
         }
     }
 

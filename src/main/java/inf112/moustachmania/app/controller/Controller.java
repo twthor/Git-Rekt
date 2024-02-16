@@ -11,9 +11,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import inf112.moustachmania.app.model.Model;
 import inf112.moustachmania.app.view.View;
 
-public class Controller implements Controllable, ApplicationListener { // Capitalized class name
+public class Controller implements Controllable, ApplicationListener {
     private Model model;
-    private View view; // Now correctly refers to your custom View class
+    private View view;
     private Sound bellSound;
 
     @Override
@@ -26,7 +26,7 @@ public class Controller implements Controllable, ApplicationListener { // Capita
         Gdx.graphics.setForegroundFPS(60);
 
         model = new Model(spriteImage);
-        view = new View(batch, font, spriteImage); // Correct instantiation of your View
+        view = new View(batch, font, spriteImage);
     }
 
     @Override
@@ -53,13 +53,12 @@ public class Controller implements Controllable, ApplicationListener { // Capita
 
     @Override
     public void dispose() {
-        // Assuming your View class has a dispose method to dispose of the SpriteBatch, BitmapFont, and Texture
-        view.dispose(); // Ensure this method exists and properly disposes of the resources
+        view.dispose();
         bellSound.dispose();
-        // You should also dispose of the model's Texture resource if not handled by the View
+        // Huske å dispose nye ting.
     }
 
-    // Implement pause and resume if necessary
+    // Implementere pauses og resume
     @Override
     public void pause() {}
 
