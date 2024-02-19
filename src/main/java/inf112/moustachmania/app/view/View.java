@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import inf112.moustachmania.app.model.Model;
 
-public class View implements Viewable {
+public class View  {
     private final SpriteBatch batch;
     private final BitmapFont font;
     private final Texture spriteImage;

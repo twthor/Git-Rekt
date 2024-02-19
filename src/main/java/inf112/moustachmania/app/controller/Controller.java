@@ -11,7 +11,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import inf112.moustachmania.app.model.Model;
 import inf112.moustachmania.app.view.View;
 
-public class Controller implements Controllable, ApplicationListener {
+public class Controller implements ApplicationListener {
     private Model model;
     private View view;
     private Sound bellSound;
