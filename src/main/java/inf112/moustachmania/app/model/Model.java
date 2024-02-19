@@ -1,10 +1,17 @@
 package inf112.moustachmania.app.model;
 
 import com.badlogic.gdx.graphics.Texture;
+import inf112.moustachmania.app.controller.ControllableModel;
+import inf112.moustachmania.app.player.Player;
+import inf112.moustachmania.app.view.ViewableModel;
 
 import java.awt.*;
 
-public class Model {
+public class Model implements ViewableModel, ControllableModel {
+
+    // Field variables
+    private Player player;
+
     public Rectangle spriteRect;
     public float dx = 1, dy = 1;
     private final Rectangle screenRect = new Rectangle();
@@ -40,4 +47,38 @@ public class Model {
         }
     }
 
+    @Override
+    public void setGameOver() {
+
+    }
+
+    @Override
+    public int timeBetweenTick() {
+        return 0;
+    }
+
+    @Override
+    public void clockTick() {
+
+    }
+
+    @Override
+    public boolean isMoving() {
+        return false;
+    }
+
+    @Override
+    public void startGame() {
+
+    }
+
+    @Override
+    public void render() {
+
+    }
+
+    @Override
+    public void dispose() {
+
+    }
 }
