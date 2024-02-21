@@ -1,6 +1,7 @@
 package inf112.moustachmania.app.model;
 
 import com.badlogic.gdx.graphics.Texture;
+import inf112.moustachmania.app.Screens.GameState;
 import inf112.moustachmania.app.controller.ControllableModel;
 import inf112.moustachmania.app.player.Player;
 import inf112.moustachmania.app.view.ViewableModel;
@@ -14,10 +15,12 @@ public class Model implements ViewableModel, ControllableModel {
 
     public Rectangle spriteRect;
     public float dx = 1, dy = 1;
+    public GameState state;
     private final Rectangle screenRect = new Rectangle();
 
     public Model(Texture spriteImage) {
         spriteRect = new Rectangle(1, 1, spriteImage.getWidth() / 2, spriteImage.getHeight() / 2);
+        this.state = GameState.START_SCREEN;
     }
 
     public void updateScreenSize(int width, int height) {
@@ -80,5 +83,10 @@ public class Model implements ViewableModel, ControllableModel {
     @Override
     public void dispose() {
 
+    }
+
+    @Override
+    public GameState getGameState() {
+        return state;
     }
 }

@@ -1,4 +1,4 @@
-package inf112.moustachmania.app.model;
+package inf112.moustachmania.app.Screens;
 
 public enum GameState {
     START_SCREEN,
