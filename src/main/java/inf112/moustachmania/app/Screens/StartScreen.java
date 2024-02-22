@@ -19,10 +19,6 @@ import inf112.moustachmania.app.Main;
 public class StartScreen implements Screen {
     private final Stage stage;
     private final Main game;
-    /*
-
-
-     */
 
     // Constructor
     public StartScreen(final Main game) {
@@ -41,6 +37,21 @@ public class StartScreen implements Screen {
                 //handleNewGameButtonEvent();
             }
         });
+        buttonTable.add(textButton).spaceBottom(10).fillX();
+        buttonTable.row();
+        textButton = new TextButton("perhaps continue game???", game.getSkin());
+        textButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                //handleNewGameButtonEvent();
+
+                //mulig flytte dette opp eller til en egen metode
+                game.startScreen = new StartScreen(game);
+                game.setScreen(game.startScreen);
+                //dispose();
+            }
+        });
+
     }
     @Override
     public void show() {
@@ -60,7 +71,9 @@ public class StartScreen implements Screen {
 
     @Override
     public void dispose() {
+        stage.dispose();
     }
+
 
     @Override
     public void pause() {}
