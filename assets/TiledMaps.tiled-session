@@ -8,15 +8,14 @@
     ],
     "fileStates": {
         "base.tsx": {
-            "scaleInDock": 1,
-            "scaleInEditor": 2.69
+            "scaleInDock": 1
         },
         "map_1.tmx": {
-            "scale": 2.09,
-            "selectedLayer": 3,
+            "scale": 2.1206,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 61.961722488038276,
-                "y": 72.48803827751198
+                "x": 399.65104215787983,
+                "y": 52.34367631802321
             }
         }
     },
@@ -26,12 +25,10 @@
     "map.tileHeight": 16,
     "map.tileWidth": 16,
     "openFiles": [
-        "map_1.tmx",
-        "base.tsx"
+        "map_1.tmx"
     ],
     "project": "TiledMaps.tiled-project",
     "recentFiles": [
-        "base.tsx",
         "map_1.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
