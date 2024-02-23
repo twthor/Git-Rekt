@@ -1,11 +1,8 @@
 {
-    "Map/SizeTest": {
-        "height": 4300,
-        "width": 2
-    },
     "activeFile": "map_1.tmx",
     "expandedProjectPaths": [
     ],
+    "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
         "base.tsx": {
             "scaleInDock": 1
@@ -19,11 +16,7 @@
             }
         }
     },
-    "last.imagePath": "/Users/minatolfsen/Documents/UIB/6 semester/INF112/git-rekt/assets",
-    "map.lastUsedFormat": "tmx",
-    "map.renderOrder": "3",
-    "map.tileHeight": 16,
-    "map.tileWidth": 16,
+    "last.externalTilesetPath": "/Users/minatolfsen/Documents/UIB/6 semester/INF112/git-rekt/assets",
     "openFiles": [
         "map_1.tmx"
     ],
@@ -31,9 +24,5 @@
     "recentFiles": [
         "map_1.tmx"
     ],
-    "tileset.lastUsedFormat": "tsx",
-    "tileset.tileSize": {
-        "height": 16,
-        "width": 16
-    }
+    "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)"
 }
