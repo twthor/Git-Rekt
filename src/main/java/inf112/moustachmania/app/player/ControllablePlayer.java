@@ -1,23 +1,25 @@
 package inf112.moustachmania.app.player;
 
+import java.awt.*;
+
 public interface ControllablePlayer {
     /**
      * Gets the position of the Player.
      * @return array of x and y coordinates of the player.
      */
-    int[] getPosition();
+    Point getPosition();
 
     /**
      * Updates the position of the player.
      * @param pos array of the new x and y coordinates of the player.
      */
-    void setPosition(int[] pos);
+    void setPosition(Point pos);
 
     /**
      *
      * @param pos
      */
-    void setDestination(int[] pos);
+    void setDestination(Point pos);
 
     /**
      * Checks if the player reached the goal in the game.

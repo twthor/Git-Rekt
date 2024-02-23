@@ -2,7 +2,7 @@ package inf112.moustachmania.app.player;
 
 import java.awt.*;
 
-public interface ViewablePlayer {
+public interface ViewableCharacter {
 
     /**
      * Gets the position of the player
@@ -13,8 +13,9 @@ public interface ViewablePlayer {
 
 
     /**
-     * Gets the character of the Player
+     * Gets the character of the entity.
      */
-    void getPlayer();
+    void getCharacter();
+
 
 }

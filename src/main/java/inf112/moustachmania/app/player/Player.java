@@ -1,11 +1,13 @@
 package inf112.moustachmania.app.player;
 
-public class Player implements ViewablePlayer, ControllablePlayer {
+import java.awt.*;
+
+public class Player implements ViewableCharacter, ControllablePlayer {
 
     // field variables
     // private final Figure figure;
-    private int[] position;
-    private int[] destination;
+    private Point position;
+    private Point destination;
     // // Tenker mål kan angis ved koordinater.
     // private int[] finishline;
     // Når man befinner seg på de koordinatene, så blir boolean true.
@@ -13,32 +15,29 @@ public class Player implements ViewablePlayer, ControllablePlayer {
     private boolean powerUp;
 
     public Player() {
-        this.position = new int[]{0, 0};
-        this.destination = new int[]{0, 0};
+        this.position = new Point(0, 0);
+        this.destination = new Point(0, 0);
         this.goalReached = false;
         this.powerUp = false;
         // this.finishline = new int[]{20, 20}; // e.g.
     }
 
     @Override
-    public int[] getPosition() {
-        return position;
+    public Point getPosition() {
+        return new Point(position.getLocation());
     }
 
     @Override
-    public void setPosition(int[] pos) {
+    public void setPosition(Point pos) {
         if (pos != position) {
             return;
         }
-        this.position[0] = pos[0]; // x
-        this.position[1] = pos[1]; // y
-
+        this.position.setLocation(pos.getLocation()); // x & y
     }
 
     @Override
-    public void setDestination(int[] pos) {
-        this.destination[0] = pos[0];
-        this.destination[1] = pos[1];
+    public void setDestination(Point pos) {
+        this.destination.setLocation(pos.getLocation()); // x & y
     }
 
     @Override
@@ -58,7 +57,7 @@ public class Player implements ViewablePlayer, ControllablePlayer {
 
 
     @Override
-    public void getPlayer() {
+    public void getCharacter() {
     }
 
     public void setGoalReached() {
@@ -70,20 +69,20 @@ public class Player implements ViewablePlayer, ControllablePlayer {
      */
     public void movePlayer() {
         // X direction
-        if (destination[0] > position[0]) {
-            position[0] += 1;
-        } else if (destination[0] < position[0]) {
-            position[0] -= 1;
+        if (destination.getX() > position.getX()) {
+            position.x += 1;
+        } else if (destination.getX() < position.getX()) {
+            position.x -= 1;
         }
         // Y direction
-        if (destination[1] > position[1]) {
-            position[1] += 1;
-        } else if (destination[1] < position[1]) {
-            position[1] -= 1;
+        if (destination.getY() > position.getY()) {
+            position.y += 1;
+        } else if (destination.getY() < position.getY()) {
+            position.y -= 1;
         }
     }
 
     public boolean isMoving() {
-        return (destination[0] != position[0]) && (destination[1] != position[1]);
+        return (!destination.equals(position));
     }
 }
