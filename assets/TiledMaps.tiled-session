@@ -8,19 +8,11 @@
             "scaleInDock": 1
         },
         "map_1.tmx": {
-<<<<<<<<< Temporary merge branch 1
-            "scale": 2.5876,
-            "selectedLayer": 3,
-            "viewCenter": {
-                "x": 567.5142989642912,
-                "y": 124.82609367753902
-=========
             "scale": 2.1206,
             "selectedLayer": 4,
             "viewCenter": {
                 "x": 399.65104215787983,
                 "y": 52.34367631802321
->>>>>>>>> Temporary merge branch 2
             }
         }
     },
