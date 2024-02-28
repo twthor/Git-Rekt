@@ -55,10 +55,6 @@ public class Model implements ViewableModel, ControllableModel {
 
     }
 
-    @Override
-    public int timeBetweenTick() {
-        return 0;
-    }
 
     @Override
     public void clockTick() {
@@ -74,9 +70,15 @@ public class Model implements ViewableModel, ControllableModel {
     public void startGame() {
 
     }
+    
 
     @Override
-    public void render() {
+    public void update(float delta) {
+        
+    }
+
+    @Override
+    public void render(float delta) {
 
     }
 

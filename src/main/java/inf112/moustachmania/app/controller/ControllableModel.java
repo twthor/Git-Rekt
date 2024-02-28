@@ -2,16 +2,14 @@ package inf112.moustachmania.app.controller;
 
 public interface ControllableModel {
 
+    void update(float delta);
+
+    void dispose();
+
     /**
      * Sets the GameState to GAME_OVER
      */
     void setGameOver();
-
-    /**
-     * Sets the time between each tick in milliseconds
-     * @return the time in milliseconds between each tick.
-     */
-    int timeBetweenTick();
 
     /**
      * Called everytime the timer ticks.

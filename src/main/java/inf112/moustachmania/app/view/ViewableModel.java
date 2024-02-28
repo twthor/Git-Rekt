@@ -7,7 +7,7 @@ public interface ViewableModel {
     /**
      * TODO: Legge til javadocs
      */
-    void render();
+    void render(float delta);
 
     /**
      * Gets rid of

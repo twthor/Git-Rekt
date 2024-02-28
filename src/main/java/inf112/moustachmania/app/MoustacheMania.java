@@ -4,6 +4,7 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import inf112.moustachmania.app.screens.GameScreen;
 import inf112.moustachmania.app.screens.GameState;
 import inf112.moustachmania.app.screens.StartScreen;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -64,14 +65,15 @@ public class MoustacheMania extends Game {
         if (this.getScreen().getClass() == StartScreen.class) {
             return GameState.START_SCREEN;
         }
+        else if (this.getScreen().getClass() == GameScreen.class) {
+            return GameState.ACTIVE_GAME;
+        }
         else {
             throw new RuntimeException("Unkown screen type");
         }
 
         /*
          TODO: legge til klasser for andre GameStates:
-        else if (this.getScreen().getClass() ==
-        ACTIVE_GAME,
 
             PAUSE_SCREEN,
 

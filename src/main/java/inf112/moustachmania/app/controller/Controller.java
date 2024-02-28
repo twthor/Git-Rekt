@@ -10,58 +10,64 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import inf112.moustachmania.app.model.Model;
 import inf112.moustachmania.app.view.View;
+import inf112.moustachmania.app.MoustacheMania;
 
-public class Controller implements ApplicationListener {
-    private Model model;
-    private View view;
-    private Sound bellSound;
+public class Controller implements ControllableModel {
+    private final Model model;
+    private final MoustacheMania game;
 
-    @Override
-    public void create() {
-        SpriteBatch batch = new SpriteBatch();
-        BitmapFont font = new BitmapFont();
-        font.setColor(Color.RED);
-        Texture spriteImage = new Texture(Gdx.files.internal("obligator.png"));
-        bellSound = Gdx.audio.newSound(Gdx.files.internal("blipp.ogg"));
-        Gdx.graphics.setForegroundFPS(60);
-
-        model = new Model(spriteImage);
-        view = new View(batch, font, spriteImage);
+    public Controller(final MoustacheMania game, Model model) {
+        this.game = game;
+        this.model = model;
     }
 
-    @Override
-    public void render() {
-        model.updatePosition();
-        view.render(model);
 
-        handleInput();
-    }
-
+    /**
+        Handles player input
+    */
     private void handleInput() {
-        if (Gdx.input.justTouched()) {
-            bellSound.play();
-        }
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
             Gdx.app.exit();
         }
     }
 
-    @Override
     public void resize(int width, int height) {
         model.updateScreenSize(width, height);
     }
 
-    @Override
-    public void dispose() {
-        view.dispose();
-        bellSound.dispose();
-        // Huske å dispose nye ting.
-    }
-
     // Implementere pauses og resume
-    @Override
     public void pause() {}
 
-    @Override
     public void resume() {}
+
+    @Override
+    public void update(float delta) {
+
+    }
+
+    @Override
+    public void dispose() {
+
+    }
+
+    @Override
+    public void setGameOver() {
+
+    }
+
+
+    @Override
+    public void clockTick() {
+
+    }
+
+    @Override
+    public boolean isMoving() {
+        return false;
+    }
+
+    @Override
+    public void startGame() {
+
+    }
 }
