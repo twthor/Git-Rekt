@@ -7,7 +7,7 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import inf112.moustachmania.app.Screens.StartScreen;
+import inf112.moustachmania.app.screens.StartScreen;
 import inf112.moustachmania.app.utils.Consts;
 
 public class Main extends Game {

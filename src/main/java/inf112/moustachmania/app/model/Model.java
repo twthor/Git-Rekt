@@ -1,7 +1,7 @@
 package inf112.moustachmania.app.model;
 
 import com.badlogic.gdx.graphics.Texture;
-import inf112.moustachmania.app.Screens.GameState;
+import inf112.moustachmania.app.screens.GameState;
 import inf112.moustachmania.app.controller.ControllableModel;
 import inf112.moustachmania.app.player.Player;
 import inf112.moustachmania.app.view.ViewableModel;
