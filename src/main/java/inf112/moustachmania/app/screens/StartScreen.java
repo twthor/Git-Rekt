@@ -9,6 +9,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 import inf112.moustachmania.app.MoustacheMania;
+import inf112.moustachmania.app.model.Model;
+import inf112.moustachmania.app.view.ViewableModel;
+import inf112.moustachmania.app.view.View;
+import inf112.moustachmania.app.player.Player;
+import inf112.moustachmania.app.controller.Controller;
+import inf112.moustachmania.app.controller.ControllableModel;
 
 public class StartScreen implements Screen {
     private final Stage stage;
@@ -64,10 +70,12 @@ public class StartScreen implements Screen {
         stage.addActor(uiRoot);
 
     }
+    
     @Override
     public void show() {
         Gdx.input.setInputProcessor(stage);
     }
+
     @Override
     public void render(float delta) {
         ScreenUtils.clear(0,0,0,1);
@@ -80,6 +88,25 @@ public class StartScreen implements Screen {
         stage.getViewport().update(width, height, true);
     }
 
+
+    // ButtonEvent for when starting the game
+    private void handleNewGameButtonEvent() {
+        Player player = new Player();
+        Model model = new Model(game, player);
+        ViewableModel view = new View(game, model);
+        ControllableModel controller = new Controller(game, model);
+
+        game.gameScreen = new GameScreen(game, view, controller);
+        game.setScreen(game.gameScreen);
+
+        dispose();
+    }
+
+    // Closes the game window
+    private void handleExitGameButtonEvent() {
+        Gdx.app.exit();
+    }
+
     @Override
     public void dispose() {
         stage.dispose();
@@ -90,21 +117,5 @@ public class StartScreen implements Screen {
     public void resume() {}
     @Override
     public void hide() {}
-
-    private void handleNewGameButtonEvent() {
-        //Player player = new Player(30, 30);
-        //IWorldModel model = new WorldModel(game, player);
-        //IWorldView view = new WorldView(game, model);
-        //IWorldController controller = new WorldController(game, model);
-
-        //game.worldScreen = new WorldScreen(game, view, controller);
-        //game.setScreen(game.worldScreen);
-
-        dispose();
-    }
-    
-    private void handleExitGameButtonEvent() {
-        Gdx.app.exit();
-    };
 
 }

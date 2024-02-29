@@ -10,11 +10,12 @@ import inf112.moustachmania.app.screens.StartScreen;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import inf112.moustachmania.app.utils.Consts;
+import inf112.moustachmania.app.utils.Constants;
 
 public class MoustacheMania extends Game {
 
     public StartScreen startScreen;
+    public GameScreen gameScreen;
 
     private SpriteBatch batch;
     private BitmapFont font;
@@ -33,7 +34,7 @@ public class MoustacheMania extends Game {
     public void create() {
         batch = new SpriteBatch();
         font = new BitmapFont();
-        skin = new Skin(Gdx.files.internal(Consts.skinPath));
+        skin = new Skin(Gdx.files.internal(Constants.skinPath));
 
         this.setScreen(new StartScreen(this));
     }
