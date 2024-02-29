@@ -2,8 +2,7 @@ package inf112.moustachmania.app.model.map;
 
 import java.awt.*;
 
-// lage en interface for mappene og skal lage metoder for å hente ut informasjon om mappene, som f.eks. størrelse, og layers
-public interface IMap {
+public interface IMapLayer {
 
     /**
      * Get the layer of the map
