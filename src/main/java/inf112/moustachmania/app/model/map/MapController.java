@@ -36,6 +36,15 @@ public class MapController {
         mapDictionary.put(mapPaths, new Map(mapPaths));
     }
 
+    private void changeMap(String mapPath){
+        // for å endre på vilket map som vises
+    }
+
+    /*public boolean isTiledBlocked(Point point){
+        for å se om de går mot et collison layer eller ikke
+        bør lage en methode i map, som hånterer om den er blokert
+    }*/
+
     public Point getMapDimensions() {
         return currentMap.getMapDimensions();
     }
@@ -43,4 +52,10 @@ public class MapController {
     public String getTiledMapPath() {
         return currentMapPath;
     }
+
+    /*public boolean isExit(Point playerPos){
+        lager en methode i map som skal hentes her
+        skal skjekke om det er exit på slutten av spilelt
+        om spiller er i mål
+    }*/
 }
