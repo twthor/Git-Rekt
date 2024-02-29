@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import inf112.moustachmania.app.MoustacheMania;
 import inf112.moustachmania.app.model.Model;
 import inf112.moustachmania.app.screens.GameState;
+import inf112.moustachmania.app.utils.Constants;
 
 
 public class View implements ViewableModel  {
@@ -67,8 +68,8 @@ public class View implements ViewableModel  {
     }
 
     private void loadMap() {
-        TiledMap tiledMap = new TmxMapLoader().load("assets/maps/map_1.tmx");
-        tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap, 2);
+        TiledMap tiledMap = new TmxMapLoader().load(Constants.mapPaths);
+        tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap, Constants.scale);
         mapLayers = tiledMap.getLayers();
         currentMapPath = model.getTileMapPath();
     }
