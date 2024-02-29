@@ -12,6 +12,7 @@ public class GameScreen implements Screen {
     private final ViewableModel view;
     private final ControllableModel controller;
 
+    // Constructor
     public GameScreen(final MoustacheMania game, ViewableModel view, ControllableModel controller) {
         this.game = game;
         this.view = view;
