@@ -24,6 +24,7 @@ public class View implements ViewableModel  {
 
     // Map variables
     private OrthogonalTiledMapRenderer tiledMapRenderer;
+    private TiledMap tiledMap;
     private String currentMapPath;
     private MapLayers mapLayers;
 
@@ -64,11 +65,11 @@ public class View implements ViewableModel  {
 
     @Override
     public void dispose() {
-
+        tiledMap.dispose();
     }
 
     private void loadMap() {
-        TiledMap tiledMap = new TmxMapLoader().load(Constants.mapPaths);
+        tiledMap = new TmxMapLoader().load(Constants.mapPaths);
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap, Constants.scale);
         mapLayers = tiledMap.getLayers();
         currentMapPath = model.getTileMapPath();
