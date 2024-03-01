@@ -1,5 +1,6 @@
 package inf112.moustachmania.app.model;
 
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import inf112.moustachmania.app.MoustacheMania;
 import com.badlogic.gdx.graphics.Texture;
 import inf112.moustachmania.app.screens.GameState;
@@ -18,6 +19,11 @@ public class Model implements ViewableModel, ControllableModel {
     private final MoustacheMania game;
     private final MapController mapController;
 
+    private TiledMapTileLayer collisionMap;
+
+    private static final float GRAVITY = -2.5f;
+
+
     public Model(final MoustacheMania game, Player player) {
         this.game = game;
         this.player = player;
@@ -35,6 +41,16 @@ public class Model implements ViewableModel, ControllableModel {
     @Override
     public void setGameOver() {
 
+    }
+
+
+    public void setCollisionMap(TiledMapTileLayer collisionLayer) {
+        // mapController.setCollisionMap(collisionLayer);
+
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 
 
