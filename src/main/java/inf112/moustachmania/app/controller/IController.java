@@ -1,6 +1,6 @@
 package inf112.moustachmania.app.controller;
 
-public interface ControllableModel {
+public interface IController {
 
     void update(float delta);
 
@@ -27,4 +27,6 @@ public interface ControllableModel {
      * Starts the game by setting GameState to ActiveGame
      */
     void startGame();
+
+    void handleInput();
 }

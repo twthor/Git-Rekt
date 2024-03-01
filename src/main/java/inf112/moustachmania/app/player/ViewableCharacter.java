@@ -1,6 +1,7 @@
 package inf112.moustachmania.app.player;
 
-import java.awt.*;
+
+import com.badlogic.gdx.math.Vector2;
 
 public interface ViewableCharacter {
 
@@ -9,13 +10,7 @@ public interface ViewableCharacter {
      *
      * @return array of x and y position of the player
      */
-    Point getPosition();
-
-
-    /**
-     * Gets the character of the entity.
-     */
-    void getCharacter();
+    Vector2 getPosition();
 
 
 }
