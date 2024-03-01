@@ -2,8 +2,13 @@ package inf112.moustachmania.app.screens;
 
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -20,6 +25,7 @@ public class StartScreen implements Screen {
     private final Stage stage;
     private final MoustacheMania game;
 
+    // TODO: split functionality from the constructor into different helper methods
     // Constructor
     public StartScreen(final MoustacheMania game) {
         this.game = game;
@@ -33,6 +39,12 @@ public class StartScreen implements Screen {
 
         //TextButton.TextButtonStyle textButtonStyle = game.getSkin().get("default", TextButton.TextButtonStyle.class);
 
+        // Game title
+        Texture titleTexture = new Texture("assets/moustachemania.png");
+        Image titleImage = new Image(titleTexture);
+        buttonTable.add(titleImage).padBottom(20).row(); // row() puts the image on its own row in buttonTable.
+
+
         TextButton textButton = new TextButton("New game", game.getSkin());        //textButton.getLabel().setColor(1, 1, 1, 1);
         textButton.addListener(new ClickListener() {
             @Override
@@ -43,7 +55,7 @@ public class StartScreen implements Screen {
         buttonTable.add(textButton).spaceBottom(10).fillX();
 
         buttonTable.row();
-        textButton = new TextButton("perhaps continue game???", game.getSkin());
+        textButton = new TextButton("Continue game?", game.getSkin());
         textButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
