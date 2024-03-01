@@ -8,7 +8,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import inf112.moustachmania.app.MoustacheMania;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 public class HelpScreen implements Screen {
 
@@ -17,8 +19,9 @@ public class HelpScreen implements Screen {
 
     // Constructor
     public HelpScreen(MoustacheMania game) {
-        this.stage = new Stage();
+        this.stage = new Stage(new ScreenViewport()); // uses viewport, does not scale the stage with window-size however
         this.game = game;
+
 
         Table uiRoot = new Table();
         uiRoot.setFillParent(true);
@@ -40,6 +43,25 @@ public class HelpScreen implements Screen {
         // Putting buttons on the screens:
         uiRoot.add(buttonTable).expand().fill();
         stage.addActor(uiRoot);
+
+        // Creates a table to contain description of the controls
+        Table controlsTable = new Table();
+        controlsTable.pad(10);
+
+        //  Creating Labels description for controls
+        Label titleLabel = new Label("Game Controls:", game.getSkin());
+        Label moveLabel = new Label("Move: Arrow keys/WASD", game.getSkin());
+        Label actionLabel = new Label("Action: Spacebar/E", game.getSkin());
+
+
+        // Add the labels to the controlsTable
+        controlsTable.add(titleLabel).padBottom(20).row();
+        uiRoot.row();
+        controlsTable.add(moveLabel).padBottom(10).row();
+        controlsTable.add(actionLabel).row();
+
+        uiRoot.add(controlsTable).expand().top();
+        Gdx.input.setInputProcessor(stage);
 
     }
 
