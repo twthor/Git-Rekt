@@ -1,17 +1,21 @@
 package inf112.moustachmania.app.player;
 
-public interface ViewablePlayer {
+import java.awt.*;
+
+public interface ViewableCharacter {
 
     /**
      * Gets the position of the player
+     *
      * @return array of x and y position of the player
      */
-    int[] getPosition();
+    Point getPosition();
 
 
     /**
-     * Gets the character of the Player
+     * Gets the character of the entity.
      */
-    void getPlayer();
+    void getCharacter();
+
 
 }
