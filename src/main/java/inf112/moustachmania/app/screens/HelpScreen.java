@@ -14,12 +14,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.graphics.Texture;
 import java.util.ArrayList;
-import java.util.logging.FileHandler;
 
 public class HelpScreen implements Screen {
     private final Stage stage;
     private final MoustacheMania game;
-    private ArrayList<Texture> texturesToDispose;
+    private ArrayList<Texture> texturesToDispose; // List to handle image textures to be disposed
 
     // Constructor
     public HelpScreen(MoustacheMania game) {
