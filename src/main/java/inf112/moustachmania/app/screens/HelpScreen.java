@@ -11,23 +11,76 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import inf112.moustachmania.app.MoustacheMania;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.graphics.Texture;
+import java.util.ArrayList;
+import java.util.logging.FileHandler;
 
 public class HelpScreen implements Screen {
-
     private final Stage stage;
     private final MoustacheMania game;
+    private ArrayList<Texture> texturesToDispose;
 
     // Constructor
     public HelpScreen(MoustacheMania game) {
         this.stage = new Stage(new ScreenViewport()); // uses viewport, does not scale the stage with window-size however
         this.game = game;
+        this.texturesToDispose = new ArrayList<>();
 
+        setupUiTable();
+        Gdx.input.setInputProcessor(stage);
+    }
 
+    private void setupUiTable() {
         Table uiRoot = new Table();
         uiRoot.setFillParent(true);
-        Table buttonTable = new Table();
-        buttonTable.padLeft(10.0f);
+        stage.addActor(uiRoot);
 
+        setupControllerDescription(uiRoot);
+
+        uiRoot.row().padTop(20);
+
+        setupBackTostartScreenButton(uiRoot);
+
+        addControlImage(uiRoot, "assets/arrowkeys.png");
+    }
+
+    // set up description of the controls and lables to controlsTable
+    private void setupControllerDescription(Table uiRoot) {
+        Table controlsTable = new Table();
+        controlsTable.pad(10);
+
+        // Creating Labels description for controls
+        Label titleLabel = new Label("Game Controls:", game.getSkin());
+        Label moveLabel = new Label("Move: Arrow keys <-  -> ", game.getSkin());
+        Label jumpLabel = new Label("Jump: Spacebar ---- ", game.getSkin());
+        Label pauseGameLabel = new Label("Pause game: Esc ", game.getSkin());
+
+        // Scaling the size of the labels
+        titleLabel.setFontScale(2f);
+        moveLabel.setFontScale(1.5f);
+        jumpLabel.setFontScale(1.5f);
+        pauseGameLabel.setFontScale(1.5f);
+
+        // Add the labels to the controlsTable
+        controlsTable.add(titleLabel).padBottom(30).padTop(30).row();
+        controlsTable.add(moveLabel).padBottom(10).row();
+        controlsTable.add(jumpLabel).padBottom(10).row();
+        controlsTable.add(pauseGameLabel).row();
+
+        uiRoot.add(controlsTable).expand().top();
+    }
+
+    private void addControlImage(Table table, String imagePath) {
+        Texture imageTexture = new Texture(Gdx.files.internal(imagePath));
+        Image image = new Image(imageTexture);
+        table.add(image).center().padBottom(20).row();
+        texturesToDispose.add(imageTexture);
+    }
+
+
+    // set up the back-button and click-handling
+    private void setupBackTostartScreenButton(Table uiRoot) {
         TextButton helpButton = new TextButton("Back to start-screen", game.getSkin());
         helpButton.addListener(new ClickListener() {
             @Override
@@ -37,32 +90,8 @@ public class HelpScreen implements Screen {
                 game.setScreen(game.startScreen);
             }
         });
-        buttonTable.add(helpButton).spaceBottom(10).fillX();
-        buttonTable.row();
-
-        // Putting buttons on the screens:
-        uiRoot.add(buttonTable).expand().fill();
-        stage.addActor(uiRoot);
-
-        // Creates a table to contain description of the controls
-        Table controlsTable = new Table();
-        controlsTable.pad(10);
-
-        //  Creating Labels description for controls
-        Label titleLabel = new Label("Game Controls:", game.getSkin());
-        Label moveLabel = new Label("Move: Arrow keys/WASD", game.getSkin());
-        Label actionLabel = new Label("Action: Spacebar/E", game.getSkin());
-
-
-        // Add the labels to the controlsTable
-        controlsTable.add(titleLabel).padBottom(20).row();
-        uiRoot.row();
-        controlsTable.add(moveLabel).padBottom(10).row();
-        controlsTable.add(actionLabel).row();
-
-        uiRoot.add(controlsTable).expand().top();
-        Gdx.input.setInputProcessor(stage);
-
+        uiRoot.add(helpButton).spaceBottom(10).fillX();
+        //uiRoot.row();
     }
 
     @Override
@@ -72,7 +101,7 @@ public class HelpScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        ScreenUtils.clear(0,0,0,1);
+        ScreenUtils.clear(0, 0, 0, 1);
         stage.act(delta);
         stage.draw();
     }
@@ -100,5 +129,8 @@ public class HelpScreen implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
+        for (Texture texture : texturesToDispose) {
+            texture.dispose();
+        }
     }
 }
