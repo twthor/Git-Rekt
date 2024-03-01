@@ -1,53 +1,35 @@
 package inf112.moustachmania.app.model;
 
+import inf112.moustachmania.app.MoustacheMania;
 import com.badlogic.gdx.graphics.Texture;
 import inf112.moustachmania.app.screens.GameState;
 import inf112.moustachmania.app.controller.ControllableModel;
 import inf112.moustachmania.app.player.Player;
 import inf112.moustachmania.app.view.ViewableModel;
+import inf112.moustachmania.app.model.map.MapController;
 
 import java.awt.*;
 
 public class Model implements ViewableModel, ControllableModel {
 
     // Field variables
-    private Player player;
+    private final Player player;
 
-    public Rectangle spriteRect;
-    public float dx = 1, dy = 1;
-    public GameState state;
-    private final Rectangle screenRect = new Rectangle();
+    private final MoustacheMania game;
+    private final MapController mapController;
 
-    public Model(Texture spriteImage) {
-        spriteRect = new Rectangle(1, 1, spriteImage.getWidth() / 2, spriteImage.getHeight() / 2);
-        this.state = GameState.START_SCREEN;
+    public Model(final MoustacheMania game, Player player) {
+        this.game = game;
+        this.player = player;
+        this.mapController = MapController.getInstance();
     }
 
     public void updateScreenSize(int width, int height) {
-        screenRect.width = width;
-        screenRect.height = height;
+
     }
 
     public void updatePosition() {
-        Rectangle tempRectX = new Rectangle(spriteRect);
-        tempRectX.x += (int) dx; // Forsøke å gå i X retning
 
-        // Sjekke ny posisjon er innenfor skjermen
-        if (screenRect.contains(tempRectX)) {
-            spriteRect.x += (int) dx; // Dersom innenfor skjermen, forsøk å bevege seg.
-        } else {
-            dx = -dx; // motsatt retning om ikke innenfor skjermen
-        }
-
-        // Samme som for X-retning, men her for Y-retning
-        Rectangle tempRectY = new Rectangle(spriteRect);
-        tempRectY.y += (int) dy;
-
-        if (screenRect.contains(tempRectY)) {
-            spriteRect.y += (int) dy;
-        } else {
-            dy = -dy;
-        }
     }
 
     @Override
@@ -55,6 +37,10 @@ public class Model implements ViewableModel, ControllableModel {
 
     }
 
+
+    public String getTileMapPath() {
+        return mapController.getTileMapPath();
+    }
 
     @Override
     public void clockTick() {
@@ -89,6 +75,7 @@ public class Model implements ViewableModel, ControllableModel {
 
     @Override
     public GameState getGameState() {
-        return state;
+        return game.getGameState();
     }
+
 }
