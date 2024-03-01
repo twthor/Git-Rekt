@@ -96,7 +96,7 @@ public class StartScreen implements Screen {
         IView view = new View(game, model);
         IController controller = new Controller(game, model);
 
-        game.gameScreen = new GameScreen(game, view, controller);
+        game.gameScreen = new GameScreen(game, view, controller, model);
         game.setScreen(game.gameScreen);
 
         dispose();

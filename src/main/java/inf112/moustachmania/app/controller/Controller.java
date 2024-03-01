@@ -24,19 +24,19 @@ public class Controller implements IController {
         }
         if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             // TODO: player.setWalkingState(direction left)
-            model.getPlayer().movePlayer(-1,0);
+            model.getPlayer().movePlayer(-1);
         } else {
             //TODO: model.getPlayer().setState(PlayerState.Standing);
         }
         if (Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
             // TODO: player.setWalkingState(direction right)
-            model.getPlayer().movePlayer(1,0);
+            model.getPlayer().movePlayer(1);
         } else {
             // TODO player.setState(PlayerState.Standing);
 
         }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-            model.getPlayer().movePlayer(0,0);
+        if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+            model.getPlayer().jumpPlayer();
         }
     }
 
