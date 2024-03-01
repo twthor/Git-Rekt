@@ -2,16 +2,11 @@ package inf112.moustachmania.app.model;
 
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import inf112.moustachmania.app.MoustacheMania;
-import com.badlogic.gdx.graphics.Texture;
 import inf112.moustachmania.app.screens.GameState;
-import inf112.moustachmania.app.controller.ControllableModel;
 import inf112.moustachmania.app.player.Player;
-import inf112.moustachmania.app.view.ViewableModel;
 import inf112.moustachmania.app.model.map.MapController;
 
-import java.awt.*;
-
-public class Model implements ViewableModel, ControllableModel {
+public class Model implements IModel {
 
     // Field variables
     private final Player player;
@@ -38,12 +33,7 @@ public class Model implements ViewableModel, ControllableModel {
 
     }
 
-    @Override
-    public void setGameOver() {
-
-    }
-
-
+    
     public void setCollisionMap(TiledMapTileLayer collisionLayer) {
         // mapController.setCollisionMap(collisionLayer);
 
@@ -58,40 +48,5 @@ public class Model implements ViewableModel, ControllableModel {
         return mapController.getTileMapPath();
     }
 
-    @Override
-    public void clockTick() {
-
-    }
-
-    @Override
-    public boolean isMoving() {
-        return false;
-    }
-
-    @Override
-    public void startGame() {
-
-    }
-    
-
-    @Override
-    public void update(float delta) {
-        
-    }
-
-    @Override
-    public void render(float delta) {
-
-    }
-
-    @Override
-    public void dispose() {
-
-    }
-
-    @Override
-    public GameState getGameState() {
-        return game.getGameState();
-    }
 
 }

@@ -1,18 +1,17 @@
 package inf112.moustachmania.app.screens;
 
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import inf112.moustachmania.app.MoustacheMania;
-import inf112.moustachmania.app.view.ViewableModel;
-import inf112.moustachmania.app.controller.ControllableModel;
+import inf112.moustachmania.app.view.IView;
+import inf112.moustachmania.app.controller.IController;
 
 public class GameScreen implements Screen {
     //private final Stage stage;
     private final MoustacheMania game;
-    private final ViewableModel view;
-    private final ControllableModel controller;
+    private final IView view;
+    private final IController controller;
 
-    public GameScreen(final MoustacheMania game, ViewableModel view, ControllableModel controller) {
+    public GameScreen(final MoustacheMania game, IView view, IController controller) {
         this.game = game;
         this.view = view;
         this.controller = controller;
@@ -28,6 +27,8 @@ public class GameScreen implements Screen {
         view.render(v);
         controller.update(v);
         game.getGameState();
+
+        controller.handleInput();
     }
 
     @Override

@@ -2,7 +2,7 @@ package inf112.moustachmania.app.view;
 
 import inf112.moustachmania.app.screens.GameState;
 
-public interface ViewableModel {
+public interface IView {
 
     /**
      * TODO: Legge til javadocs

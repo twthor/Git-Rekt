@@ -1,9 +1,5 @@
 package inf112.moustachmania.app.view;
 
-import java.awt.*;
-import java.util.List;
-
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -21,7 +17,7 @@ import inf112.moustachmania.app.screens.GameState;
 import inf112.moustachmania.app.utils.Constants;
 
 
-public class View implements ViewableModel  {
+public class View implements IView {
 
     // Game variables
     private final MoustacheMania game;

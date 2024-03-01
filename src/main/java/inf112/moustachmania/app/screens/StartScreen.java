@@ -10,11 +10,11 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 import inf112.moustachmania.app.MoustacheMania;
 import inf112.moustachmania.app.model.Model;
-import inf112.moustachmania.app.view.ViewableModel;
+import inf112.moustachmania.app.view.IView;
 import inf112.moustachmania.app.view.View;
 import inf112.moustachmania.app.player.Player;
 import inf112.moustachmania.app.controller.Controller;
-import inf112.moustachmania.app.controller.ControllableModel;
+import inf112.moustachmania.app.controller.IController;
 
 public class StartScreen implements Screen {
     private final Stage stage;
@@ -93,8 +93,8 @@ public class StartScreen implements Screen {
     private void handleNewGameButtonEvent() {
         Player player = new Player();
         Model model = new Model(game, player);
-        ViewableModel view = new View(game, model);
-        ControllableModel controller = new Controller(game, model);
+        IView view = new View(game, model);
+        IController controller = new Controller(game, model);
 
         game.gameScreen = new GameScreen(game, view, controller);
         game.setScreen(game.gameScreen);
