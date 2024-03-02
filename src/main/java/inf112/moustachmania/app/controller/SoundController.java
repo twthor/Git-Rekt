@@ -5,21 +5,20 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import inf112.moustachmania.app.MoustacheMania;
 import inf112.moustachmania.app.player.Player;
-import inf112.moustachmania.app.screens.GameScreen;
 import inf112.moustachmania.app.screens.GameState;
 
 public class SoundController {
 
     private Player player;
-    private Music backgroundMusic;
-    private Music mainMenuMusic;
-    private Sound powerUpSound;
+    private final Music backgroundMusic;
+    private final Music mainMenuMusic;
+    private final Sound powerUpSound;
     private MoustacheMania game;
     private static SoundController instance = null;
     GameState currentGameState;
 
 
-    public SoundController() {
+    private SoundController() {
         // LibGDX filepath finding API
         backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("backgroundMusic.mp3"));
         mainMenuMusic = Gdx.audio.newMusic(Gdx.files.internal("mainMenuMusic.mp3"));
@@ -44,11 +43,15 @@ public class SoundController {
         if (gameState == currentGameState){
             return;
         }
-        System.out.println(gameState);
+
         if (gameState == GameState.ACTIVE_GAME) {
             backgroundMusic.setVolume(0.3f);
             backgroundMusic.setLooping(true);
             backgroundMusic.play();
+
+            if (player.powerUp) {
+                powerUpSound.play();
+            }
         } else {
             backgroundMusic.stop();
         }
@@ -62,10 +65,7 @@ public class SoundController {
             mainMenuMusic.stop();
         }
 
-        /*
-        if (player.powerUp) {
-            powerUpSound.play();
-        } */
+
         currentGameState = gameState;
     }
 
@@ -74,7 +74,6 @@ public class SoundController {
     }
 
     /**
-     *
      * Sets the game instance to be used by the SoundController.
      * @param game The game instance to be set.
      */

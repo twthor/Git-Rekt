@@ -29,8 +29,6 @@ public class StartScreen implements Screen {
         this.game = game;
         stage = new Stage();
 
-        soundController = new SoundController();
-
         Table uiRoot = new Table();
         uiRoot.setFillParent(true);
 
@@ -104,6 +102,9 @@ public class StartScreen implements Screen {
 
         game.gameScreen = new GameScreen(game, view, controller, model);
         game.setScreen(game.gameScreen);
+
+        // Sets the player field variable in the sound controller, so we can play sounds based on player events
+        SoundController.getInstance().setPlayer(player);
 
         dispose();
     }

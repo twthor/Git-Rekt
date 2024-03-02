@@ -7,7 +7,6 @@ import inf112.moustachmania.app.view.IView;
 import inf112.moustachmania.app.controller.IController;
 
 public class GameScreen implements Screen {
-    //private final Stage stage;
     private final MoustacheMania game;
     private final IView view;
     private final IController controller;

@@ -17,12 +17,9 @@ public class MoustacheMania extends Game {
 
     public StartScreen startScreen;
     public GameScreen gameScreen;
-
     private SpriteBatch batch;
     private BitmapFont font;
     private Skin skin;
-
-    // TODO: Soundmanager
     private SoundController soundController;
 
     public static void main(String[] args) {
@@ -37,6 +34,8 @@ public class MoustacheMania extends Game {
         batch = new SpriteBatch();
         font = new BitmapFont();
         skin = new Skin(Gdx.files.internal(Constants.skinPath));
+
+        // Sound-controller
         soundController = SoundController.getInstance();
         soundController.setGame(this);
 
@@ -65,6 +64,7 @@ public class MoustacheMania extends Game {
     public void dispose() {
         batch.dispose();
         font.dispose();
+        soundController.dispose();
     }
 
     public GameState getGameState() {
