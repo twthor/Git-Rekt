@@ -4,6 +4,7 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import inf112.moustachmania.app.controller.SoundController;
 import inf112.moustachmania.app.screens.GameScreen;
 import inf112.moustachmania.app.screens.GameState;
 import inf112.moustachmania.app.screens.StartScreen;
@@ -22,6 +23,7 @@ public class MoustacheMania extends Game {
     private Skin skin;
 
     // TODO: Soundmanager
+    private SoundController soundController;
 
     public static void main(String[] args) {
         Lwjgl3ApplicationConfiguration cfg = new Lwjgl3ApplicationConfiguration();
@@ -35,6 +37,8 @@ public class MoustacheMania extends Game {
         batch = new SpriteBatch();
         font = new BitmapFont();
         skin = new Skin(Gdx.files.internal(Constants.skinPath));
+        soundController = SoundController.getInstance();
+        soundController.setGame(this);
 
         this.setScreen(new StartScreen(this));
     }
@@ -43,6 +47,7 @@ public class MoustacheMania extends Game {
     */
     public void render() {
         super.render();
+        SoundController.getInstance().update();
     }
 
     public Skin getSkin() {
@@ -75,11 +80,10 @@ public class MoustacheMania extends Game {
 
         /*
          TODO: legge til klasser for andre GameStates:
-
             PAUSE_SCREEN,
-
             GAME_OVER
-                  */
+            HELP_SCREEN
+         */
 
     }
 

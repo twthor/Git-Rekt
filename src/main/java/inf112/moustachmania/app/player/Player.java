@@ -23,6 +23,8 @@ public class Player implements ViewableCharacter, ControllablePlayer {
     static float DAMPING = 0.87f;
     public float stateTime;
 
+    public boolean powerUp = false;
+
     public Player() {
         this.position = new Vector2(10, 6);
 

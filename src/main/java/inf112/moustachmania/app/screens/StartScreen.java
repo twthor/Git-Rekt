@@ -8,7 +8,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.audio.Music;
 import inf112.moustachmania.app.MoustacheMania;
+import inf112.moustachmania.app.controller.SoundController;
 import inf112.moustachmania.app.model.Model;
 import inf112.moustachmania.app.view.IView;
 import inf112.moustachmania.app.view.View;
@@ -19,11 +21,15 @@ import inf112.moustachmania.app.controller.IController;
 public class StartScreen implements Screen {
     private final Stage stage;
     private final MoustacheMania game;
+    private SoundController soundController;
+
 
     // Constructor
     public StartScreen(final MoustacheMania game) {
         this.game = game;
         stage = new Stage();
+
+        soundController = new SoundController();
 
         Table uiRoot = new Table();
         uiRoot.setFillParent(true);
