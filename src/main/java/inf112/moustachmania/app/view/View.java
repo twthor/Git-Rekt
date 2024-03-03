@@ -37,11 +37,10 @@ public class View implements IView {
     private final OrthographicCamera camera;
 
     // Player variables
-    //private final CharacterSprite playerSprite; // TODO: implement texture image for player
     private Texture playerTexture;
 
     private Animation<TextureRegion> stand;
-    private Animation<TextureRegion> walking;
+    private Animation<TextureRegion> walk;
 
 
 
@@ -52,8 +51,8 @@ public class View implements IView {
         playerTexture = new Texture("assets/karakter.png");
         TextureRegion[] regions = TextureRegion.split(playerTexture, 16, 16)[0];
         stand = new Animation<>(0, regions[0]);
-        walking = new Animation<>(0.15f, regions[1], regions[2], regions[3], regions[4]);
-        walking.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
+        walk = new Animation<>(0.1f, regions[1], regions[2], regions[3], regions[4]);
+        walk.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
         // jump
 
         // Size of the player - for collision detection
@@ -121,25 +120,16 @@ public class View implements IView {
     private void renderPlayer() {
         Player player = model.getPlayer();
         TextureRegion frame = null;
-        /*frame = stand.getKeyFrame(player.stateTime);
-        game.getBatch().begin();
-        game.getBatch().draw(frame, player.position.x, player.position.y, Player.WIDTH, Player.HEIGHT);
-        game.getBatch().end();*/
 
-        // based on the koala state, get the animation frame
-        /*
-            case Jumping:
-                frame = jump.getKeyFrame(player.stateTime);
-                break; */
+        // switch-case changing the frames for the player given the state.
         frame = switch (player.state) {
             case Standing -> stand.getKeyFrame(player.stateTime);
-            case Walking -> walking.getKeyFrame(player.stateTime);
+            case Walking -> walk.getKeyFrame(player.stateTime);
+            // case jumping -> jumping.getKeyFrame(player.stateTime);
             default -> frame;
         };
 
-        // draw the koala, depending on the current velocity
-        // on the x-axis, draw the koala facing either right
-        // or left
+        // draw the player facing either right or left.
         game.getBatch().begin();
         if (player.facesRight) {
             game.getBatch().draw(frame, player.position.x, player.position.y, Player.WIDTH, Player.HEIGHT);

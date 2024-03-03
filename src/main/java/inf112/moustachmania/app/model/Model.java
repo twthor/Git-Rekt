@@ -48,6 +48,9 @@ public class Model implements IModel {
         // Continuously try to make player fall
         player.velocity.add(0, GRAVITY);
 
+        // Updating players stateTime. Important for the player animations.
+        player.stateTime += deltaTime;
+
         // Update player position
         player.position.add(player.velocity);
 

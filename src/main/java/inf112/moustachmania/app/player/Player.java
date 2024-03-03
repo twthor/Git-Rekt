@@ -25,6 +25,7 @@ public class Player implements ViewableCharacter, ControllablePlayer {
 
     public Player() {
         this.position = new Vector2(10, 6);
+        this.stateTime = 0;
 
         //this.goalReached = false;
         //this.powerUp = false;
