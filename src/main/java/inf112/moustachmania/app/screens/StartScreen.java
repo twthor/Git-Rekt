@@ -13,7 +13,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.audio.Music;
 import inf112.moustachmania.app.MoustacheMania;
+import inf112.moustachmania.app.controller.SoundController;
 import inf112.moustachmania.app.model.Model;
 import inf112.moustachmania.app.view.IView;
 import inf112.moustachmania.app.view.View;
@@ -24,6 +26,8 @@ import inf112.moustachmania.app.controller.IController;
 public class StartScreen implements Screen {
     private final Stage stage;
     private final MoustacheMania game;
+    private SoundController soundController;
+
 
     // TODO: split functionality from the constructor into different helper methods
     // Constructor
@@ -110,6 +114,9 @@ public class StartScreen implements Screen {
 
         game.gameScreen = new GameScreen(game, view, controller, model);
         game.setScreen(game.gameScreen);
+
+        // Sets the player field variable in the sound controller, so we can play sounds based on player events
+        SoundController.getInstance().setPlayer(player);
 
         dispose();
     }
