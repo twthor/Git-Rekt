@@ -2,6 +2,7 @@ package inf112.moustachmania.app.view;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayers;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -40,6 +41,7 @@ public class View implements IView {
     private Texture playerTexture;
 
     private Animation<TextureRegion> stand;
+    private Animation<TextureRegion> walking;
 
 
 
@@ -50,15 +52,18 @@ public class View implements IView {
         playerTexture = new Texture("assets/karakter.png");
         TextureRegion[] regions = TextureRegion.split(playerTexture, 16, 16)[0];
         stand = new Animation<>(0, regions[0]);
-        // walk
+        walking = new Animation<>(0.15f, regions[1], regions[2], regions[3], regions[4]);
+        walking.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
         // jump
 
+        // Size of the player - for collision detection
+        // 1 unit == 16 pixels
         Player.WIDTH = (1 / 16f) * regions[0].getRegionWidth();
         Player.HEIGHT = (1 / 16f) * regions[0].getRegionHeight();
 
         loadMap();
 
-        // 30x20 units. 1 unit == 16 pixels
+        // 30x20 units.
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 30, 20);
     }
@@ -116,9 +121,31 @@ public class View implements IView {
     private void renderPlayer() {
         Player player = model.getPlayer();
         TextureRegion frame = null;
-        frame = stand.getKeyFrame(player.stateTime);
+        /*frame = stand.getKeyFrame(player.stateTime);
         game.getBatch().begin();
         game.getBatch().draw(frame, player.position.x, player.position.y, Player.WIDTH, Player.HEIGHT);
+        game.getBatch().end();*/
+
+        // based on the koala state, get the animation frame
+        /*
+            case Jumping:
+                frame = jump.getKeyFrame(player.stateTime);
+                break; */
+        frame = switch (player.state) {
+            case Standing -> stand.getKeyFrame(player.stateTime);
+            case Walking -> walking.getKeyFrame(player.stateTime);
+            default -> frame;
+        };
+
+        // draw the koala, depending on the current velocity
+        // on the x-axis, draw the koala facing either right
+        // or left
+        game.getBatch().begin();
+        if (player.facesRight) {
+            game.getBatch().draw(frame, player.position.x, player.position.y, Player.WIDTH, Player.HEIGHT);
+        } else {
+            game.getBatch().draw(frame, player.position.x + Player.WIDTH, player.position.y, -Player.WIDTH, Player.HEIGHT);
+        }
         game.getBatch().end();
     }
 

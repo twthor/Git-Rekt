@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import inf112.moustachmania.app.model.Model;
 import inf112.moustachmania.app.MoustacheMania;
+import inf112.moustachmania.app.player.Player;
 
 public class Controller implements IController {
     private final Model model;
@@ -19,24 +20,24 @@ public class Controller implements IController {
         Handles player input
     */
     public void handleInput() {
+        Player player = model.getPlayer();
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
             Gdx.app.exit();
         }
         if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             // TODO: player.setWalkingState(direction left)
-            model.getPlayer().movePlayer(-1);
-        } else {
-            //TODO: model.getPlayer().setState(PlayerState.Standing);
+            player.movePlayer(-1);
+            if (player.grounded) player.state = Player.State.Walking;
+            player.facesRight = false;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+            player.movePlayer(1);
             // TODO: player.setWalkingState(direction right)
-            model.getPlayer().movePlayer(1);
-        } else {
-            // TODO player.setState(PlayerState.Standing);
-
+            if (player.grounded) player.state = Player.State.Walking;
+            player.facesRight = true;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-            model.getPlayer().jumpPlayer();
+            player.jumpPlayer();
         }
     }
 
