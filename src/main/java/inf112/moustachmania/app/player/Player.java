@@ -13,7 +13,7 @@ public class Player implements ViewableCharacter, ControllablePlayer {
     public Vector2 velocity;
     public State state = State.Walking;
 
-    boolean facesRight = true;
+    public boolean facesRight = true;
     public boolean grounded = true;
 
     public static float WIDTH;
@@ -27,6 +27,7 @@ public class Player implements ViewableCharacter, ControllablePlayer {
 
     public Player() {
         this.position = new Vector2(10, 6);
+        this.stateTime = 0;
 
         //this.goalReached = false;
         //this.powerUp = false;

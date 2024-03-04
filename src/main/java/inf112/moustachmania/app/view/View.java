@@ -2,6 +2,7 @@ package inf112.moustachmania.app.view;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayers;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -36,10 +37,10 @@ public class View implements IView {
     private final OrthographicCamera camera;
 
     // Player variables
-    //private final CharacterSprite playerSprite; // TODO: implement texture image for player
     private Texture playerTexture;
 
     private Animation<TextureRegion> stand;
+    private Animation<TextureRegion> walk;
 
 
 
@@ -50,15 +51,18 @@ public class View implements IView {
         playerTexture = new Texture("assets/karakter.png");
         TextureRegion[] regions = TextureRegion.split(playerTexture, 16, 16)[0];
         stand = new Animation<>(0, regions[0]);
-        // walk
+        walk = new Animation<>(0.1f, regions[1], regions[2], regions[3], regions[4]);
+        walk.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
         // jump
 
+        // Size of the player - for collision detection
+        // 1 unit == 16 pixels
         Player.WIDTH = (1 / 16f) * regions[0].getRegionWidth();
         Player.HEIGHT = (1 / 16f) * regions[0].getRegionHeight();
 
         loadMap();
 
-        // 30x20 units. 1 unit == 16 pixels
+        // 30x20 units.
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 30, 20);
     }
@@ -116,9 +120,22 @@ public class View implements IView {
     private void renderPlayer() {
         Player player = model.getPlayer();
         TextureRegion frame = null;
-        frame = stand.getKeyFrame(player.stateTime);
+
+        // switch-case changing the frames for the player given the state.
+        frame = switch (player.state) {
+            case Standing -> stand.getKeyFrame(player.stateTime);
+            case Walking -> walk.getKeyFrame(player.stateTime);
+            // case jumping -> jumping.getKeyFrame(player.stateTime);
+            default -> frame;
+        };
+
+        // draw the player facing either right or left.
         game.getBatch().begin();
-        game.getBatch().draw(frame, player.position.x, player.position.y, Player.WIDTH, Player.HEIGHT);
+        if (player.facesRight) {
+            game.getBatch().draw(frame, player.position.x, player.position.y, Player.WIDTH, Player.HEIGHT);
+        } else {
+            game.getBatch().draw(frame, player.position.x + Player.WIDTH, player.position.y, -Player.WIDTH, Player.HEIGHT);
+        }
         game.getBatch().end();
     }
 
