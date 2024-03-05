@@ -9,5 +9,8 @@ public enum GameState {
 
     GAME_OVER,
 
+    LEVEL_SELECT,
+
     HelpScreen
+
 }

@@ -7,6 +7,7 @@ import com.badlogic.gdx.Gdx;
 import inf112.moustachmania.app.controller.SoundController;
 import inf112.moustachmania.app.screens.GameScreen;
 import inf112.moustachmania.app.screens.GameState;
+import inf112.moustachmania.app.screens.LevelScreen;
 import inf112.moustachmania.app.screens.HelpScreen;
 import inf112.moustachmania.app.screens.StartScreen;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -17,6 +18,7 @@ import inf112.moustachmania.app.utils.Constants;
 public class MoustacheMania extends Game {
 
     public StartScreen startScreen;
+    public LevelScreen levelScreen;
     public HelpScreen helpScreen;
     public GameScreen gameScreen;
 
@@ -78,6 +80,9 @@ public class MoustacheMania extends Game {
         else if (this.getScreen().getClass() == GameScreen.class) {
             return GameState.ACTIVE_GAME;
         }
+        else if (this.getScreen().getClass() == LevelScreen.class) {
+            return GameState.LEVEL_SELECT;
+        }    
         else if (this.getScreen().getClass() == HelpScreen.class) {
             return GameState.HelpScreen;
         }

@@ -27,6 +27,7 @@ public class StartScreen implements Screen {
     private final Stage stage;
     private final MoustacheMania game;
     private SoundController soundController;
+    private LevelScreen levelScreen;
 
 
     // TODO: split functionality from the constructor into different helper methods
@@ -117,16 +118,16 @@ public class StartScreen implements Screen {
 
     // ButtonEvent for when starting the game
     private void handleNewGameButtonEvent() {
-        Player player = new Player();
+        /*Player player = new Player();
         Model model = new Model(game, player);
         IView view = new View(game, model);
-        IController controller = new Controller(game, model);
+        IController controller = new Controller(game, model);*/
 
-        game.gameScreen = new GameScreen(game, view, controller, model);
-        game.setScreen(game.gameScreen);
+        game.levelScreen = new LevelScreen(game);
+        game.setScreen(game.levelScreen);
 
         // Sets the player field variable in the sound controller, so we can play sounds based on player events
-        SoundController.getInstance().setPlayer(player);
+        //SoundController.getInstance().setPlayer(player);
 
         dispose();
     }
