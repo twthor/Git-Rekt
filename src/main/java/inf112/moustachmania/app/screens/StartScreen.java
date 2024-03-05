@@ -74,6 +74,16 @@ public class StartScreen implements Screen {
         });
         buttonTable.add(textButton).spaceBottom(10).fillX();
 
+        // Controller help button
+        buttonTable.row();
+        textButton = new TextButton("Controls", game.getSkin());
+        textButton.addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
+                handleControlsHelpGameButtonEvent();
+            }});
+        buttonTable.add(textButton).spaceBottom(10).fillX();
+
+        // Quit game button
         buttonTable.row();
         textButton = new TextButton("Exit game", game.getSkin());
         textButton.addListener(new ClickListener() {
@@ -87,7 +97,7 @@ public class StartScreen implements Screen {
         stage.addActor(uiRoot);
 
     }
-    
+
     @Override
     public void show() {
         Gdx.input.setInputProcessor(stage);
@@ -118,6 +128,13 @@ public class StartScreen implements Screen {
 
         // Sets the player field variable in the sound controller, so we can play sounds based on player events
         //SoundController.getInstance().setPlayer(player);
+
+        dispose();
+    }
+
+    private void handleControlsHelpGameButtonEvent() {
+        game.helpScreen = new HelpScreen(game);
+        game.setScreen(game.helpScreen);
 
         dispose();
     }
