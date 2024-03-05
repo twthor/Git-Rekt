@@ -7,15 +7,15 @@ import java.util.HashMap;
 
 public class MapController {
 
-    private final String mapPaths;
+    private final String[] mapPaths;
     private String currentMapPath;
     private Map currentMap;
     private HashMap<String, Map> mapDictionary;
     private static MapController instance;
 
-    public MapController(String mapPaths) {
+    public MapController(String[] mapPaths) {
         this.mapPaths = mapPaths;
-        this.currentMapPath = mapPaths;
+        this.currentMapPath = mapPaths[0];
         loadMaps();
         this.currentMap = mapDictionary.get(currentMapPath);
     }
@@ -33,7 +33,9 @@ public class MapController {
 
     private void loadMaps() {
         mapDictionary = new HashMap<>();
-        mapDictionary.put(mapPaths, new Map(mapPaths));
+        for (String mapPath : mapPaths) {
+            mapDictionary.put(mapPath, new Map(mapPath));
+        }
     }
 
     private void changeMap(String mapPath){
