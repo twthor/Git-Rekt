@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>Git Rekt</groupId>
+	<groupId>Git-Rekt</groupId>
 	<artifactId>MoustacheMania</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
@@ -14,7 +14,7 @@
 		<junit.jupiter.version>5.10.2</junit.jupiter.version>
 		<slf4j.version>2.0.11</slf4j.version>
 		<!-- FIXME - set to app's main class' -->
-		<main.class>inf112.moustachmania.app.Main</main.class>
+		<main.class>inf112.moustachemania.app.Main</main.class>
 		<jvm.extra.args></jvm.extra.args>
 	</properties>
 	<repositories>
@@ -89,6 +89,18 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-simple</artifactId>
 			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.13.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>7.9.0</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 	<build>
