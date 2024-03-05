@@ -7,5 +7,7 @@ public enum GameState {
 
     PAUSE_SCREEN,
 
-    GAME_OVER
+    GAME_OVER,
+
+    LEVEL_SELECT
 }
