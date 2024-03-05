@@ -3,8 +3,6 @@ package inf112.moustachmania.app;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -74,8 +72,8 @@ public class ExampleIT {
 	 * Simple test case
 	 */
 	@Test
-	void dummy1() {
+	void findMusicFile() {
 		// check that we can find a file using the LibGDX file API
-		assertNotNull(Gdx.files.internal("obligator.png"));
+		assertNotNull(Gdx.files.internal("backgroundMusic.mp3"));
 	}
 }

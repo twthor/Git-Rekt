@@ -1,18 +1,12 @@
 package inf112.moustachmania.app.controller;
 
-import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import inf112.moustachmania.app.model.Model;
-import inf112.moustachmania.app.view.View;
 import inf112.moustachmania.app.MoustacheMania;
+import inf112.moustachmania.app.player.Player;
 
-public class Controller implements ControllableModel {
+public class Controller implements IController {
     private final Model model;
     private final MoustacheMania game;
 
@@ -25,9 +19,26 @@ public class Controller implements ControllableModel {
     /**
         Handles player input
     */
-    private void handleInput() {
+    public void handleInput() {
+        Player player = model.getPlayer();
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
             Gdx.app.exit();
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+            // TODO: player.setWalkingState(direction left)
+            player.movePlayer(-1);
+            if (player.grounded) player.state = Player.State.Walking;
+            player.facesRight = false;
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+            player.movePlayer(1);
+            // TODO: player.setWalkingState(direction right)
+            if (player.grounded) player.state = Player.State.Walking;
+            player.facesRight = true;
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+            player.jumpPlayer();
+            if (!player.grounded) player.state = Player.State.Jumping;
         }
     }
 
