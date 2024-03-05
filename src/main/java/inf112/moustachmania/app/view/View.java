@@ -91,7 +91,7 @@ public class View implements IView {
     }
 
     private void loadMap() {
-        tiledMap = new TmxMapLoader().load(Constants.mapPaths);
+        tiledMap = new TmxMapLoader().load(Constants.mapPaths[0]);
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap, Constants.scale);
         mapLayers = tiledMap.getLayers();
         currentMapPath = model.getTileMapPath();
