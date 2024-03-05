@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import inf112.moustachmania.app.model.Model;
 import inf112.moustachmania.app.MoustacheMania;
 import inf112.moustachmania.app.player.Player;
+import inf112.moustachmania.app.screens.PauseScreen;
 
 public class Controller implements IController {
     private final Model model;
@@ -22,7 +23,8 @@ public class Controller implements IController {
     public void handleInput() {
         Player player = model.getPlayer();
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-            Gdx.app.exit();
+            game.setScreen(new PauseScreen(game, model));
+            //Gdx.app.exit();
         }
         if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             // TODO: player.setWalkingState(direction left)
