@@ -38,6 +38,7 @@ public class Controller implements IController {
         }
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
             player.jumpPlayer();
+            if (!player.grounded) player.state = Player.State.Jumping;
         }
     }
 

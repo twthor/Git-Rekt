@@ -41,6 +41,7 @@ public class View implements IView {
 
     private Animation<TextureRegion> stand;
     private Animation<TextureRegion> walk;
+    private Animation<TextureRegion> jump;
 
 
 
@@ -53,7 +54,7 @@ public class View implements IView {
         stand = new Animation<>(0, regions[0]);
         walk = new Animation<>(0.1f, regions[1], regions[2], regions[3], regions[4]);
         walk.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
-        // jump
+        jump = new Animation<>(0.1f, regions[5]);
 
         // Size of the player - for collision detection
         // 1 unit == 16 pixels
@@ -125,7 +126,7 @@ public class View implements IView {
         frame = switch (player.state) {
             case Standing -> stand.getKeyFrame(player.stateTime);
             case Walking -> walk.getKeyFrame(player.stateTime);
-            // case jumping -> jumping.getKeyFrame(player.stateTime);
+            case Jumping -> jump.getKeyFrame(player.stateTime);
             default -> frame;
         };
 
