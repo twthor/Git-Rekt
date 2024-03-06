@@ -5,11 +5,7 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import inf112.moustachmania.app.controller.SoundController;
-import inf112.moustachmania.app.screens.GameScreen;
-import inf112.moustachmania.app.screens.GameState;
-import inf112.moustachmania.app.screens.LevelScreen;
-import inf112.moustachmania.app.screens.HelpScreen;
-import inf112.moustachmania.app.screens.StartScreen;
+import inf112.moustachmania.app.screens.*;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -21,6 +17,7 @@ public class MoustacheMania extends Game {
     public LevelScreen levelScreen;
     public HelpScreen helpScreen;
     public GameScreen gameScreen;
+    public PauseScreen pauseScreen;
 
     private SpriteBatch batch;
     private BitmapFont font;
@@ -100,7 +97,10 @@ public class MoustacheMania extends Game {
             return GameState.LEVEL_SELECT;
         }    
         else if (this.getScreen().getClass() == HelpScreen.class) {
-            return GameState.HelpScreen;
+            return GameState.HELP_SCREEN;
+        }
+        else if (this.getScreen().getClass() == PauseScreen.class) {
+            return GameState.PAUSE_SCREEN;
         }
         else {
             throw new RuntimeException("Unkown screen type");

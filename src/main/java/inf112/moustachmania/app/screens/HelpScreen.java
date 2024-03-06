@@ -13,6 +13,8 @@ import inf112.moustachmania.app.MoustacheMania;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.graphics.Texture;
+import inf112.moustachmania.app.utils.Constants;
+
 import java.util.ArrayList;
 
 public class HelpScreen implements Screen {
@@ -27,7 +29,7 @@ public class HelpScreen implements Screen {
         this.game = game;
         this.texturesToDispose = new ArrayList<>();
 
-        addBackgroundImage("assets/testPicture.png");
+        addBackgroundImage(Constants.backgroundPicture);
 
         setupUiTable();
 
@@ -42,7 +44,8 @@ public class HelpScreen implements Screen {
 
         setupControllerDescription(uiRoot);
         uiRoot.row().padTop(20);
-        setupBackTostartScreenButton(uiRoot);
+
+        backTostartScreenButton(uiRoot);
 
     }
 
@@ -58,7 +61,7 @@ public class HelpScreen implements Screen {
 
         // Creating Labels description for controls
         Label titleLabel = new Label("Game Controls:", game.getSkin());
-        Label moveLabel = new Label("Move: Arrow keys  <-  -> ", game.getSkin());
+        Label moveLabel = new Label("Move: Arrow keys  <=  => ", game.getSkin());
         Label jumpLabel = new Label("Jump: Spacebar  ===== ", game.getSkin());
         Label pauseGameLabel = new Label("Pause game:  esc ", game.getSkin());
 
@@ -85,18 +88,18 @@ public class HelpScreen implements Screen {
     private void addBackgroundImage(String imagePath) {
         Texture imageTexture = new Texture(Gdx.files.internal(imagePath));
         Image image = new Image(imageTexture);
+        image.setColor(1,1,1,0.4f);
         image.setSize(stage.getWidth(), stage.getHeight());
         stage.addActor(image);
 
         texturesToDispose.add(imageTexture);
     }
 
-
     /**
      * Adds a back to start-screen button to the given uiRoot
      * @param uiRoot The root table to add the button to
      */
-    private void setupBackTostartScreenButton(Table uiRoot) {
+    private void backTostartScreenButton(Table uiRoot) {
         TextButton helpButton = new TextButton("Back to start-screen", game.getSkin());
         helpButton.addListener(new ClickListener() {
             @Override
