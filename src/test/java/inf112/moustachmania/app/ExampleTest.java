@@ -1,4 +1,4 @@
-package inf112.moustachemania.app;
+package inf112.moustachmania.app;
 
 import static org.junit.jupiter.api.Assertions.*;
 

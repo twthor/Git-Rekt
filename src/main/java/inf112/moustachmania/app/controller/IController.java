@@ -1,4 +1,4 @@
-package inf112.moustachemania.app.controller;
+package inf112.moustachmania.app.controller;
 
 public interface IController {
 

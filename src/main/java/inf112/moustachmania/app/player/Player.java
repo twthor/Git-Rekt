@@ -1,4 +1,4 @@
-package inf112.moustachemania.app.player;
+package inf112.moustachmania.app.player;
 
 import com.badlogic.gdx.math.Vector2;
 

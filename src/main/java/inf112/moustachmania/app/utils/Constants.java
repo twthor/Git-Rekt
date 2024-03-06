@@ -1,4 +1,4 @@
-package inf112.moustachemania.app.utils;
+package inf112.moustachmania.app.utils;
 
 public class Constants {
 

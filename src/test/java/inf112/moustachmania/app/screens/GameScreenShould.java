@@ -1,15 +1,15 @@
-package inf112.moustachemania.app.screens;
+package inf112.moustachmania.app.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl3.TestApplication;
-import inf112.moustachemania.app.MoustacheMania;
-import inf112.moustachemania.app.controller.Controller;
-import inf112.moustachemania.app.controller.IController;
-import inf112.moustachemania.app.model.IModel;
-import inf112.moustachemania.app.model.Model;
-import inf112.moustachemania.app.player.Player;
-import inf112.moustachemania.app.view.IView;
-import inf112.moustachemania.app.view.View;
+import inf112.moustachmania.app.MoustacheMania;
+import inf112.moustachmania.app.controller.Controller;
+import inf112.moustachmania.app.controller.IController;
+import inf112.moustachmania.app.model.IModel;
+import inf112.moustachmania.app.model.Model;
+import inf112.moustachmania.app.player.Player;
+import inf112.moustachmania.app.view.IView;
+import inf112.moustachmania.app.view.View;
 import org.junit.AfterClass;
 import org.junit.jupiter.api.Test;
 

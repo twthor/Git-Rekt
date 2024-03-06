@@ -1,10 +1,10 @@
-package inf112.moustachemania.app.controller;
+package inf112.moustachmania.app.controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import inf112.moustachemania.app.model.Model;
-import inf112.moustachemania.app.MoustacheMania;
-import inf112.moustachemania.app.player.Player;
+import inf112.moustachmania.app.model.Model;
+import inf112.moustachmania.app.MoustacheMania;
+import inf112.moustachmania.app.player.Player;
 
 public class Controller implements IController {
     private final Model model;

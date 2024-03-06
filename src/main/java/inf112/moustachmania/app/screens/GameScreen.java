@@ -1,10 +1,10 @@
-package inf112.moustachemania.app.screens;
+package inf112.moustachmania.app.screens;
 
 import com.badlogic.gdx.Screen;
-import inf112.moustachemania.app.MoustacheMania;
-import inf112.moustachemania.app.model.IModel;
-import inf112.moustachemania.app.view.IView;
-import inf112.moustachemania.app.controller.IController;
+import inf112.moustachmania.app.MoustacheMania;
+import inf112.moustachmania.app.model.IModel;
+import inf112.moustachmania.app.view.IView;
+import inf112.moustachmania.app.controller.IController;
 
 public class GameScreen implements Screen {
     private final MoustacheMania game;

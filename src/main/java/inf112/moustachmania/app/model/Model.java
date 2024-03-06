@@ -1,11 +1,11 @@
-package inf112.moustachemania.app.model;
+package inf112.moustachmania.app.model;
 
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
-import inf112.moustachemania.app.MoustacheMania;
-import inf112.moustachemania.app.player.Player;
+import inf112.moustachmania.app.MoustacheMania;
+import inf112.moustachmania.app.player.Player;
 
 public class Model implements IModel {
 

@@ -1,4 +1,4 @@
-package inf112.moustachemania.app.view;
+package inf112.moustachmania.app.view;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -10,11 +10,11 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import inf112.moustachemania.app.MoustacheMania;
-import inf112.moustachemania.app.model.Model;
-import inf112.moustachemania.app.player.Player;
-import inf112.moustachemania.app.screens.GameState;
-import inf112.moustachemania.app.utils.Constants;
+import inf112.moustachmania.app.MoustacheMania;
+import inf112.moustachmania.app.model.Model;
+import inf112.moustachmania.app.player.Player;
+import inf112.moustachmania.app.screens.GameState;
+import inf112.moustachmania.app.utils.Constants;
 
 
 public class View implements IView {
@@ -67,9 +67,9 @@ public class View implements IView {
     @Override
     public void render(float delta) {
         ScreenUtils.clear(0, 0, 0, 1);
-        if (!currentMapPath.equals(model.getTileMapPath())) {
-            loadMap();
-        }
+
+        loadMap();
+
 
         camera.update();
         game.getBatch().setProjectionMatrix(camera.combined);
@@ -95,7 +95,6 @@ public class View implements IView {
         tiledMap = new TmxMapLoader().load(Constants.mapPaths[0]);
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap, Constants.scale);
         mapLayers = tiledMap.getLayers();
-        currentMapPath = model.getTileMapPath();
 
         TiledMapTileLayer collisionLayer = (TiledMapTileLayer)tiledMap.getLayers().get("collision");
         model.setCollisionMap(collisionLayer);

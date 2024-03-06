@@ -1,6 +1,6 @@
-package inf112.moustachemania.app.view;
+package inf112.moustachmania.app.view;
 
-import inf112.moustachemania.app.screens.GameState;
+import inf112.moustachmania.app.screens.GameState;
 
 public interface IView {
 

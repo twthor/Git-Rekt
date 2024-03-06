@@ -1,4 +1,4 @@
-package inf112.moustachemania.app.screens;
+package inf112.moustachmania.app.screens;
 
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Gdx;
@@ -10,14 +10,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
-import inf112.moustachemania.app.MoustacheMania;
-import inf112.moustachemania.app.controller.SoundController;
-import inf112.moustachemania.app.model.Model;
-import inf112.moustachemania.app.view.IView;
-import inf112.moustachemania.app.view.View;
-import inf112.moustachemania.app.player.Player;
-import inf112.moustachemania.app.controller.Controller;
-import inf112.moustachemania.app.controller.IController;
+import inf112.moustachmania.app.MoustacheMania;
+import inf112.moustachmania.app.controller.SoundController;
+import inf112.moustachmania.app.model.Model;
+import inf112.moustachmania.app.view.IView;
+import inf112.moustachmania.app.view.View;
+import inf112.moustachmania.app.player.Player;
+import inf112.moustachmania.app.controller.Controller;
+import inf112.moustachmania.app.controller.IController;
 
 public class StartScreen implements Screen {
     private final Stage stage;

@@ -1,11 +1,11 @@
-package inf112.moustachemania.app.controller;
+package inf112.moustachmania.app.controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
-import inf112.moustachemania.app.MoustacheMania;
-import inf112.moustachemania.app.player.Player;
-import inf112.moustachemania.app.screens.GameState;
+import inf112.moustachmania.app.MoustacheMania;
+import inf112.moustachmania.app.player.Player;
+import inf112.moustachmania.app.screens.GameState;
 
 public class SoundController {
 

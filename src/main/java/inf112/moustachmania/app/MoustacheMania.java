@@ -1,17 +1,17 @@
-package inf112.moustachemania.app;
+package inf112.moustachmania.app;
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import inf112.moustachemania.app.controller.SoundController;
-import inf112.moustachemania.app.screens.GameScreen;
-import inf112.moustachemania.app.screens.GameState;
-import inf112.moustachemania.app.screens.StartScreen;
+import inf112.moustachmania.app.controller.SoundController;
+import inf112.moustachmania.app.screens.GameScreen;
+import inf112.moustachmania.app.screens.GameState;
+import inf112.moustachmania.app.screens.StartScreen;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import inf112.moustachemania.app.utils.Constants;
+import inf112.moustachmania.app.utils.Constants;
 
 public class MoustacheMania extends Game {
 

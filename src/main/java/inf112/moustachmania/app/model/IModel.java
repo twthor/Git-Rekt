@@ -1,4 +1,4 @@
-package inf112.moustachemania.app.model;
+package inf112.moustachmania.app.model;
 
 public interface IModel {
     

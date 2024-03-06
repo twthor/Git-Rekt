@@ -1,8 +1,8 @@
-package inf112.moustachemania.app.screens;
+package inf112.moustachmania.app.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl3.TestApplication;
-import inf112.moustachemania.app.MoustacheMania;
+import inf112.moustachmania.app.MoustacheMania;
 import org.junit.AfterClass;
 import org.junit.jupiter.api.Test;
 
