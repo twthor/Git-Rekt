@@ -9,6 +9,9 @@ import inf112.moustachmania.app.player.Player;
 
 public class Model implements IModel {
 
+    private final Player player;
+    private final MoustacheMania game;
+
     private TiledMapTileLayer collisionMap;
     private Array<Rectangle> tiles = new Array<Rectangle>();
     private final Player player;
