@@ -18,11 +18,12 @@ import inf112.moustachmania.app.utils.Constants;
 import java.util.ArrayList;
 
 public class HelpScreen implements Screen {
+
+    private ArrayList<Texture> texturesToDispose; // List to handle image textures to be disposed
     private final Stage stage;
     private final MoustacheMania game;
-    private ArrayList<Texture> texturesToDispose; // List to handle image textures to be disposed
 
-    // Constructor
+
     public HelpScreen(MoustacheMania game) {
         this.stage = new Stage(new ScreenViewport()); // uses viewport, does not scale the stage with window-size however
         this.game = game;
@@ -35,19 +36,24 @@ public class HelpScreen implements Screen {
         show();
     }
 
+
     private void setupUiTable() {
         Table uiRoot = new Table();
         uiRoot.setFillParent(true);
         stage.addActor(uiRoot);
 
         setupControllerDescription(uiRoot);
-
         uiRoot.row().padTop(20);
 
         backTostartScreenButton(uiRoot);
 
     }
 
+
+    /**
+     * Adds a table to the given uiRoot, containing a description of the game controls
+     * @param uiRoot The root table to add the controlsTable to
+     */
     // set up description of the controls and lables to controlsTable
     private void setupControllerDescription(Table uiRoot) {
         Table controlsTable = new Table();
@@ -74,8 +80,10 @@ public class HelpScreen implements Screen {
         uiRoot.add(controlsTable).expand().fill();
     }
 
-    /*
-    Adds the background image
+
+    /**
+     * Adds a background image to the stage
+     * @param imagePath the path to the image to be added
      */
     private void addBackgroundImage(String imagePath) {
         Texture imageTexture = new Texture(Gdx.files.internal(imagePath));
@@ -87,7 +95,10 @@ public class HelpScreen implements Screen {
         texturesToDispose.add(imageTexture);
     }
 
-    // set up the back-button and click-handling
+    /**
+     * Adds a back to start-screen button to the given uiRoot
+     * @param uiRoot The root table to add the button to
+     */
     private void backTostartScreenButton(Table uiRoot) {
         TextButton helpButton = new TextButton("Back to start-screen", game.getSkin());
         helpButton.addListener(new ClickListener() {
@@ -100,13 +111,12 @@ public class HelpScreen implements Screen {
         uiRoot.add(helpButton).spaceBottom(10).fillX();
     }
 
-    /*
-    designates the given stage to receive and handle all user input events
-     */
+
     @Override
     public void show() {
         Gdx.input.setInputProcessor(stage);
     }
+
 
     @Override
     public void render(float delta) {
@@ -115,35 +125,30 @@ public class HelpScreen implements Screen {
         stage.draw();
     }
 
+
     @Override
     public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);
     }
 
-    @Override
-    public void pause() {
 
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void hide() {
-
-    }
-
-    /*
-    Disposes stage as well as used textures when no longer needed to avoid
-    memory leak.
-    */
     @Override
     public void dispose() {
         stage.dispose();
         for (Texture texture : texturesToDispose) {
             texture.dispose();
         }
+    }
+
+
+
+    @Override
+    public void pause() {
+    }
+    @Override
+    public void resume() {
+    }
+    @Override
+    public void hide() {
     }
 }

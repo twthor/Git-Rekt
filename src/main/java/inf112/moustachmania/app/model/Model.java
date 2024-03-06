@@ -5,21 +5,14 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
 import inf112.moustachmania.app.MoustacheMania;
-import inf112.moustachmania.app.screens.GameState;
 import inf112.moustachmania.app.player.Player;
-import inf112.moustachmania.app.model.map.MapController;
-import org.w3c.dom.css.Rect;
 
 public class Model implements IModel {
 
-    // Field variables
-    private final Player player;
-
-    private final MoustacheMania game;
-    private final MapController mapController;
-
     private TiledMapTileLayer collisionMap;
-
+    private Array<Rectangle> tiles = new Array<Rectangle>();
+    private final Player player;
+    private final MoustacheMania game;
     private static final float GRAVITY = -0.005f;
 
     private Pool<Rectangle> rectPool = new Pool<Rectangle>() {
@@ -29,20 +22,16 @@ public class Model implements IModel {
         }
     };
 
-    private Array<Rectangle> tiles = new Array<Rectangle>();
 
     public Model(final MoustacheMania game, Player player) {
         this.game = game;
         this.player = player;
-        this.mapController = MapController.getInstance();
-
-
     }
 
-    public void updateScreenSize(int width, int height) {
-
-    }
-
+    /**
+     * Updates the model
+     * @param deltaTime The time since the last update
+     */
     public void update(float deltaTime) {
 
         // Continuously try to make player fall
@@ -123,10 +112,19 @@ public class Model implements IModel {
     }
 
 
+    /**
+     * Sets the collision map
+     * @param collisionLayer The collision map
+     */
     public void setCollisionMap(TiledMapTileLayer collisionLayer) {
         collisionMap = collisionLayer;
     }
 
+
+    /**
+     * Gets the collision map
+     * @return The collision map
+     */
     public void getTiles(int startX, int startY, int endX, int endY, Array<Rectangle> tiles) {
 
         rectPool.freeAll(tiles);
@@ -144,14 +142,12 @@ public class Model implements IModel {
         }
     }
 
+
+    /**
+     * Gets the player
+     * @return The player
+     */
     public Player getPlayer() {
         return player;
     }
-
-
-    public String getTileMapPath() {
-        return mapController.getTileMapPath();
-    }
-
-
 }

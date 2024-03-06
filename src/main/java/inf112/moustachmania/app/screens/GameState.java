@@ -11,5 +11,7 @@ public enum GameState {
 
     HELP_SCREEN,
 
-    GAME_WON
+    GAME_WON,
+
+    LEVEL_SELECT
 }

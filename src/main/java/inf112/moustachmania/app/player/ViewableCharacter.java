@@ -7,7 +7,6 @@ public interface ViewableCharacter {
 
     /**
      * Gets the position of the player
-     *
      * @return array of x and y position of the player
      */
     Vector2 getPosition();

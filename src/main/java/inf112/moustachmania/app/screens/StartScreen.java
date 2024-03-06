@@ -26,11 +26,9 @@ import inf112.moustachmania.app.controller.IController;
 public class StartScreen implements Screen {
     private final Stage stage;
     private final MoustacheMania game;
-    private SoundController soundController;
 
 
     // TODO: split functionality from the constructor into different helper methods
-    // Constructor
     public StartScreen(final MoustacheMania game) {
         this.game = game;
         stage = new Stage();
@@ -97,10 +95,12 @@ public class StartScreen implements Screen {
 
     }
 
+
     @Override
     public void show() {
         Gdx.input.setInputProcessor(stage);
     }
+
 
     @Override
     public void render(float delta) {
@@ -109,28 +109,26 @@ public class StartScreen implements Screen {
         stage.draw();
     }
 
+
     @Override
     public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);
     }
 
 
-    // ButtonEvent for when starting the game
+    /**
+     * Handles the event when the new game button is clicked
+     */
     private void handleNewGameButtonEvent() {
-        Player player = new Player();
-        Model model = new Model(game, player);
-        IView view = new View(game, model);
-        IController controller = new Controller(game, model);
-
-        game.gameScreen = new GameScreen(game, view, controller, model);
-        game.setScreen(game.gameScreen);
-
-        // Sets the player field variable in the sound controller, so we can play sounds based on player events
-        SoundController.getInstance().setPlayer(player);
+        game.levelScreen = new LevelScreen(game);
+        game.setScreen(game.levelScreen);
 
         dispose();
     }
 
+    /**
+     * Handles the event when the controls help button is clicked
+     */
     private void handleControlsHelpGameButtonEvent() {
         game.helpScreen = new HelpScreen(game);
         game.setScreen(game.helpScreen);
@@ -138,15 +136,20 @@ public class StartScreen implements Screen {
         dispose();
     }
 
+
     // Closes the game window
     private void handleExitGameButtonEvent() {
         Gdx.app.exit();
     }
 
+
     @Override
     public void dispose() {
         stage.dispose();
     }
+
+
+
     @Override
     public void pause() {}
     @Override

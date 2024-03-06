@@ -14,6 +14,7 @@ import inf112.moustachmania.app.utils.Constants;
 public class MoustacheMania extends Game {
 
     public StartScreen startScreen;
+    public LevelScreen levelScreen;
     public HelpScreen helpScreen;
     public GameScreen gameScreen;
     public PauseScreen pauseScreen;
@@ -23,6 +24,7 @@ public class MoustacheMania extends Game {
     private Skin skin;
     private SoundController soundController;
 
+
     public static void main(String[] args) {
         Lwjgl3ApplicationConfiguration cfg = new Lwjgl3ApplicationConfiguration();
         cfg.setTitle("Moustache Mania");
@@ -31,6 +33,9 @@ public class MoustacheMania extends Game {
         new Lwjgl3Application(new MoustacheMania(), cfg);
      }
 
+    /**
+     * Create the game
+     */
     public void create() {
         batch = new SpriteBatch();
         font = new BitmapFont();
@@ -45,29 +50,41 @@ public class MoustacheMania extends Game {
     }
 
     /**
+     * Render the game
     */
     public void render() {
         super.render();
         SoundController.getInstance().update();
     }
 
+    /**
+     * Get the skin
+     */
     public Skin getSkin() {
         return this.skin;
     }
 
+    /**
+     * Get the batch
+     */
     public SpriteBatch getBatch() {
         return this.batch;
     }
 
+    /**
+     * Get the font
+     */
     public BitmapFont getFont() {
         return this.font;
     }
+
 
     public void dispose() {
         batch.dispose();
         font.dispose();
         soundController.dispose();
     }
+
 
     public GameState getGameState() {
         if (this.getScreen().getClass() == StartScreen.class) {
@@ -76,6 +93,9 @@ public class MoustacheMania extends Game {
         else if (this.getScreen().getClass() == GameScreen.class) {
             return GameState.ACTIVE_GAME;
         }
+        else if (this.getScreen().getClass() == LevelScreen.class) {
+            return GameState.LEVEL_SELECT;
+        }    
         else if (this.getScreen().getClass() == HelpScreen.class) {
             return GameState.HELP_SCREEN;
         }
@@ -85,14 +105,5 @@ public class MoustacheMania extends Game {
         else {
             throw new RuntimeException("Unkown screen type");
         }
-
-        /*
-         TODO: legge til klasser for andre GameStates:
-            PAUSE_SCREEN,
-            GAME_OVER
-            HELP_SCREEN
-         */
-
     }
-
 }
