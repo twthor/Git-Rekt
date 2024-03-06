@@ -5,9 +5,7 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import inf112.moustachmania.app.controller.SoundController;
-import inf112.moustachmania.app.screens.GameScreen;
-import inf112.moustachmania.app.screens.GameState;
-import inf112.moustachmania.app.screens.StartScreen;
+import inf112.moustachmania.app.screens.*;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -16,11 +14,16 @@ import inf112.moustachmania.app.utils.Constants;
 public class MoustacheMania extends Game {
 
     public StartScreen startScreen;
+    public LevelScreen levelScreen;
+    public HelpScreen helpScreen;
     public GameScreen gameScreen;
+    public PauseScreen pauseScreen;
+
     private SpriteBatch batch;
     private BitmapFont font;
     private Skin skin;
     private SoundController soundController;
+
 
     public static void main(String[] args) {
         Lwjgl3ApplicationConfiguration cfg = new Lwjgl3ApplicationConfiguration();
@@ -30,6 +33,9 @@ public class MoustacheMania extends Game {
         new Lwjgl3Application(new MoustacheMania(), cfg);
      }
 
+    /**
+     * Create the game
+     */
     public void create() {
         batch = new SpriteBatch();
         font = new BitmapFont();
@@ -40,32 +46,45 @@ public class MoustacheMania extends Game {
         soundController.setGame(this);
 
         this.setScreen(new StartScreen(this));
+        //this.setScreen(new HelpScreen(this));
     }
 
     /**
+     * Render the game
     */
     public void render() {
         super.render();
         SoundController.getInstance().update();
     }
 
+    /**
+     * Get the skin
+     */
     public Skin getSkin() {
         return this.skin;
     }
 
+    /**
+     * Get the batch
+     */
     public SpriteBatch getBatch() {
         return this.batch;
     }
 
+    /**
+     * Get the font
+     */
     public BitmapFont getFont() {
         return this.font;
     }
+
 
     public void dispose() {
         batch.dispose();
         font.dispose();
         soundController.dispose();
     }
+
 
     public GameState getGameState() {
         if (this.getScreen().getClass() == StartScreen.class) {
@@ -74,17 +93,17 @@ public class MoustacheMania extends Game {
         else if (this.getScreen().getClass() == GameScreen.class) {
             return GameState.ACTIVE_GAME;
         }
+        else if (this.getScreen().getClass() == LevelScreen.class) {
+            return GameState.LEVEL_SELECT;
+        }    
+        else if (this.getScreen().getClass() == HelpScreen.class) {
+            return GameState.HELP_SCREEN;
+        }
+        else if (this.getScreen().getClass() == PauseScreen.class) {
+            return GameState.PAUSE_SCREEN;
+        }
         else {
             throw new RuntimeException("Unkown screen type");
         }
-
-        /*
-         TODO: legge til klasser for andre GameStates:
-            PAUSE_SCREEN,
-            GAME_OVER
-            HELP_SCREEN
-         */
-
     }
-
 }

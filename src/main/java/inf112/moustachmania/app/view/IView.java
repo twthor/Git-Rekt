@@ -5,14 +5,17 @@ import inf112.moustachmania.app.screens.GameState;
 public interface IView {
 
     /**
-     * TODO: Legge til javadocs
+     * Renders the game, updating the screen
+     * @param delta time since last render
      */
     void render(float delta);
 
+
     /**
-     * Gets rid of
+     * Gets rid of the view
      */
     void dispose();
+
 
     /**
      * Gets the active state of the game

@@ -19,31 +19,24 @@ import inf112.moustachmania.app.utils.Constants;
 
 public class View implements IView {
 
-    // Game variables
     private final MoustacheMania game;
     private final Model model;
-
-    // Map variables
     private OrthogonalTiledMapRenderer tiledMapRenderer;
     private TiledMap tiledMap;
     private String currentMapPath;
     private MapLayers mapLayers;
-
-    // Camera
     private final OrthographicCamera camera;
-
-    // Player variables
     private Texture playerTexture;
-
     private Animation<TextureRegion> stand;
     private Animation<TextureRegion> walk;
     private Animation<TextureRegion> jump;
+    private final int levelNumber;
 
 
-
-    public View(MoustacheMania game, Model model) {
+    public View(MoustacheMania game, Model model, int levelNumber) {
         this.game = game;
         this.model = model;
+        this.levelNumber = levelNumber;
 
         playerTexture = new Texture("assets/karakter.png");
         TextureRegion[] regions = TextureRegion.split(playerTexture, 16, 16)[0];
@@ -92,7 +85,7 @@ public class View implements IView {
     }
 
     private void loadMap() {
-        tiledMap = new TmxMapLoader().load(Constants.mapPaths[0]);
+        tiledMap = new TmxMapLoader().load(Constants.mapPaths[levelNumber]);
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap, Constants.scale);
         mapLayers = tiledMap.getLayers();
 
