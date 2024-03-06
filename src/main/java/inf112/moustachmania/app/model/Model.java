@@ -11,11 +11,8 @@ public class Model implements IModel {
 
     private final Player player;
     private final MoustacheMania game;
-
     private TiledMapTileLayer collisionMap;
     private Array<Rectangle> tiles = new Array<Rectangle>();
-    private final Player player;
-    private final MoustacheMania game;
     private static final float GRAVITY = -0.005f;
 
     private Pool<Rectangle> rectPool = new Pool<Rectangle>() {
