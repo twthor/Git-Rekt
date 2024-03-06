@@ -9,5 +9,7 @@ public enum GameState {
 
     GAME_OVER,
 
-    HelpScreen
+    HELP_SCREEN,
+
+    GAME_WON
 }

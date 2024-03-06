@@ -77,7 +77,7 @@ public class MoustacheMania extends Game {
             return GameState.ACTIVE_GAME;
         }
         else if (this.getScreen().getClass() == HelpScreen.class) {
-            return GameState.HelpScreen;
+            return GameState.HELP_SCREEN;
         }
         else if (this.getScreen().getClass() == PauseScreen.class) {
             return GameState.PAUSE_SCREEN;

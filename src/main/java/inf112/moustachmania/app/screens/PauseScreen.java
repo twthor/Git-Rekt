@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 import inf112.moustachmania.app.MoustacheMania;
 import inf112.moustachmania.app.model.IModel;
+import inf112.moustachmania.app.utils.Constants;
 
 public class PauseScreen implements Screen {
 
@@ -27,9 +28,7 @@ public class PauseScreen implements Screen {
         game.pauseScreen = this;
         game.setScreen(this);
 
-        Texture texture = new Texture("assets/testPicture.png");
-        Image pausedBackgroundImage = new Image(texture);
-        pausedBackgroundImage.setSize(stage.getWidth(), stage.getHeight());
+        addBackgroundImage(Constants.backgroundPicture);
 
         Table table = new Table();
         Table buttonTable = new Table();
@@ -44,27 +43,24 @@ public class PauseScreen implements Screen {
             public void clicked(InputEvent event, float a, float b) {
                 handleResumeGameButtonEvent();
             }
-
         });
         buttonTable.add(resumeGameButton).spaceBottom(10).fillX();
         //buttonTable.add(resumeGameButton); ???
         buttonTable.row();
 
         // Button to exit game
-        TextButton exitGameButton = new TextButton("Exit game", game.getSkin());
+        TextButton exitGameButton = new TextButton("Quit level", game.getSkin());
         exitGameButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float a, float b) {
                 handleBackToStartScreenButtonEvent();
             }
-
         });
         buttonTable.add(exitGameButton).spaceBottom(10).fillX();
         //buttonTable.add(exitGameButton);
         buttonTable.row();
 
         table.add(buttonTable).expand().fill(); // Add buttons to the main table and formats and fill up available space in the table
-        stage.addActor(pausedBackgroundImage); // Adds the background
         stage.addActor(table); // adds the main table to the stage
         show();
 
@@ -123,6 +119,17 @@ public class PauseScreen implements Screen {
     private void handleResumeGameButtonEvent() {
         game.setScreen(game.gameScreen);
         dispose();
+    }
+
+    /*
+    Adds and format background image to the stage
+     */
+    private void addBackgroundImage(String imagePath) {
+        Texture imageTexture = new Texture(Gdx.files.internal(imagePath));
+        Image pausedBackgroundImage = new Image(imageTexture);
+        pausedBackgroundImage.setColor(1,1,1,0.4f);
+        pausedBackgroundImage.setSize(stage.getWidth(), stage.getHeight());
+        stage.addActor(pausedBackgroundImage); // Adds background image to the stage
     }
 
 }

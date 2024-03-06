@@ -16,7 +16,6 @@ public class Controller implements IController {
         this.model = model;
     }
 
-
     /**
         Handles player input
     */
@@ -47,11 +46,6 @@ public class Controller implements IController {
     public void resize(int width, int height) {
         model.updateScreenSize(width, height);
     }
-
-    // Implementere pauses og resume
-    public void pause() {}
-
-    public void resume() {}
 
     @Override
     public void update(float delta) {
