@@ -1,6 +1,5 @@
 package inf112.moustachmania.app.screens;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -20,8 +19,10 @@ import inf112.moustachmania.app.view.IView;
 import inf112.moustachmania.app.view.View;
 
 public class LevelScreen implements Screen {
+
     private final Stage stage;
     private final MoustacheMania game;
+
 
     public LevelScreen(final MoustacheMania game) {
         this.game = game;
@@ -44,9 +45,13 @@ public class LevelScreen implements Screen {
             uiRoot.add(levelButton).spaceBottom(10).fillX().row();
             stage.addActor(uiRoot);
         }
-        // kan lage back button
     }
 
+
+    /**
+     * Handles the event when a level button is clicked
+     * @param levelNumber The level number of the button clicked
+     */
     private void handleLevelButtonEvent(int levelNumber) {
         Player player = new Player();
         Model model = new Model(game, player);
@@ -54,22 +59,21 @@ public class LevelScreen implements Screen {
         IController controller = new Controller(game, model);
 
         if (levelNumber >= 0 && levelNumber <= Constants.mapPaths.length) {
-            //String selectedMapPath = Constants.mapPaths[levelNumber - 1];
-            // handle level selection logic here
-            // må kunne lode opp map-et
             game.gameScreen = new GameScreen(game, view, controller, model);
             game.setScreen(game.gameScreen);
-
             SoundController.getInstance().setPlayer(player);
-        } else {
+        }
+        else {
             Gdx.app.log("LevelScreen", "Invalid level number: " + levelNumber);
         }
     }
+
 
     @Override
     public void show() {
         Gdx.input.setInputProcessor(stage);
     }
+
 
     @Override
     public void render(float delta) {
@@ -78,28 +82,27 @@ public class LevelScreen implements Screen {
         stage.draw();
     }
 
+
     @Override
     public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);
     }
 
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void hide() {
-
-    }
 
     @Override
     public void dispose() {
         stage.dispose();
+    }
+
+
+
+    @Override
+    public void pause() {
+    }
+    @Override
+    public void resume() {
+    }
+    @Override
+    public void hide() {
     }
 }

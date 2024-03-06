@@ -2,31 +2,22 @@ package inf112.moustachmania.app.controller;
 
 public interface IController {
 
+
+    /**
+     * Updates the controller
+     * @param delta time since last update
+     */
     void update(float delta);
 
+
+    /**
+     * Disposes of the controller
+     */
     void dispose();
 
-    /**
-     * Sets the GameState to GAME_OVER
-     */
-    void setGameOver();
 
     /**
-     * Called everytime the timer ticks.
-     * Used when updating the model.
+     * Handles player input
      */
-    void clockTick();
-
-    /**
-     * Checks to see if the player is moving
-     * @return true if player is moving
-     */
-    boolean isMoving();
-
-    /**
-     * Starts the game by setting GameState to ActiveGame
-     */
-    void startGame();
-
     void handleInput();
 }
