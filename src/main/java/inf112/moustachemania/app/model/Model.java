@@ -5,9 +5,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
 import inf112.moustachemania.app.MoustacheMania;
-import inf112.moustachemania.app.screens.GameState;
 import inf112.moustachemania.app.player.Player;
-import inf112.moustachemania.app.model.map.MapController;
 
 public class Model implements IModel {
 
@@ -15,7 +13,6 @@ public class Model implements IModel {
     private final Player player;
 
     private final MoustacheMania game;
-    private final MapController mapController;
 
     private TiledMapTileLayer collisionMap;
 
@@ -33,8 +30,6 @@ public class Model implements IModel {
     public Model(final MoustacheMania game, Player player) {
         this.game = game;
         this.player = player;
-        this.mapController = MapController.getInstance();
-
 
     }
 
@@ -146,11 +141,5 @@ public class Model implements IModel {
     public Player getPlayer() {
         return player;
     }
-
-
-    public String getTileMapPath() {
-        return mapController.getTileMapPath();
-    }
-
 
 }
