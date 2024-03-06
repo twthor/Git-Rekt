@@ -33,7 +33,7 @@ public class GameScreenShould {
     @Test
     public void render() {
         GameScreen gameScreen = createScreen();
-        gameScreen.pause();
+        gameScreen.render(1);
         gameScreen.dispose();
     }
 
@@ -46,10 +46,9 @@ public class GameScreenShould {
 
     private GameScreen createScreen() {
         final Model model = new Model(game, new Player());
-        final IView view = new View(game, model);
-        final IModel model2 = new Model(game, new Player());
+        final IView view = new View(game, model, 1);
         final IController controller = new Controller(game, model);
 
-        return new GameScreen(game, view, controller, model2);
+        return new GameScreen(game, view, controller, model);
     }
 }
