@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 
 
 public interface ControllablePlayer {
+
     /**
      * Gets the position of the Player.
      * @return array of x and y coordinates of the player.

@@ -9,13 +9,13 @@ import inf112.moustachmania.app.screens.GameState;
 
 public class SoundController {
 
+    GameState currentGameState;
     private Player player;
+    private MoustacheMania game;
     private final Music backgroundMusic;
     private final Music mainMenuMusic;
     private final Sound powerUpSound;
-    private MoustacheMania game;
     private static SoundController instance = null;
-    GameState currentGameState;
 
 
     private SoundController() {
@@ -25,12 +25,18 @@ public class SoundController {
         powerUpSound = Gdx.audio.newSound(Gdx.files.internal("powerUpSound.mp3"));
     }
 
+
+    /**
+     * Singleton pattern
+     * @return The instance of the SoundController
+     */
     public static SoundController getInstance() {
         if (instance == null) {
             instance = new SoundController();
         }
         return instance;
     }
+
 
     /**
      * Updates the music and sound effects based on GameStates and game events
@@ -39,7 +45,9 @@ public class SoundController {
         if (game == null){
             return;
         }
+
         GameState gameState = game.getGameState();
+
         if (gameState == currentGameState){
             return;
         }
@@ -55,9 +63,11 @@ public class SoundController {
         } else {
             backgroundMusic.stop();
         }
+
         if (gameState == GameState.PAUSE_SCREEN) {
             backgroundMusic.stop();
         }
+
         if (gameState == GameState.START_SCREEN) {
             mainMenuMusic.setLooping(true);
             mainMenuMusic.play();
@@ -69,9 +79,15 @@ public class SoundController {
         currentGameState = gameState;
     }
 
+
+    /**
+     * Sets the player instance to be used by the SoundController.
+     * @param player The player instance to be set.
+     */
     public void setPlayer(Player player) {
         this.player = player;
     }
+
 
     /**
      * Sets the game instance to be used by the SoundController.
@@ -81,6 +97,10 @@ public class SoundController {
         this.game = game;
     }
 
+
+    /**
+     * Disposes of the music and sound effects
+     */
     public void dispose() {
         backgroundMusic.dispose();
         mainMenuMusic.dispose();
