@@ -5,7 +5,6 @@ import com.badlogic.gdx.backends.lwjgl3.TestApplication;
 import inf112.moustachmania.app.MoustacheMania;
 import inf112.moustachmania.app.controller.Controller;
 import inf112.moustachmania.app.controller.IController;
-import inf112.moustachmania.app.model.IModel;
 import inf112.moustachmania.app.model.Model;
 import inf112.moustachmania.app.player.Player;
 import inf112.moustachmania.app.view.IView;
@@ -13,12 +12,12 @@ import inf112.moustachmania.app.view.View;
 import org.junit.AfterClass;
 import org.junit.jupiter.api.Test;
 
-public class GameScreenShould {
+public class GameScreenTest {
 
     private final MoustacheMania game;
 
 
-    public GameScreenShould() {
+    public GameScreenTest() {
         this.game = new MoustacheMania();
         new TestApplication(game);
 
@@ -39,6 +38,13 @@ public class GameScreenShould {
 
     @Test
     public void pause() {
+        GameScreen gameScreen = createScreen();
+        gameScreen.pause();
+        gameScreen.dispose();
+    }
+
+    @Test
+    public void resume() {
         GameScreen gameScreen = createScreen();
         gameScreen.resume();
         gameScreen.dispose();

@@ -222,6 +222,9 @@
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>3.2.5</version>
 					<configuration>
+						<includes>
+							<include>**/*Test.java</include>
+						</includes>
 						<useModulePath>false</useModulePath>
 						<argLine></argLine>
 					</configuration>

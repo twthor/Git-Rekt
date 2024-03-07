@@ -6,11 +6,11 @@ import inf112.moustachmania.app.MoustacheMania;
 import org.junit.AfterClass;
 import org.junit.jupiter.api.Test;
 
-public class LevelScreenShould {
+public class LevelScreenTest {
 
     private final MoustacheMania game;
 
-    public LevelScreenShould() {
+    public LevelScreenTest() {
         this.game = new MoustacheMania();
         new TestApplication(game);
 
