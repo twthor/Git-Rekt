@@ -5,7 +5,6 @@ import com.badlogic.gdx.backends.lwjgl3.TestApplication;
 import inf112.moustachmania.app.MoustacheMania;
 import inf112.moustachmania.app.controller.Controller;
 import inf112.moustachmania.app.controller.IController;
-import inf112.moustachmania.app.model.IModel;
 import inf112.moustachmania.app.model.Model;
 import inf112.moustachmania.app.player.Player;
 import inf112.moustachmania.app.view.IView;
@@ -13,12 +12,12 @@ import inf112.moustachmania.app.view.View;
 import org.junit.AfterClass;
 import org.junit.jupiter.api.Test;
 
-public class GameScreenShould {
+public class GameScreenTest {
 
     private final MoustacheMania game;
 
 
-    public GameScreenShould() {
+    public GameScreenTest() {
         this.game = new MoustacheMania();
         new TestApplication(game);
 
@@ -33,12 +32,19 @@ public class GameScreenShould {
     @Test
     public void render() {
         GameScreen gameScreen = createScreen();
-        gameScreen.pause();
+        gameScreen.render(1);
         gameScreen.dispose();
     }
 
     @Test
     public void pause() {
+        GameScreen gameScreen = createScreen();
+        gameScreen.pause();
+        gameScreen.dispose();
+    }
+
+    @Test
+    public void resume() {
         GameScreen gameScreen = createScreen();
         gameScreen.resume();
         gameScreen.dispose();
@@ -46,10 +52,9 @@ public class GameScreenShould {
 
     private GameScreen createScreen() {
         final Model model = new Model(game, new Player());
-        final IView view = new View(game, model);
-        final IModel model2 = new Model(game, new Player());
+        final IView view = new View(game, model, 1);
         final IController controller = new Controller(game, model);
 
-        return new GameScreen(game, view, controller, model2);
+        return new GameScreen(game, view, controller, model);
     }
 }
