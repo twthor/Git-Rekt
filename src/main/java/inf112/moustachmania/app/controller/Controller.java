@@ -26,25 +26,22 @@ public class Controller implements IController {
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
             game.setScreen(new PauseScreen(game, model));
-            //Gdx.app.exit();
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            // TODO: player.setWalkingState(direction left)
-            player.movePlayer(-1);
+            model.movePlayer(-1);
             if (player.grounded) player.state = Player.State.Walking;
             player.facesRight = false;
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            player.movePlayer(1);
-            // TODO: player.setWalkingState(direction right)
+            model.movePlayer(1);
             if (player.grounded) player.state = Player.State.Walking;
             player.facesRight = true;
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-            player.jumpPlayer();
+            model.jumpPlayer();
             if (!player.grounded) player.state = Player.State.Jumping;
         }
     }
