@@ -16,6 +16,8 @@ import inf112.moustachmania.app.player.Player;
 import inf112.moustachmania.app.screens.GameState;
 import inf112.moustachmania.app.utils.Constants;
 
+import static com.badlogic.gdx.Gdx.graphics;
+
 
 public class View implements IView {
 
@@ -61,9 +63,6 @@ public class View implements IView {
     public void render(float delta) {
         ScreenUtils.clear(0, 0, 0, 1);
 
-        loadMap();
-
-
         camera.update();
         game.getBatch().setProjectionMatrix(camera.combined);
         tiledMapRenderer.setView(camera);
@@ -72,7 +71,6 @@ public class View implements IView {
         camera.position.x = model.getPlayer().position.x;
         camera.update();
 
-        // TODO: split into draw-methods for different layers of the map
         renderMap();
         renderPlayer();
 
@@ -95,15 +93,7 @@ public class View implements IView {
     }
     
     private void renderMap() {
-        // start batch
-        //tiledMapRenderer.getBatch().begin();
-
-        // render in things from the map:
         tiledMapRenderer.render();
-        // TODO: load different layers instead of the whole map in one go.
-
-        // end batch
-        //tiledMapRenderer.getBatch().end();
     }
 
     private void renderPlayer() {

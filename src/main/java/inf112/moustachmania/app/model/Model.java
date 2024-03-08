@@ -33,29 +33,52 @@ public class Model implements IModel {
      * @param deltaTime The time since the last update
      */
     public void update(float deltaTime) {
-
         // Continuously try to make player fall
         player.velocity.add(0, GRAVITY);
+        checkYCollision(player);
+        player.position.add(player.velocity);
 
         // Updating players stateTime. Important for the player animations.
         player.stateTime += deltaTime;
 
-        // Update player position
-        player.position.add(player.velocity);
-
+        // If player is slowing down, set speed to 0 and change frame
         if (Math.abs(player.velocity.x) < 1) {
             player.velocity.x = 0;
             if (player.grounded) player.state = Player.State.Standing;
         }
 
-        // multiply by delta time so we know how far we go
-        // in this frame
+        // multiply by delta time, so we know how far we go in this frame
         player.velocity.scl(deltaTime);
+        player.velocity.scl(1 / deltaTime);
+    }
 
-        // Check for collisions
-        // perform collision detection & response, on each axis, but separately
-        // if the player is moving right, check the tiles to the right of it's
-        // right bounding box edge, otherwise check the ones to the left
+    /**
+     * When called upon from the controller, the model moves the player to the desired position.
+     * @param x input speed from controller. Always 1, but is multiplied with MAX_VELOCITY from Player.java
+     */
+    public void movePlayer(int x) {
+        player.velocity.x = x * Player.MAX_VELOCITY;
+        checkXCollision(player);
+        player.position.add(player.velocity);
+    }
+
+    /**
+     * When called upon from the controller, the model makes the player jump
+     * and moves the player upwards based on Player.JUMP_VELOCITY.
+     * Sets Player.grounded = false.
+     */
+    public void jumpPlayer() {
+        if (player.grounded) {
+            player.velocity.y += Player.JUMP_VELOCITY;
+            player.grounded = false;
+        }
+    }
+
+    /**
+     * Check for collision in the x-axis.
+     * @param player checks collision for the current player object in regard to the collision layer from the Tiled map.
+     */
+    private void checkXCollision(Player player) {
         Rectangle playerRect = rectPool.obtain();
         playerRect.set(player.position.x, player.position.y, Player.WIDTH, Player.HEIGHT);
         int startX, startY, endX, endY;
@@ -76,7 +99,18 @@ public class Model implements IModel {
             }
         }
         playerRect.x = player.position.x;
+        rectPool.free(playerRect);
+        checkYCollision(player);
+    }
 
+    /**
+     * Checks collision in the y-axis for the current player object in regard to the collision layer from the Tiled map.
+     * @param player Current player object for the game
+     */
+    private void checkYCollision(Player player) {
+        Rectangle playerRect = rectPool.obtain();
+        playerRect.set(player.position.x, player.position.y, Player.WIDTH, Player.HEIGHT);
+        int startX, startY, endX, endY;
         if (player.velocity.y > 0) {
             startY = endY = (int)(player.position.y + Player.HEIGHT + player.velocity.y);
         } else {
@@ -89,8 +123,9 @@ public class Model implements IModel {
         for (Rectangle tile : tiles) {
             if (playerRect.overlaps(tile)) {
                 // we actually reset the players y-position here
-                // So its just below/above the tile we collided with
-                // this should remove bouncing.
+                // So its just below/above the tile we collided with this should remove bouncing.
+
+                // If the player jumps up into a block:
                 if (player.velocity.y > 0) {
                     player.position.y = tile.y - Player.HEIGHT;
                     // TODO: implement breaking blocks.
@@ -98,7 +133,7 @@ public class Model implements IModel {
                     //collisionMap.setCell((int)tile.x, (int)tile.y, null);
                 } else {
                     player.position.y = tile.y + tile.height;
-                    // if we hit the ground, mark us as grounded, so we can jump
+                    // if we hit the ground, mark us as grounded, so we can jump again
                     player.grounded = true;
                 }
                 player.velocity.y = 0;
@@ -106,11 +141,7 @@ public class Model implements IModel {
             }
         }
         rectPool.free(playerRect);
-
-        player.position.add(player.velocity);
-        player.velocity.scl(1 / deltaTime);
     }
-
 
     /**
      * Sets the collision map
@@ -120,13 +151,11 @@ public class Model implements IModel {
         collisionMap = collisionLayer;
     }
 
-
     /**
      * Gets the collision map
      * @return The collision map
      */
     public void getTiles(int startX, int startY, int endX, int endY, Array<Rectangle> tiles) {
-
         rectPool.freeAll(tiles);
         tiles.clear();
 

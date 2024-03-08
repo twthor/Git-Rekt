@@ -46,7 +46,6 @@ public class MoustacheMania extends Game {
         soundController.setGame(this);
 
         this.setScreen(new StartScreen(this));
-        //this.setScreen(new HelpScreen(this));
     }
 
     /**
