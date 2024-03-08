@@ -11,18 +11,16 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 import inf112.moustachmania.app.MoustacheMania;
-import inf112.moustachmania.app.model.IModel;
 import inf112.moustachmania.app.utils.Constants;
 
 public class PauseScreen implements Screen {
 
     private final Stage stage;
     MoustacheMania game;
-    IModel model;
 
-    public PauseScreen(MoustacheMania game, IModel model) {
+
+    public PauseScreen(MoustacheMania game) {
         this.stage = new Stage();
-        this.model = model;
         this.game = game;
 
         game.pauseScreen = this;
@@ -47,6 +45,7 @@ public class PauseScreen implements Screen {
         buttonTable.add(resumeGameButton).spaceBottom(10).fillX();
         //buttonTable.add(resumeGameButton); ???
         buttonTable.row();
+
 
         // Button to exit game
         TextButton exitGameButton = new TextButton("Quit level", game.getSkin());
