@@ -1,6 +1,5 @@
 package inf112.moustachmania.app.controller;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
@@ -16,6 +15,8 @@ public class SoundController {
     private final Music backgroundMusic;
     private final Music mainMenuMusic;
     private final Sound powerUpSound;
+    private final Sound gameOverSound;
+    private final Sound levelCompletedSound;
     private static SoundController instance = null;
 
 
@@ -24,6 +25,8 @@ public class SoundController {
         backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("backgroundMusic.mp3"));
         mainMenuMusic = Gdx.audio.newMusic(Gdx.files.internal("mainMenuMusic.mp3"));
         powerUpSound = Gdx.audio.newSound(Gdx.files.internal("powerUpSound.mp3"));
+        gameOverSound = Gdx.audio.newSound(Gdx.files.internal("gameOver.mp3"));
+        levelCompletedSound = Gdx.audio.newSound(Gdx.files.internal("levelCompleted.mp3"));
     }
 
 
@@ -75,9 +78,12 @@ public class SoundController {
         } else {
             mainMenuMusic.stop();
         }
-        
+
         if (gameState == GameState.GAME_OVER) {
-            powerUpSound.play();
+            gameOverSound.play();
+        }
+        if (gameState == GameState.GAME_WON) {
+            levelCompletedSound.play();
         }
 
         currentGameState = gameState;
