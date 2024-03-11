@@ -33,7 +33,8 @@ Musikk:
 - Startskjermmusikk
   - https://pixabay.com/users/jimgor33-5579676/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=145077
   - https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=145077
-  
+- Game over lyd og level completed lyd
+  - https://mixkit.co/free-sound-effects/game-over/
 Bilder/sprites:
 - Mynter
   - https://opengameart.org/content/16x16-spinning-coin-pickup-animation
