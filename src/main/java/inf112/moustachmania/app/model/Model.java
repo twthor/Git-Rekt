@@ -189,6 +189,14 @@ public class Model implements IModel {
         }
     }
 
+    /**
+     * Getter for the controller and view to fetch the width of the level.
+     * @return width of the level in int.
+     */
+    public int getLevelWidth() {
+        return collisionMap.getWidth();
+    }
+
 
     /**
      * Gets the player
