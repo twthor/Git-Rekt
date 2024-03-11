@@ -5,7 +5,9 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
 import inf112.moustachmania.app.MoustacheMania;
+import inf112.moustachmania.app.controller.SoundController;
 import inf112.moustachmania.app.player.Player;
+import inf112.moustachmania.app.screens.StartScreen;
 
 public class Model implements IModel {
 
@@ -46,6 +48,9 @@ public class Model implements IModel {
             player.velocity.x = 0;
             if (player.grounded) player.state = Player.State.Standing;
         }
+
+        // Check if player is in bounds of the screen
+        checkPlayerOutOfBounds(player);
 
         // multiply by delta time, so we know how far we go in this frame
         player.velocity.scl(deltaTime);
@@ -141,6 +146,19 @@ public class Model implements IModel {
             }
         }
         rectPool.free(playerRect);
+    }
+
+    private void checkPlayerOutOfBounds(Player player) {
+        float playerX = player.position.x;
+        float playerY = player.position.y;
+        float mapWidth = collisionMap.getWidth();
+        float mapHeight = collisionMap.getHeight();
+
+        // Check if the player is outside the map boundaries
+        if (playerX < -2 || playerY < -2 || playerX > mapWidth || playerY > mapHeight) {
+            // Trigger game over event or state
+            game.setScreen(new StartScreen(game));
+        }
     }
 
     /**
