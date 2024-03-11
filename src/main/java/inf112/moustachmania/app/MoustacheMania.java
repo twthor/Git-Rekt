@@ -18,7 +18,7 @@ public class MoustacheMania extends Game {
     public HelpScreen helpScreen;
     public GameScreen gameScreen;
     public PauseScreen pauseScreen;
-
+    public GameOverScreen gameOverScreen;
     private SpriteBatch batch;
     private BitmapFont font;
     private Skin skin;
@@ -100,6 +100,9 @@ public class MoustacheMania extends Game {
         }
         else if (this.getScreen().getClass() == PauseScreen.class) {
             return GameState.PAUSE_SCREEN;
+        }
+        else if (this.getScreen().getClass() == GameOverScreen.class) {
+            return GameState.GAME_OVER;
         }
         else {
             throw new RuntimeException("Unkown screen type");

@@ -14,10 +14,9 @@ import inf112.moustachmania.app.MoustacheMania;
 import inf112.moustachmania.app.utils.Constants;
 
 public class PauseScreen implements Screen {
-
     private final Stage stage;
+    private Texture imageTexture;
     MoustacheMania game;
-
 
     public PauseScreen(MoustacheMania game) {
         this.stage = new Stage();
@@ -106,6 +105,7 @@ public class PauseScreen implements Screen {
 
     @Override
     public void dispose() {
+        stage.dispose();
 
     }
 

@@ -22,6 +22,7 @@ public class LevelScreen implements Screen {
 
     private final Stage stage;
     private final MoustacheMania game;
+    private int currentLevelNumber = -1;
 
 
     public LevelScreen(final MoustacheMania game) {
@@ -53,12 +54,13 @@ public class LevelScreen implements Screen {
      * @param levelNumber The level number of the button clicked
      */
     private void handleLevelButtonEvent(int levelNumber) {
+        currentLevelNumber = levelNumber; // Holder oversikt over hvilken bane
         Player player = new Player();
         Model model = new Model(game, player);
         IView view = new View(game, model, levelNumber);
         IController controller = new Controller(game, model);
 
-        if (levelNumber >= 0 && levelNumber <= Constants.mapPaths.length) {
+        if (levelNumber >= 0 && levelNumber < Constants.mapPaths.length) { // byttet fra <= til <
             game.gameScreen = new GameScreen(game, view, controller, model);
             game.setScreen(game.gameScreen);
             SoundController.getInstance().setPlayer(player);
@@ -104,5 +106,9 @@ public class LevelScreen implements Screen {
     }
     @Override
     public void hide() {
+    }
+
+    public int currentLevel() {
+        return currentLevelNumber;
     }
 }
