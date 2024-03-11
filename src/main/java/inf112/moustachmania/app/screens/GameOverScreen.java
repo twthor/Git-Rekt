@@ -67,7 +67,7 @@ public class GameOverScreen implements Screen {
             }
         });
 
-        buttonTable.add(tryAgainButton).spaceBottom(10).fillX();
+        buttonTable.add(tryAgainButton).spaceBottom(10).fillX().padTop(400);
         buttonTable.row();
 
         buttonTable.add(playOtherLevelButton).spaceBottom(10).fillX();
