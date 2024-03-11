@@ -28,6 +28,14 @@ public class Player implements ViewableCharacter, ControllablePlayer {
     }
 
     /**
+     * Set players power-up boolean
+     * @param b true for power-up, false for none.
+     */
+    public void setPowerUp(boolean b) {
+        this.powerUp = b;
+    }
+
+    /**
      * The different states the player can be in
      */
     public enum State {
