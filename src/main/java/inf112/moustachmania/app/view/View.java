@@ -7,6 +7,7 @@ import com.badlogic.gdx.maps.MapLayers;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -67,13 +68,11 @@ public class View implements IView {
         game.getBatch().setProjectionMatrix(camera.combined);
         tiledMapRenderer.setView(camera);
 
-        // TODO: implement camera following player and that when it is at the edge, dont fix camera to player
-        camera.position.x = model.getPlayer().position.x;
+        setCameraPosition();
         camera.update();
 
         renderMap();
         renderPlayer();
-
     }
 
     @Override
@@ -89,6 +88,26 @@ public class View implements IView {
 
         TiledMapTileLayer collisionLayer = (TiledMapTileLayer)tiledMap.getLayers().get("collision");
         model.setCollisionMap(collisionLayer);
+    }
+
+    private void setCameraPosition() {
+        // Get the width of the level
+        float levelWidth = model.getLevelWidth();
+
+        // Calculate the minimum and maximum x positions for the camera to stay within the level bounds
+        float minX = camera.viewportWidth / 2; // Left edge of the level
+        float maxX = levelWidth - camera.viewportWidth / 2; // Right edge of the level
+
+        // Ensure the camera's x position stays within the level bounds
+        camera.position.x = Math.max(minX, Math.min(maxX, camera.position.x));
+
+        // Fetches the players x position.
+        float playerX = model.getPlayer().position.x;
+        // Interpolation is making the camera transition more smoothly.
+        float interpolatedX = Interpolation.linear.apply(camera.position.x, playerX, 0.1f);
+
+        // Ensure the interpolated camera position stays within the level bounds
+        camera.position.x = Math.max(minX, Math.min(maxX, interpolatedX));
     }
     
     private void renderMap() {
