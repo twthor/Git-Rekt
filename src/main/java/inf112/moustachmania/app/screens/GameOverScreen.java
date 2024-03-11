@@ -22,6 +22,7 @@ import inf112.moustachmania.app.view.View;
 
 public class GameOverScreen implements Screen {
     private final Stage stage;
+    private Texture imageTexture;
     MoustacheMania game;
 
     public GameOverScreen(MoustacheMania game) {
@@ -31,8 +32,7 @@ public class GameOverScreen implements Screen {
         game.gameOverScreen = this;
         game.setScreen(this);
 
-        //addBackgroundImage(Constants.backgroundPicture);
-        addBackgroundImage("assets/testPicture.png"); // Change to actual background-image
+        addBackgroundImage(Constants.gameOverPicture);
 
         Table table = new Table();
         table.setFillParent(true);
@@ -69,6 +69,7 @@ public class GameOverScreen implements Screen {
         show();
     }
     public void tryAgainEventHandler() {
+        // Need new instances of these classes to "create" a new game when trying a level again
         Player player = new Player();
         Model model = new Model(game, player);
         IView view = new View(game, model, game.levelScreen.currentLevel());
@@ -84,12 +85,11 @@ public class GameOverScreen implements Screen {
         dispose();
     }
     private void addBackgroundImage(String imagePath) {
-        Texture imageTexture = new Texture(Gdx.files.internal(imagePath));
+        imageTexture = new Texture(Gdx.files.internal(imagePath));
         Image backgroundImage = new Image(imageTexture);
         backgroundImage.setColor(1,1,1,0.4f);
         backgroundImage.setSize(stage.getWidth(), stage.getHeight());
         stage.addActor(backgroundImage); // Adds background image to the stage
-        //imageTexture.dispose();
     }
     @Override
     public void show() {
@@ -125,6 +125,9 @@ public class GameOverScreen implements Screen {
 
     @Override
     public void dispose() {
+        if (imageTexture != null) {
+            imageTexture.dispose();
+        }
         stage.dispose();
     }
 }

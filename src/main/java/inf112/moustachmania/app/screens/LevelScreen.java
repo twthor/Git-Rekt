@@ -22,7 +22,7 @@ public class LevelScreen implements Screen {
 
     private final Stage stage;
     private final MoustacheMania game;
-    private int currentLevelNumber = -1;
+    private int currentLevelNumber = -1; // "placeholder" bane-indeks
 
 
     public LevelScreen(final MoustacheMania game) {
@@ -54,7 +54,7 @@ public class LevelScreen implements Screen {
      * @param levelNumber The level number of the button clicked
      */
     private void handleLevelButtonEvent(int levelNumber) {
-        currentLevelNumber = levelNumber; // Holder oversikt over hvilken bane
+        currentLevelNumber = levelNumber; // Holder oversikt over hvilken bane som er "aktiv"
         Player player = new Player();
         Model model = new Model(game, player);
         IView view = new View(game, model, levelNumber);
@@ -108,6 +108,9 @@ public class LevelScreen implements Screen {
     public void hide() {
     }
 
+    /*
+    currentLevel method return the current level the player is playing.
+     */
     public int currentLevel() {
         return currentLevelNumber;
     }
