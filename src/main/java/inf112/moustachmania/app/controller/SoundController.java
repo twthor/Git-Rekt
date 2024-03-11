@@ -1,5 +1,6 @@
 package inf112.moustachmania.app.controller;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
@@ -74,7 +75,10 @@ public class SoundController {
         } else {
             mainMenuMusic.stop();
         }
-
+        
+        if (gameState == GameState.GAME_OVER) {
+            powerUpSound.play();
+        }
 
         currentGameState = gameState;
     }

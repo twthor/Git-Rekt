@@ -89,7 +89,6 @@ public class View implements IView {
 
         TiledMapTileLayer collisionLayer = (TiledMapTileLayer)tiledMap.getLayers().get("collision");
         model.setCollisionMap(collisionLayer);
-
     }
     
     private void renderMap() {
