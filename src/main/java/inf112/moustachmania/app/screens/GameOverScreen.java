@@ -49,6 +49,15 @@ public class GameOverScreen implements Screen {
             }
         });
 
+        //sets up "play another level" button and event handling
+        TextButton playOtherLevelButton = new TextButton("Play another level", game.getSkin());
+        playOtherLevelButton.addListener(new ClickListener() {
+             @Override
+             public void clicked(InputEvent event, float a, float b) {
+                 playOtherLevelEventHandler();
+             }
+         });
+
         // sets up "exit game" button and event handling
         TextButton exitGameButton = new TextButton("Back to main menu", game.getSkin());
         exitGameButton.addListener(new ClickListener() {
@@ -59,6 +68,9 @@ public class GameOverScreen implements Screen {
         });
 
         buttonTable.add(tryAgainButton).spaceBottom(10).fillX();
+        buttonTable.row();
+
+        buttonTable.add(playOtherLevelButton).spaceBottom(10).fillX();
         buttonTable.row();
 
         buttonTable.add(exitGameButton).spaceBottom(10).fillX();
@@ -79,6 +91,13 @@ public class GameOverScreen implements Screen {
         game.setScreen(game.gameScreen);
         dispose();
     }
+
+    public void playOtherLevelEventHandler() {
+        game.levelScreen = new LevelScreen(game);
+        game.setScreen(game.levelScreen);
+        dispose();
+    }
+
     public void backToStartScreenEventHandler() {
         game.startScreen = new StartScreen(game);
         game.setScreen(game.startScreen);
