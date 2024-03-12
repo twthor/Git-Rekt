@@ -10,6 +10,7 @@ public class Constants {
     public static final String gameOverPicture = "assets/gameOver.png";
     public static final String coinPicture = "assets/coin.png";
     public static final String playerTexture = "assets/karakter.png";
+    public static final String playerTexturePU = "assets/karakterPU.png";
     public static final String powerUpTexture = "assets/powerUp.png";
 
 

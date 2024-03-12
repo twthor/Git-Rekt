@@ -18,6 +18,7 @@ public class Model implements IModel {
     private TiledMapTileLayer coinsLayer;
     private Array<Rectangle> tiles = new Array<Rectangle>();
     private static final float GRAVITY = -0.005f;
+    private float timer = 10.0f;
 
     private Pool<Rectangle> rectPool = new Pool<Rectangle>() {
         @Override
@@ -45,6 +46,13 @@ public class Model implements IModel {
         pickUpCoins(player);
 
         checkForPowerUp(player);
+        if (player.powerUp) {
+            timer -= deltaTime;
+            if (timer <= 0) {
+                player.powerUp = false;
+                timer = 10;
+            }
+        }
 
         // Updating players stateTime. Important for the player animations.
         player.stateTime += deltaTime;
