@@ -16,6 +16,8 @@ public class Model implements IModel {
     private TiledMapTileLayer collisionMap;
     private TiledMapTileLayer powerUpsLayer;
     private TiledMapTileLayer coinsLayer;
+    private TiledMapTileLayer startPosLayer;
+    private TiledMapTileLayer endPosLayer;
     private Array<Rectangle> tiles = new Array<Rectangle>();
     private static final float GRAVITY = -0.005f;
 
@@ -57,6 +59,16 @@ public class Model implements IModel {
 
         // Check if player is in bounds of the screen
         checkPlayerOutOfBounds(player);
+
+
+
+
+        checkStartPosition(player);
+
+        checkEndPosition(player);
+
+
+
 
         // multiply by delta time, so we know how far we go in this frame
         player.velocity.scl(deltaTime);
@@ -256,6 +268,26 @@ public class Model implements IModel {
         this.coinsLayer = coinsLayer;
     }
 
+
+
+
+
+
+    public void setStartPosLayer(TiledMapTileLayer startPosLayer){
+        this.startPosLayer = startPosLayer;
+    }
+
+    public void setEndPosLayer(TiledMapTileLayer endPosLayer){
+        this.endPosLayer = endPosLayer;
+    }
+
+
+
+
+
+
+
+
     /**
      * Gets the collision map
      * @return The collision map
@@ -290,5 +322,14 @@ public class Model implements IModel {
      */
     public Player getPlayer() {
         return player;
+    }
+
+
+    private void checkStartPosition(Player player) {
+    }
+
+
+
+    private void checkEndPosition(Player player) {
     }
 }
