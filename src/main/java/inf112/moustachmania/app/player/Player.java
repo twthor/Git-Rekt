@@ -15,16 +15,34 @@ public class Player implements ViewableCharacter, ControllablePlayer {
     public float stateTime;
     public static float WIDTH;
     public static float HEIGHT;
+    private int coinScore;
 
 
     public Player() {
         this.position = new Vector2(10, 5);
         this.stateTime = 0;
+        this.coinScore = 0;
 
         // size of player
         WIDTH = 1 / 16f;
         HEIGHT = 1 / 16f;
         this.velocity = new Vector2();
+    }
+
+    public void incrementCoinScore() {
+        this.coinScore++;
+    }
+
+    public int getCoinScore() {
+        return this.coinScore;
+    }
+
+    /**
+     * Set players power-up boolean
+     * @param b true for power-up, false for none.
+     */
+    public void setPowerUp(boolean b) {
+        this.powerUp = b;
     }
 
     /**

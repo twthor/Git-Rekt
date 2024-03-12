@@ -3,11 +3,19 @@ package inf112.moustachmania.app.view;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapLayers;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.MapObjects;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -16,6 +24,9 @@ import inf112.moustachmania.app.model.Model;
 import inf112.moustachmania.app.player.Player;
 import inf112.moustachmania.app.screens.GameState;
 import inf112.moustachmania.app.utils.Constants;
+
+import java.awt.*;
+import java.util.ArrayList;
 
 import static com.badlogic.gdx.Gdx.graphics;
 
@@ -30,9 +41,11 @@ public class View implements IView {
     private MapLayers mapLayers;
     private final OrthographicCamera camera;
     private Texture playerTexture;
+    private Texture coinTexture;
     private Animation<TextureRegion> stand;
     private Animation<TextureRegion> walk;
     private Animation<TextureRegion> jump;
+    private Animation<TextureRegion> coinSpin;
     private final int levelNumber;
 
 
@@ -41,12 +54,19 @@ public class View implements IView {
         this.model = model;
         this.levelNumber = levelNumber;
 
-        playerTexture = new Texture("assets/karakter.png");
+        playerTexture = new Texture(Constants.playerTexture);
         TextureRegion[] regions = TextureRegion.split(playerTexture, 16, 16)[0];
         stand = new Animation<>(0, regions[0]);
         walk = new Animation<>(0.1f, regions[1], regions[2], regions[3], regions[4]);
         walk.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
         jump = new Animation<>(0.1f, regions[5]);
+
+        // Coins - 0-6
+        coinTexture = new Texture(Constants.coinPicture);
+        TextureRegion[] coinRegions = TextureRegion.split(coinTexture, 16, 16)[0];
+        coinSpin = new Animation<>(0.1f, coinRegions[0], coinRegions[1], coinRegions[2], coinRegions[3], coinRegions[4], coinRegions[5], coinRegions[6]);
+        coinSpin.setPlayMode(Animation.PlayMode.LOOP);
+
 
         // Size of the player - for collision detection
         // 1 unit == 16 pixels
@@ -73,6 +93,8 @@ public class View implements IView {
 
         renderMap();
         renderPlayer();
+        renderCoins();
+        renderCoinScore();
     }
 
     @Override
@@ -87,7 +109,9 @@ public class View implements IView {
         mapLayers = tiledMap.getLayers();
 
         TiledMapTileLayer collisionLayer = (TiledMapTileLayer)tiledMap.getLayers().get("collision");
+        TiledMapTileLayer coins = (TiledMapTileLayer)tiledMap.getLayers().get("coins");
         model.setCollisionMap(collisionLayer);
+        model.setCoinsLayer(coins);
     }
 
     private void setCameraPosition() {
@@ -109,7 +133,54 @@ public class View implements IView {
         // Ensure the interpolated camera position stays within the level bounds
         camera.position.x = Math.max(minX, Math.min(maxX, interpolatedX));
     }
-    
+
+    private void renderCoins() {
+        Player player = model.getPlayer();
+        TiledMapTileLayer coins = (TiledMapTileLayer) mapLayers.get("coins");
+        ArrayList<Vector2> coinPositions = new ArrayList<>();
+        float coinHeight = 1f;
+        float coinWidth = 1f;
+
+        for (int i = 0; i < coins.getWidth(); i++) {
+            for (int j = 0; j < coins.getHeight(); j++) {
+                TiledMapTileLayer.Cell cell = coins.getCell(i, j);
+                if (cell != null) {
+                    float x = i * coinWidth;
+                    float y = j * coinHeight;
+                    Vector2 coinPosition = new Vector2(x, y);
+                    coinPositions.add(coinPosition);
+                }
+            }
+        }
+        // Adjust camera to fit the entire tiled map
+        game.getBatch().begin();
+        for (Vector2 position : coinPositions) {
+            game.getBatch().draw(coinSpin.getKeyFrame(player.stateTime), position.x, position.y, coinWidth, coinHeight);
+        }
+        game.getBatch().end();
+    }
+
+    private void renderCoinScore() {
+        Player player = model.getPlayer();
+        game.getFont().getData().setScale(0.1f);
+
+        // Calculate the position of the coin score relative to the camera's viewport
+        float viewportX = Interpolation.linear.apply(camera.position.x - camera.viewportWidth / 2);
+        float viewportY = Interpolation.linear.apply(camera.position.y + camera.viewportHeight / 2);
+
+        // Adjust the position to align with the top-left corner of the screen
+        float offsetX = 1;
+        float offsetY = camera.viewportHeight - 20;
+
+        // Calculate the position of the coin score in world coordinates
+        float worldX = viewportX + offsetX;
+        float worldY = viewportY - offsetY;
+
+        game.getBatch().begin();
+        game.getFont().draw(game.getBatch(), String.valueOf(player.getCoinScore()), worldX, worldY);
+        game.getBatch().end();
+    }
+
     private void renderMap() {
         tiledMapRenderer.render();
     }

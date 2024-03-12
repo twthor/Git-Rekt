@@ -15,6 +15,8 @@ public class Model implements IModel {
     private final Player player;
     private final MoustacheMania game;
     private TiledMapTileLayer collisionMap;
+    private TiledMapTileLayer powerUpRectangles;
+    private TiledMapTileLayer coinsLayer;
     private Array<Rectangle> tiles = new Array<Rectangle>();
     private static final float GRAVITY = -0.005f;
 
@@ -40,6 +42,9 @@ public class Model implements IModel {
         player.velocity.add(0, GRAVITY);
         checkYCollision(player);
         player.position.add(player.velocity);
+
+        //getPowerUp(player);
+        pickUpCoins(player);
 
         // Updating players stateTime. Important for the player animations.
         player.stateTime += deltaTime;
@@ -80,6 +85,37 @@ public class Model implements IModel {
         }
     }
 
+    private void pickUpCoins(Player player) {
+        Rectangle playerRect = rectPool.obtain();
+        playerRect.set(player.position.x, player.position.y, Player.WIDTH, Player.HEIGHT);
+        int startX, startY, endX, endY;
+        // finds the x-position of the player - both if the player is moving and standing still
+        if (player.velocity.x > 0) {
+            startX = endX = (int)(player.position.x + Player.WIDTH + player.velocity.x);
+        } else {
+            startX = endX = (int)(player.position.x + player.velocity.x);
+        }
+        startY = (int)(player.position.y);
+        endY = (int)(player.position.y + Player.HEIGHT);
+        getTiles(startX, startY, endX, endY, tiles, coinsLayer);
+        // Iterate over the coin rectangles
+        for (Rectangle coinRect : tiles) {
+            // Check for collision between player and coin
+            if (playerRect.overlaps(coinRect)) {
+                int cellX = (int) (coinRect.x);
+                int cellY = (int) (coinRect.y);
+
+                // Remove the coin from the game
+                coinsLayer.setCell(cellX, cellY, null);
+                // Increment player's coin score
+                player.incrementCoinScore();
+                SoundController.getInstance().playCoinSound();
+                break; // Exit the loop after picking up one coin
+            }
+        }
+        rectPool.free(playerRect);
+    }
+
     /**
      * Check for collision in the x-axis.
      * @param player checks collision for the current player object in regard to the collision layer from the Tiled map.
@@ -96,7 +132,7 @@ public class Model implements IModel {
         }
         startY = (int)(player.position.y);
         endY = (int)(player.position.y + Player.HEIGHT);
-        getTiles(startX, startY, endX, endY, tiles);
+        getTiles(startX, startY, endX, endY, tiles, collisionMap);
         playerRect.x += player.velocity.x;
         for (Rectangle tile : tiles) {
             if (playerRect.overlaps(tile)) {
@@ -124,7 +160,7 @@ public class Model implements IModel {
         }
         startX = (int)(player.position.x);
         endX = (int)(player.position.x + Player.WIDTH);
-        getTiles(startX, startY, endX, endY, tiles);
+        getTiles(startX, startY, endX, endY, tiles, collisionMap);
         playerRect.y += player.velocity.y;
         for (Rectangle tile : tiles) {
             if (playerRect.overlaps(tile)) {
@@ -164,24 +200,40 @@ public class Model implements IModel {
     }
 
     /**
-     * Sets the collision map
+     * Sets the collision map for the model
      * @param collisionLayer The collision map
      */
     public void setCollisionMap(TiledMapTileLayer collisionLayer) {
-        collisionMap = collisionLayer;
+        this.collisionMap = collisionLayer;
+    }
+
+    /**
+     * Sets the models power up layer
+     * @param powerUps TiledMap layer for where the power ups are placed
+     */
+    public void setPowerUpLayer(TiledMapTileLayer powerUps) {
+        this.powerUpRectangles = powerUps;
+    }
+
+    /**
+     * Sets the models coin layer
+     * @param coinsLayer TiledMap layer for where the coins are placed
+     */
+    public void setCoinsLayer(TiledMapTileLayer coinsLayer) {
+        this.coinsLayer = coinsLayer;
     }
 
     /**
      * Gets the collision map
      * @return The collision map
      */
-    public void getTiles(int startX, int startY, int endX, int endY, Array<Rectangle> tiles) {
+    public void getTiles(int startX, int startY, int endX, int endY, Array<Rectangle> tiles, TiledMapTileLayer layer) {
         rectPool.freeAll(tiles);
         tiles.clear();
 
         for (int y = startY; y <= endY; y++) {
             for (int x = startX; x <= endX; x++) {
-                TiledMapTileLayer.Cell cell = collisionMap.getCell(x, y);
+                TiledMapTileLayer.Cell cell = layer.getCell(x, y);
                 if (cell != null) {
                     Rectangle rect = rectPool.obtain();
                     rect.set(x, y, 1, 1);
@@ -190,6 +242,7 @@ public class Model implements IModel {
             }
         }
     }
+
 
     /**
      * Getter for the controller and view to fetch the width of the level.
