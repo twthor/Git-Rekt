@@ -17,6 +17,7 @@ public class SoundController {
     private final Sound coinSound;
     private final Sound gameOverSound;
     private final Sound levelCompletedSound;
+    private final Sound powerUpSound;
     private static SoundController instance = null;
 
 
@@ -25,8 +26,9 @@ public class SoundController {
         backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("backgroundMusic.mp3"));
         mainMenuMusic = Gdx.audio.newMusic(Gdx.files.internal("mainMenuMusic.mp3"));
         coinSound = Gdx.audio.newSound(Gdx.files.internal("coinSound.mp3"));
-        gameOverSound = Gdx.audio.newSound(Gdx.files.internal("gameOver.mp3"));
-        levelCompletedSound = Gdx.audio.newSound(Gdx.files.internal("levelCompleted.mp3"));
+        gameOverSound = Gdx.audio.newSound(Gdx.files.internal("gameOver.wav"));
+        levelCompletedSound = Gdx.audio.newSound(Gdx.files.internal("levelCompleted.wav"));
+        powerUpSound = Gdx.audio.newSound(Gdx.files.internal("powerUpSound.mp3"));
     }
 
 
@@ -94,6 +96,9 @@ public class SoundController {
         coinSound.play();
     }
 
+    public void playPowerUpSound() {
+        powerUpSound.play();
+    }
 
     /**
      * Sets the player instance to be used by the SoundController.
@@ -120,6 +125,8 @@ public class SoundController {
         backgroundMusic.dispose();
         mainMenuMusic.dispose();
         coinSound.dispose();
+        gameOverSound.dispose();
+        levelCompletedSound.dispose();
     }
 
 }

@@ -8,14 +8,13 @@ import inf112.moustachmania.app.MoustacheMania;
 import inf112.moustachmania.app.controller.SoundController;
 import inf112.moustachmania.app.player.Player;
 import inf112.moustachmania.app.screens.GameOverScreen;
-import inf112.moustachmania.app.screens.StartScreen;
 
 public class Model implements IModel {
 
     private final Player player;
     private final MoustacheMania game;
     private TiledMapTileLayer collisionMap;
-    private TiledMapTileLayer powerUpRectangles;
+    private TiledMapTileLayer powerUpsLayer;
     private TiledMapTileLayer coinsLayer;
     private Array<Rectangle> tiles = new Array<Rectangle>();
     private static final float GRAVITY = -0.005f;
@@ -43,8 +42,9 @@ public class Model implements IModel {
         checkYCollision(player);
         player.position.add(player.velocity);
 
-        //getPowerUp(player);
         pickUpCoins(player);
+
+        checkForPowerUp(player);
 
         // Updating players stateTime. Important for the player animations.
         player.stateTime += deltaTime;
@@ -80,7 +80,11 @@ public class Model implements IModel {
      */
     public void jumpPlayer() {
         if (player.grounded) {
-            player.velocity.y += Player.JUMP_VELOCITY;
+            if (player.powerUp) {
+                player.velocity.y += (float) (Player.JUMP_VELOCITY*1.5);
+            } else {
+                player.velocity.y += Player.JUMP_VELOCITY;
+            }
             player.grounded = false;
         }
     }
@@ -111,6 +115,36 @@ public class Model implements IModel {
                 player.incrementCoinScore();
                 SoundController.getInstance().playCoinSound();
                 break; // Exit the loop after picking up one coin
+            }
+        }
+        rectPool.free(playerRect);
+    }
+
+    private void checkForPowerUp(Player player) {
+        Rectangle playerRect = rectPool.obtain();
+        playerRect.set(player.position.x, player.position.y, Player.WIDTH, Player.HEIGHT);
+        int startX, startY, endX, endY;
+        // finds the x-position of the player - both if the player is moving and standing still
+        if (player.velocity.x > 0) {
+            startX = endX = (int)(player.position.x + Player.WIDTH + player.velocity.x);
+        } else {
+            startX = endX = (int)(player.position.x + player.velocity.x);
+        }
+        startY = (int)(player.position.y);
+        endY = (int)(player.position.y + Player.HEIGHT);
+        getTiles(startX, startY, endX, endY, tiles, powerUpsLayer);
+        // Iterate over the coin rectangles
+        for (Rectangle coinRect : tiles) {
+            // Check for collision between player and the power up
+            if (playerRect.overlaps(coinRect)) {
+                int cellX = (int) (coinRect.x);
+                int cellY = (int) (coinRect.y);
+
+                // Remove the power up from the game
+                powerUpsLayer.setCell(cellX, cellY, null);
+                player.powerUp = true;
+                SoundController.getInstance().playPowerUpSound();
+                break; // Exit the loop after picking up a power up
             }
         }
         rectPool.free(playerRect);
@@ -194,7 +228,6 @@ public class Model implements IModel {
         // Check if the player is outside the map boundaries
         if (playerX < -2 || playerY < -2 || playerX > mapWidth || playerY > mapHeight) {
             // Trigger game over event or state
-            //game.setScreen(new StartScreen(game));
             game.setScreen(new GameOverScreen(game));
         }
     }
@@ -212,7 +245,7 @@ public class Model implements IModel {
      * @param powerUps TiledMap layer for where the power ups are placed
      */
     public void setPowerUpLayer(TiledMapTileLayer powerUps) {
-        this.powerUpRectangles = powerUps;
+        this.powerUpsLayer = powerUps;
     }
 
     /**
@@ -243,7 +276,6 @@ public class Model implements IModel {
         }
     }
 
-
     /**
      * Getter for the controller and view to fetch the width of the level.
      * @return width of the level in int.
@@ -251,7 +283,6 @@ public class Model implements IModel {
     public int getLevelWidth() {
         return collisionMap.getWidth();
     }
-
 
     /**
      * Gets the player

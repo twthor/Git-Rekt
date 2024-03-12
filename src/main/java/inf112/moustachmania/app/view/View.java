@@ -42,6 +42,7 @@ public class View implements IView {
     private final OrthographicCamera camera;
     private Texture playerTexture;
     private Texture coinTexture;
+    private Texture powerUpTexture;
     private Animation<TextureRegion> stand;
     private Animation<TextureRegion> walk;
     private Animation<TextureRegion> jump;
@@ -66,6 +67,9 @@ public class View implements IView {
         TextureRegion[] coinRegions = TextureRegion.split(coinTexture, 16, 16)[0];
         coinSpin = new Animation<>(0.1f, coinRegions[0], coinRegions[1], coinRegions[2], coinRegions[3], coinRegions[4], coinRegions[5], coinRegions[6]);
         coinSpin.setPlayMode(Animation.PlayMode.LOOP);
+
+        // power up
+        powerUpTexture = new Texture(Constants.powerUpTexture);
 
 
         // Size of the player - for collision detection
@@ -95,6 +99,7 @@ public class View implements IView {
         renderPlayer();
         renderCoins();
         renderCoinScore();
+        renderPowerUps();
     }
 
     @Override
@@ -110,8 +115,10 @@ public class View implements IView {
 
         TiledMapTileLayer collisionLayer = (TiledMapTileLayer)tiledMap.getLayers().get("collision");
         TiledMapTileLayer coins = (TiledMapTileLayer)tiledMap.getLayers().get("coins");
+        TiledMapTileLayer powerUps = (TiledMapTileLayer)tiledMap.getLayers().get("powerUp");
         model.setCollisionMap(collisionLayer);
         model.setCoinsLayer(coins);
+        model.setPowerUpLayer(powerUps);
     }
 
     private void setCameraPosition() {
@@ -132,6 +139,30 @@ public class View implements IView {
 
         // Ensure the interpolated camera position stays within the level bounds
         camera.position.x = Math.max(minX, Math.min(maxX, interpolatedX));
+    }
+
+    private void renderPowerUps() {
+        TiledMapTileLayer powerUps = (TiledMapTileLayer) mapLayers.get("powerUp");
+        ArrayList<Vector2> powerUpPositions = new ArrayList<>();
+        float powerUpHeight = 1f;
+        float powerUpWidth = 1f;
+
+        for (int i = 0; i < powerUps.getWidth(); i++) {
+            for (int j = 0; j < powerUps.getHeight(); j++) {
+                TiledMapTileLayer.Cell cell = powerUps.getCell(i, j);
+                if (cell != null) {
+                    float x = i * powerUpWidth;
+                    float y = j * powerUpHeight;
+                    Vector2 powerUpPosition = new Vector2(x, y);
+                    powerUpPositions.add(powerUpPosition);
+                }
+            }
+            game.getBatch().begin();
+            for (Vector2 position : powerUpPositions) {
+                game.getBatch().draw(powerUpTexture, position.x, position.y, powerUpWidth, powerUpHeight);
+            }
+            game.getBatch().end();
+        }
     }
 
     private void renderCoins() {
