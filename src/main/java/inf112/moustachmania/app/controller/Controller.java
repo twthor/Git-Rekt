@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import inf112.moustachmania.app.model.Model;
 import inf112.moustachmania.app.MoustacheMania;
 import inf112.moustachmania.app.player.Player;
+import inf112.moustachmania.app.screens.GameOverScreen;
 import inf112.moustachmania.app.screens.PauseScreen;
 
 public class Controller implements IController {

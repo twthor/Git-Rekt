@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.Pool;
 import inf112.moustachmania.app.MoustacheMania;
 import inf112.moustachmania.app.controller.SoundController;
 import inf112.moustachmania.app.player.Player;
+import inf112.moustachmania.app.screens.GameOverScreen;
 import inf112.moustachmania.app.screens.StartScreen;
 
 public class Model implements IModel {
@@ -193,7 +194,8 @@ public class Model implements IModel {
         // Check if the player is outside the map boundaries
         if (playerX < -2 || playerY < -2 || playerX > mapWidth || playerY > mapHeight) {
             // Trigger game over event or state
-            game.setScreen(new StartScreen(game));
+            //game.setScreen(new StartScreen(game));
+            game.setScreen(new GameOverScreen(game));
         }
     }
 

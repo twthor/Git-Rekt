@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import inf112.moustachmania.app.MoustacheMania;
 import inf112.moustachmania.app.controller.SoundController;
 import inf112.moustachmania.app.model.Model;
+import inf112.moustachmania.app.utils.Constants;
 import inf112.moustachmania.app.view.IView;
 import inf112.moustachmania.app.view.View;
 import inf112.moustachmania.app.player.Player;
@@ -23,6 +24,7 @@ public class StartScreen implements Screen {
     private final Stage stage;
     private final MoustacheMania game;
 
+    // Legge til texture for bakgrunnshåndtering...
 
     // TODO: split functionality from the constructor into different helper methods
     public StartScreen(final MoustacheMania game) {
@@ -38,7 +40,7 @@ public class StartScreen implements Screen {
         //TextButton.TextButtonStyle textButtonStyle = game.getSkin().get("default", TextButton.TextButtonStyle.class);
 
         // Game title
-        Texture titleTexture = new Texture("assets/moustachemania.png");
+        Texture titleTexture = new Texture(Constants.logoPicture);
         Image titleImage = new Image(titleTexture);
         buttonTable.add(titleImage).padBottom(20).row(); // row() puts the image on its own row in buttonTable.
 
