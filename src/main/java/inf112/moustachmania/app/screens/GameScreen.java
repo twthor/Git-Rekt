@@ -34,7 +34,6 @@ public class GameScreen implements Screen {
         view.render(deltaTime);
         controller.update(deltaTime);
         model.update(deltaTime);
-        SoundController.getInstance().update();
 
         game.getGameState();
         controller.handleInput();

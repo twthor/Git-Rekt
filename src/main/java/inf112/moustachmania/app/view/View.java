@@ -94,6 +94,7 @@ public class View implements IView {
         renderMap();
         renderPlayer();
         renderCoins();
+        renderCoinScore();
     }
 
     @Override
@@ -140,12 +141,10 @@ public class View implements IView {
         float coinHeight = 1f;
         float coinWidth = 1f;
 
-        int coinCounter = 0;
         for (int i = 0; i < coins.getWidth(); i++) {
             for (int j = 0; j < coins.getHeight(); j++) {
                 TiledMapTileLayer.Cell cell = coins.getCell(i, j);
                 if (cell != null) {
-                    coinCounter++;
                     float x = i * coinWidth;
                     float y = j * coinHeight;
                     Vector2 coinPosition = new Vector2(x, y);
@@ -153,12 +152,32 @@ public class View implements IView {
                 }
             }
         }
-        System.out.println(coinCounter);
         // Adjust camera to fit the entire tiled map
         game.getBatch().begin();
         for (Vector2 position : coinPositions) {
             game.getBatch().draw(coinSpin.getKeyFrame(player.stateTime), position.x, position.y, coinWidth, coinHeight);
         }
+        game.getBatch().end();
+    }
+
+    private void renderCoinScore() {
+        Player player = model.getPlayer();
+        game.getFont().getData().setScale(0.1f);
+
+        // Calculate the position of the coin score relative to the camera's viewport
+        float viewportX = Interpolation.linear.apply(camera.position.x - camera.viewportWidth / 2);
+        float viewportY = Interpolation.linear.apply(camera.position.y + camera.viewportHeight / 2);
+
+        // Adjust the position to align with the top-left corner of the screen
+        float offsetX = 1;
+        float offsetY = camera.viewportHeight - 20;
+
+        // Calculate the position of the coin score in world coordinates
+        float worldX = viewportX + offsetX;
+        float worldY = viewportY - offsetY;
+
+        game.getBatch().begin();
+        game.getFont().draw(game.getBatch(), String.valueOf(player.getCoinScore()), worldX, worldY);
         game.getBatch().end();
     }
 

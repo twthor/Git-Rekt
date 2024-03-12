@@ -1,7 +1,5 @@
 package inf112.moustachmania.app.model;
 
-import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.g3d.particles.ParticleSorter;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
@@ -108,8 +106,7 @@ public class Model implements IModel {
 
                 // Remove the coin from the game
                 coinsLayer.setCell(cellX, cellY, null);
-                System.out.println("picked up coin - removed it");
-                // Optionally, you can increment a coin counter or update the player's score here
+                // Increment player's coin score
                 player.incrementCoinScore();
                 SoundController.getInstance().playCoinSound();
                 break; // Exit the loop after picking up one coin
@@ -117,33 +114,6 @@ public class Model implements IModel {
         }
         rectPool.free(playerRect);
     }
-
-    /*
-    private void getPowerUp(Player player) {
-        Rectangle playerRect = rectPool.obtain();
-        playerRect.set(player.position.x, player.position.y, Player.WIDTH, Player.HEIGHT);
-        int startX, startY, endX, endY;
-        // finds the x-position of the player - both if the player is moving and standing still
-        if (player.velocity.x > 0) {
-            startX = endX = (int)(player.position.x + Player.WIDTH + player.velocity.x);
-        } else {
-            startX = endX = (int)(player.position.x + player.velocity.x);
-        }
-        startY = (int)(player.position.y);
-        endY = (int)(player.position.y + Player.HEIGHT);
-        getTiles(startX, startY, endX, endY, tiles, powerUpRectangles);
-        // Loop through all power-up rectangles to check for collision
-        for (Rectangle powerUpRect : tiles) {
-            if (playerRect.overlaps(powerUpRect)) {
-                player.setPowerUp(true); // Set player's powerUp flag to true
-                // Optionally, you can remove the power-up object from the game or mark it as collected
-                // powerUpRectangles.removeValue(powerUpRect, true);
-                break; // Break the loop if collision detected with any power-up
-            }
-        }
-
-        rectPool.free(playerRect);
-    } */
 
     /**
      * Check for collision in the x-axis.
