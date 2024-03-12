@@ -14,7 +14,7 @@ public class SoundController {
     private MoustacheMania game;
     private final Music backgroundMusic;
     private final Music mainMenuMusic;
-    private final Sound powerUpSound;
+    private final Sound coinSound;
     private final Sound gameOverSound;
     private final Sound levelCompletedSound;
     private static SoundController instance = null;
@@ -24,7 +24,7 @@ public class SoundController {
         // LibGDX filepath finding API
         backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("backgroundMusic.mp3"));
         mainMenuMusic = Gdx.audio.newMusic(Gdx.files.internal("mainMenuMusic.mp3"));
-        powerUpSound = Gdx.audio.newSound(Gdx.files.internal("powerUpSound.mp3"));
+        coinSound = Gdx.audio.newSound(Gdx.files.internal("coinSound.mp3"));
         gameOverSound = Gdx.audio.newSound(Gdx.files.internal("gameOver.mp3"));
         levelCompletedSound = Gdx.audio.newSound(Gdx.files.internal("levelCompleted.mp3"));
     }
@@ -61,9 +61,10 @@ public class SoundController {
             backgroundMusic.setLooping(true);
             backgroundMusic.play();
 
+            /*
             if (player.powerUp) {
                 powerUpSound.play();
-            }
+            } */
         } else {
             backgroundMusic.stop();
         }
@@ -87,6 +88,10 @@ public class SoundController {
         }
 
         currentGameState = gameState;
+    }
+
+    public void playCoinSound() {
+        coinSound.play();
     }
 
 
@@ -114,7 +119,7 @@ public class SoundController {
     public void dispose() {
         backgroundMusic.dispose();
         mainMenuMusic.dispose();
-        powerUpSound.dispose();
+        coinSound.dispose();
     }
 
 }

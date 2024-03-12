@@ -8,11 +8,13 @@ import com.badlogic.gdx.maps.MapLayers;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -22,6 +24,9 @@ import inf112.moustachmania.app.model.Model;
 import inf112.moustachmania.app.player.Player;
 import inf112.moustachmania.app.screens.GameState;
 import inf112.moustachmania.app.utils.Constants;
+
+import java.awt.*;
+import java.util.ArrayList;
 
 import static com.badlogic.gdx.Gdx.graphics;
 
@@ -130,27 +135,31 @@ public class View implements IView {
 
     private void renderCoins() {
         Player player = model.getPlayer();
-        MapLayer coins = mapLayers.get("coins");
-
+        TiledMapTileLayer coins = (TiledMapTileLayer) mapLayers.get("coins");
+        ArrayList<Vector2> coinPositions = new ArrayList<>();
         float coinHeight = 1f;
         float coinWidth = 1f;
 
-        game.getBatch().begin();
-        MapObjects coinList = coins.getObjects();
-        for (MapObject coinObject : coinList) {
-            System.out.println("hallo");
-            System.out.println(coinObject);
-            //if (coinObject instanceof RectangleMapObject rectangleObject) {
-            System.out.println("inside");
-            RectangleMapObject rectangleObject = (RectangleMapObject) coinObject;
-            Rectangle coinRectangle = rectangleObject.getRectangle();
-            game.getBatch().draw(coinTexture, coinRectangle.x, coinRectangle.y, coinWidth, coinHeight);
+        int coinCounter = 0;
+        for (int i = 0; i < coins.getWidth(); i++) {
+            for (int j = 0; j < coins.getHeight(); j++) {
+                TiledMapTileLayer.Cell cell = coins.getCell(i, j);
+                if (cell != null) {
+                    coinCounter++;
+                    float x = i * coinWidth;
+                    float y = j * coinHeight;
+                    Vector2 coinPosition = new Vector2(x, y);
+                    coinPositions.add(coinPosition);
+                }
+            }
         }
-        coins.setVisible(true);
-        game.getBatch().draw(coinSpin.getKeyFrame(player.stateTime), 15, 5, coinWidth, coinHeight);
-
+        System.out.println(coinCounter);
+        // Adjust camera to fit the entire tiled map
+        game.getBatch().begin();
+        for (Vector2 position : coinPositions) {
+            game.getBatch().draw(coinSpin.getKeyFrame(player.stateTime), position.x, position.y, coinWidth, coinHeight);
+        }
         game.getBatch().end();
-
     }
 
     private void renderMap() {

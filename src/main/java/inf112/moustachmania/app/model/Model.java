@@ -1,5 +1,7 @@
 package inf112.moustachmania.app.model;
 
+import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.g3d.particles.ParticleSorter;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
@@ -85,7 +87,35 @@ public class Model implements IModel {
     }
 
     private void pickUpCoins(Player player) {
+        Rectangle playerRect = rectPool.obtain();
+        playerRect.set(player.position.x, player.position.y, Player.WIDTH, Player.HEIGHT);
+        int startX, startY, endX, endY;
+        // finds the x-position of the player - both if the player is moving and standing still
+        if (player.velocity.x > 0) {
+            startX = endX = (int)(player.position.x + Player.WIDTH + player.velocity.x);
+        } else {
+            startX = endX = (int)(player.position.x + player.velocity.x);
+        }
+        startY = (int)(player.position.y);
+        endY = (int)(player.position.y + Player.HEIGHT);
+        getTiles(startX, startY, endX, endY, tiles, coinsLayer);
+        // Iterate over the coin rectangles
+        for (Rectangle coinRect : tiles) {
+            // Check for collision between player and coin
+            if (playerRect.overlaps(coinRect)) {
+                int cellX = (int) (coinRect.x);
+                int cellY = (int) (coinRect.y);
 
+                // Remove the coin from the game
+                coinsLayer.setCell(cellX, cellY, null);
+                System.out.println("picked up coin - removed it");
+                // Optionally, you can increment a coin counter or update the player's score here
+                player.incrementCoinScore();
+                SoundController.getInstance().playCoinSound();
+                break; // Exit the loop after picking up one coin
+            }
+        }
+        rectPool.free(playerRect);
     }
 
     /*
@@ -198,17 +228,25 @@ public class Model implements IModel {
     }
 
     /**
-     * Sets the collision map
+     * Sets the collision map for the model
      * @param collisionLayer The collision map
      */
     public void setCollisionMap(TiledMapTileLayer collisionLayer) {
         this.collisionMap = collisionLayer;
     }
 
+    /**
+     * Sets the models power up layer
+     * @param powerUps TiledMap layer for where the power ups are placed
+     */
     public void setPowerUpLayer(TiledMapTileLayer powerUps) {
         this.powerUpRectangles = powerUps;
     }
 
+    /**
+     * Sets the models coin layer
+     * @param coinsLayer TiledMap layer for where the coins are placed
+     */
     public void setCoinsLayer(TiledMapTileLayer coinsLayer) {
         this.coinsLayer = coinsLayer;
     }
