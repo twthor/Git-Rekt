@@ -57,10 +57,8 @@ public class View implements IView {
 
         playerTexture = new Texture(Constants.playerTexture);
         TextureRegion[] regions = TextureRegion.split(playerTexture, 16, 16)[0];
-        stand = new Animation<>(0, regions[0]);
-        walk = new Animation<>(0.1f, regions[1], regions[2], regions[3], regions[4]);
-        walk.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
-        jump = new Animation<>(0.1f, regions[5]);
+        setNormalPlayerTexture();
+
 
         // Coins - 0-6
         coinTexture = new Texture(Constants.coinPicture);
@@ -219,6 +217,11 @@ public class View implements IView {
     private void renderPlayer() {
         Player player = model.getPlayer();
         TextureRegion frame = null;
+        if (player.powerUp) {
+            setPowerUpTexture();
+        } else {
+            setNormalPlayerTexture();
+        }
 
         // switch-case changing the frames for the player given the state.
         frame = switch (player.state) {
@@ -236,6 +239,24 @@ public class View implements IView {
             game.getBatch().draw(frame, player.position.x + Player.WIDTH, player.position.y, -Player.WIDTH, Player.HEIGHT);
         }
         game.getBatch().end();
+    }
+
+    private void setNormalPlayerTexture() {
+        playerTexture = new Texture(Constants.playerTexture);
+        TextureRegion[] regions = TextureRegion.split(playerTexture, 16, 16)[0];
+        stand = new Animation<>(0, regions[0]);
+        walk = new Animation<>(0.1f, regions[1], regions[2], regions[3], regions[4]);
+        walk.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
+        jump = new Animation<>(0.1f, regions[5]);
+    }
+
+    private void setPowerUpTexture() {
+        playerTexture = new Texture(Constants.playerTexturePU);
+        TextureRegion[] regions = TextureRegion.split(playerTexture, 16, 16)[0];
+        stand = new Animation<>(0, regions[0]);
+        walk = new Animation<>(0.1f, regions[1], regions[2], regions[3], regions[4]);
+        walk.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
+        jump = new Animation<>(0.1f, regions[5]);
     }
 
     @Override

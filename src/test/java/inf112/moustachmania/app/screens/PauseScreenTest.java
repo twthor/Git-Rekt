@@ -48,7 +48,7 @@ public class PauseScreenTest {
 
     private PauseScreen createScreen() {
         Model model = new Model(game, new Player());
-        return new PauseScreen(game, model);
+        return new PauseScreen(game);
     }
 
 }
