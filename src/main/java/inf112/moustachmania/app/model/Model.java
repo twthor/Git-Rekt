@@ -194,8 +194,8 @@ public class Model implements IModel {
         // Check if the player is outside the map boundaries
         if (playerX < -2 || playerY < -2 || playerX > mapWidth || playerY > mapHeight) {
             // Trigger game over event or state
-            //game.setScreen(new StartScreen(game));
             game.setScreen(new GameOverScreen(game));
+            System.out.println(game.getGameState());
         }
     }
 

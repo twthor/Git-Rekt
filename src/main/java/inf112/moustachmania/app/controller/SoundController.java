@@ -25,8 +25,8 @@ public class SoundController {
         backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("backgroundMusic.mp3"));
         mainMenuMusic = Gdx.audio.newMusic(Gdx.files.internal("mainMenuMusic.mp3"));
         coinSound = Gdx.audio.newSound(Gdx.files.internal("coinSound.mp3"));
-        gameOverSound = Gdx.audio.newSound(Gdx.files.internal("gameOver.mp3"));
-        levelCompletedSound = Gdx.audio.newSound(Gdx.files.internal("levelCompleted.mp3"));
+        gameOverSound = Gdx.audio.newSound(Gdx.files.internal("gameOver.wav"));
+        levelCompletedSound = Gdx.audio.newSound(Gdx.files.internal("levelCompleted.wav"));
     }
 
 
@@ -120,6 +120,8 @@ public class SoundController {
         backgroundMusic.dispose();
         mainMenuMusic.dispose();
         coinSound.dispose();
+        gameOverSound.dispose();
+        levelCompletedSound.dispose();
     }
 
 }
