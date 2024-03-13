@@ -115,13 +115,12 @@ public class View implements IView {
         TiledMapTileLayer endPos = (TiledMapTileLayer)tiledMap.getLayers().get("endPos");
 
 
-
         model.setCollisionMap(collisionLayer);
         model.setCoinsLayer(coins);
         model.setPowerUpLayer(powerUps);
 
 
-
+        //meg
         model.setStartPosLayer(startPos);
         model.setEndPosLayer(endPos);
 

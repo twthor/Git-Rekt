@@ -2,6 +2,7 @@ package inf112.moustachmania.app.model;
 
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
 import inf112.moustachmania.app.MoustacheMania;
@@ -59,16 +60,6 @@ public class Model implements IModel {
 
         // Check if player is in bounds of the screen
         checkPlayerOutOfBounds(player);
-
-
-
-
-        checkStartPosition(player);
-
-        checkEndPosition(player);
-
-
-
 
         // multiply by delta time, so we know how far we go in this frame
         player.velocity.scl(deltaTime);
@@ -272,7 +263,7 @@ public class Model implements IModel {
 
 
 
-
+    //meg
     public void setStartPosLayer(TiledMapTileLayer startPosLayer){
         this.startPosLayer = startPosLayer;
     }
@@ -308,6 +299,8 @@ public class Model implements IModel {
         }
     }
 
+
+
     /**
      * Getter for the controller and view to fetch the width of the level.
      * @return width of the level in int.
@@ -325,11 +318,24 @@ public class Model implements IModel {
     }
 
 
-    private void checkStartPosition(Player player) {
+
+
+    //meg
+    public void setStartPosition() {
+        for (int y = 0; y <= this.startPosLayer.getHeight(); y++) {
+            for (int x = 0; x <= this.startPosLayer.getWidth(); x++) {
+                TiledMapTileLayer.Cell cell = this.startPosLayer.getCell(x, y);
+                if (cell != null) {
+                    this.player.setPosition(new Vector2(x, y));
+                    return;
+                }
+            }
+        }
     }
 
 
 
-    private void checkEndPosition(Player player) {
+
+    private void getEndPosition(Player player) {
     }
 }

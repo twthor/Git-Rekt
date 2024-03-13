@@ -64,6 +64,7 @@ public class LevelScreen implements Screen {
             game.gameScreen = new GameScreen(game, view, controller, model);
             game.setScreen(game.gameScreen);
             SoundController.getInstance().setPlayer(player);
+            model.setStartPosition();
         }
         else {
             Gdx.app.log("LevelScreen", "Invalid level number: " + levelNumber);
