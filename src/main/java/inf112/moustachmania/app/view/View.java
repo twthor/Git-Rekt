@@ -3,19 +3,12 @@ package inf112.moustachmania.app.view;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapLayers;
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.MapObjects;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
-import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Interpolation;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -24,11 +17,7 @@ import inf112.moustachmania.app.model.Model;
 import inf112.moustachmania.app.player.Player;
 import inf112.moustachmania.app.screens.GameState;
 import inf112.moustachmania.app.utils.Constants;
-
-import java.awt.*;
 import java.util.ArrayList;
-
-import static com.badlogic.gdx.Gdx.graphics;
 
 
 public class View implements IView {
@@ -113,9 +102,15 @@ public class View implements IView {
         TiledMapTileLayer collisionLayer = (TiledMapTileLayer)tiledMap.getLayers().get("collision");
         TiledMapTileLayer coins = (TiledMapTileLayer)tiledMap.getLayers().get("coins");
         TiledMapTileLayer powerUps = (TiledMapTileLayer)tiledMap.getLayers().get("powerUp");
+        TiledMapTileLayer startPos = (TiledMapTileLayer)tiledMap.getLayers().get("startPos");
+        TiledMapTileLayer endPos = (TiledMapTileLayer)tiledMap.getLayers().get("endPos");
+
         model.setCollisionMap(collisionLayer);
         model.setCoinsLayer(coins);
         model.setPowerUpLayer(powerUps);
+        model.setStartPosLayer(startPos);
+        model.setEndPosLayer(endPos);
+
     }
 
     private void setCameraPosition() {

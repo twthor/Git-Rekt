@@ -2,12 +2,14 @@ package inf112.moustachmania.app.model;
 
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
 import inf112.moustachmania.app.MoustacheMania;
 import inf112.moustachmania.app.controller.SoundController;
 import inf112.moustachmania.app.player.Player;
 import inf112.moustachmania.app.screens.GameOverScreen;
+import inf112.moustachmania.app.screens.LevelScreen;
 
 public class Model implements IModel {
 
@@ -16,6 +18,9 @@ public class Model implements IModel {
     private TiledMapTileLayer collisionMap;
     private TiledMapTileLayer powerUpsLayer;
     private TiledMapTileLayer coinsLayer;
+    private TiledMapTileLayer startPosLayer;
+    private TiledMapTileLayer endPosLayer;
+    private Vector2 endPos;
     private Array<Rectangle> tiles = new Array<Rectangle>();
     private static final float GRAVITY = -0.005f;
     private float timer = 10.0f;
@@ -65,6 +70,9 @@ public class Model implements IModel {
 
         // Check if player is in bounds of the screen
         checkPlayerOutOfBounds(player);
+
+        // Check if player has reached the end position
+        checkEndCollision(player);
 
         // multiply by delta time, so we know how far we go in this frame
         player.velocity.scl(deltaTime);
@@ -265,6 +273,22 @@ public class Model implements IModel {
     }
 
     /**
+     * Sets the models start position layer
+     * @param startPosLayer TiledMap layer for where the start position is placed
+     */
+    public void setStartPosLayer(TiledMapTileLayer startPosLayer){
+        this.startPosLayer = startPosLayer;
+    }
+
+    /**
+     * Sets the models end position layer
+     * @param endPosLayer TiledMap layer for where the end position is placed
+     */
+    public void setEndPosLayer(TiledMapTileLayer endPosLayer){
+        this.endPosLayer = endPosLayer;
+    }
+
+    /**
      * Gets the collision map
      * @return The collision map
      */
@@ -284,6 +308,7 @@ public class Model implements IModel {
         }
     }
 
+
     /**
      * Getter for the controller and view to fetch the width of the level.
      * @return width of the level in int.
@@ -298,5 +323,49 @@ public class Model implements IModel {
      */
     public Player getPlayer() {
         return player;
+    }
+
+
+    /**
+     * Sets the start position for the player
+     */
+    public void setStartPosition() {
+        for (int y = 0; y <= this.startPosLayer.getHeight(); y++) {
+            for (int x = 0; x <= this.startPosLayer.getWidth(); x++) {
+                TiledMapTileLayer.Cell cell = this.startPosLayer.getCell(x, y);
+                if (cell != null) {
+                    this.player.setPosition(new Vector2(x, y));
+                    setEndPosition();
+                    return;
+                }
+            }
+        }
+    }
+
+    /**
+     * Sets the end position for the player
+     */
+    public void setEndPosition() {
+        for (int y = 0; y <= this.endPosLayer.getHeight(); y++) {
+            for (int x = 0; x <= this.endPosLayer.getWidth(); x++) {
+                TiledMapTileLayer.Cell cell = this.endPosLayer.getCell(x, y);
+                if (cell != null) {
+                    this.endPos = new Vector2(x, y);
+                    return;
+                }
+            }
+        }
+    }
+
+    /**
+     * Checks if the player has reached the end position
+     * @param player The player
+     */
+    private void checkEndCollision(Player player) {
+        float diffX = Math.abs(player.position.x - endPos.x);
+        float diffY = Math.abs(player.position.y - endPos.y);
+        if (diffX < 1.0 && diffY < 1.0) {
+            game.setScreen(new LevelScreen(game));
+        }
     }
 }
