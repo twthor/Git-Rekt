@@ -13,7 +13,8 @@ Hvordan spille:
 
 # <u>Kompilering, kjøring og testing</u>
 - Kompiler med `mvn package` i terminalen.
-- Kjør ved å gå til main funksjonen i MoustacheMania.java. Senere vil vi ordne en jar fil. 
+- Kjør ved å gå til main funksjonen i MoustacheMania.java. 
+  - Kjøring med jar-fil: Vær i /git-rekt mappen i CLI og skriv "java -jar target\MoustacheMania-1.0-SNAPSHOT-fat.jar"
 - Java 17 eller senere versjoner.
 - Kjør tester ved å skrive `mvn test` i terminalen eller høyreklikk på `test/java` og trykk `run`
 

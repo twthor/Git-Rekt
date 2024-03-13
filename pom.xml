@@ -14,7 +14,7 @@
 		<junit.jupiter.version>5.10.2</junit.jupiter.version>
 		<slf4j.version>2.0.11</slf4j.version>
 		<!-- FIXME - set to app's main class' -->
-		<main.class>inf112.moustachmania.app.Main</main.class>
+		<main.class>inf112.moustachmania.app.GameLauncher</main.class>
 		<jvm.extra.args></jvm.extra.args>
 	</properties>
 	<repositories>
@@ -213,6 +213,36 @@
 				<plugin>
 					<artifactId>maven-resources-plugin</artifactId>
 					<version>3.3.1</version>
+					<configuration>
+						<outputDirectory>${basedir}/target/classes</outputDirectory>
+						<includeEmptyDirs>true</includeEmptyDirs>
+						<resources>
+							<resource>
+								<directory>${basedir}/src/main/java/com/test/customize</directory>
+								<filtering>false</filtering>
+							</resource>
+							<resource>
+								<directory>${basedir}/src/main/java/com/test/resources</directory>
+								<filtering>false</filtering>
+							</resource>
+							<resource>
+								<directory>${basedir}/src/main/java/com/test/xml</directory>
+								<filtering>false</filtering>
+							</resource>
+							<resource>
+								<directory>/assets</directory>
+							</resource>
+							<resource>
+								<directory>/assets/skin</directory>
+							</resource>
+							<resource>
+								<directory>/assets/maps</directory>
+							</resource>
+							<resource>
+								<directory>/src/main/resources</directory>
+							</resource>
+						</resources>
+					</configuration>
 				</plugin>
 				<plugin>
 					<artifactId>maven-compiler-plugin</artifactId>

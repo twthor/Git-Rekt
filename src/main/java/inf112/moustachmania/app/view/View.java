@@ -59,7 +59,6 @@ public class View implements IView {
         TextureRegion[] regions = TextureRegion.split(playerTexture, 16, 16)[0];
         setNormalPlayerTexture();
 
-
         // Coins - 0-6
         coinTexture = new Texture(Constants.coinPicture);
         TextureRegion[] coinRegions = TextureRegion.split(coinTexture, 16, 16)[0];
@@ -181,7 +180,6 @@ public class View implements IView {
                 }
             }
         }
-        // Adjust camera to fit the entire tiled map
         game.getBatch().begin();
         for (Vector2 position : coinPositions) {
             game.getBatch().draw(coinSpin.getKeyFrame(player.stateTime), position.x, position.y, coinWidth, coinHeight);

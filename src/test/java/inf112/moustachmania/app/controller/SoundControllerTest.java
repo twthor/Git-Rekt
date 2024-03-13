@@ -1,5 +1,6 @@
 package inf112.moustachmania.app.controller;
 
+import com.badlogic.gdx.Gdx;
 import inf112.moustachmania.app.MoustacheMania;
 import inf112.moustachmania.app.player.Player;
 import org.junit.jupiter.api.Test;
