@@ -24,9 +24,6 @@ public class StartScreen implements Screen {
     private final Stage stage;
     private final MoustacheMania game;
 
-    // Legge til texture for bakgrunnshåndtering...
-
-    // TODO: split functionality from the constructor into different helper methods
     public StartScreen(final MoustacheMania game) {
         this.game = game;
         stage = new Stage();
@@ -37,13 +34,10 @@ public class StartScreen implements Screen {
         Table buttonTable = new Table();
         buttonTable.padLeft(10.0f);
 
-        //TextButton.TextButtonStyle textButtonStyle = game.getSkin().get("default", TextButton.TextButtonStyle.class);
-
         // Game title
         Texture titleTexture = new Texture(Constants.logoPicture);
         Image titleImage = new Image(titleTexture);
         buttonTable.add(titleImage).padBottom(20).row(); // row() puts the image on its own row in buttonTable.
-
 
         TextButton textButton = new TextButton("New game", game.getSkin());        //textButton.getLabel().setColor(1, 1, 1, 1);
         textButton.addListener(new ClickListener() {
@@ -120,7 +114,6 @@ public class StartScreen implements Screen {
     private void handleNewGameButtonEvent() {
         game.levelScreen = new LevelScreen(game);
         game.setScreen(game.levelScreen);
-
         dispose();
     }
 
@@ -130,7 +123,6 @@ public class StartScreen implements Screen {
     private void handleControlsHelpGameButtonEvent() {
         game.helpScreen = new HelpScreen(game);
         game.setScreen(game.helpScreen);
-
         dispose();
     }
 
@@ -140,13 +132,10 @@ public class StartScreen implements Screen {
         Gdx.app.exit();
     }
 
-
     @Override
     public void dispose() {
         stage.dispose();
     }
-
-
 
     @Override
     public void pause() {}
