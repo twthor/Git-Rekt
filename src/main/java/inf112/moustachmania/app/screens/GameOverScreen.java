@@ -89,7 +89,7 @@ public class GameOverScreen implements Screen {
 
         game.gameScreen = new GameScreen(game, view, controller, model);
         game.setScreen(game.gameScreen);
-        model.setStartPosition();
+        model.setStartPosition(); // Sets the player to the start position of the level
         dispose();
     }
 

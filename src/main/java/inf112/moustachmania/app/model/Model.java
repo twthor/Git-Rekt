@@ -63,6 +63,7 @@ public class Model implements IModel {
         // Check if player is in bounds of the screen
         checkPlayerOutOfBounds(player);
 
+        // Check if player has reached the end position
         checkEndCollision(player);
 
         // multiply by delta time, so we know how far we go in this frame
@@ -263,25 +264,21 @@ public class Model implements IModel {
         this.coinsLayer = coinsLayer;
     }
 
-
-
-
-
-    //meg
+    /**
+     * Sets the models start position layer
+     * @param startPosLayer TiledMap layer for where the start position is placed
+     */
     public void setStartPosLayer(TiledMapTileLayer startPosLayer){
         this.startPosLayer = startPosLayer;
     }
 
+    /**
+     * Sets the models end position layer
+     * @param endPosLayer TiledMap layer for where the end position is placed
+     */
     public void setEndPosLayer(TiledMapTileLayer endPosLayer){
         this.endPosLayer = endPosLayer;
     }
-
-
-
-
-
-
-
 
     /**
      * Gets the collision map
@@ -302,7 +299,6 @@ public class Model implements IModel {
             }
         }
     }
-
 
 
     /**
@@ -338,9 +334,8 @@ public class Model implements IModel {
         }
     }
 
-
     /**
-     * Checks if the player has reached the end position
+     * Sets the end position for the player
      */
     public void setEndPosition() {
         for (int y = 0; y <= this.endPosLayer.getHeight(); y++) {
@@ -354,7 +349,10 @@ public class Model implements IModel {
         }
     }
 
-
+    /**
+     * Checks if the player has reached the end position
+     * @param player The player
+     */
     private void checkEndCollision(Player player) {
         float diffX = Math.abs(player.position.x - endPos.x);
         float diffY = Math.abs(player.position.y - endPos.y);

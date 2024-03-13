@@ -17,11 +17,7 @@ import inf112.moustachmania.app.model.Model;
 import inf112.moustachmania.app.player.Player;
 import inf112.moustachmania.app.screens.GameState;
 import inf112.moustachmania.app.utils.Constants;
-
-import java.awt.*;
 import java.util.ArrayList;
-
-import static com.badlogic.gdx.Gdx.graphics;
 
 
 public class View implements IView {
@@ -109,18 +105,12 @@ public class View implements IView {
         TiledMapTileLayer collisionLayer = (TiledMapTileLayer)tiledMap.getLayers().get("collision");
         TiledMapTileLayer coins = (TiledMapTileLayer)tiledMap.getLayers().get("coins");
         TiledMapTileLayer powerUps = (TiledMapTileLayer)tiledMap.getLayers().get("powerUp");
-
-
         TiledMapTileLayer startPos = (TiledMapTileLayer)tiledMap.getLayers().get("startPos");
         TiledMapTileLayer endPos = (TiledMapTileLayer)tiledMap.getLayers().get("endPos");
-
 
         model.setCollisionMap(collisionLayer);
         model.setCoinsLayer(coins);
         model.setPowerUpLayer(powerUps);
-
-
-        //meg
         model.setStartPosLayer(startPos);
         model.setEndPosLayer(endPos);
 
