@@ -9,6 +9,7 @@ import inf112.moustachmania.app.MoustacheMania;
 import inf112.moustachmania.app.controller.SoundController;
 import inf112.moustachmania.app.player.Player;
 import inf112.moustachmania.app.screens.GameOverScreen;
+import inf112.moustachmania.app.screens.LevelScreen;
 
 public class Model implements IModel {
 
@@ -19,6 +20,7 @@ public class Model implements IModel {
     private TiledMapTileLayer coinsLayer;
     private TiledMapTileLayer startPosLayer;
     private TiledMapTileLayer endPosLayer;
+    private Vector2 endPos;
     private Array<Rectangle> tiles = new Array<Rectangle>();
     private static final float GRAVITY = -0.005f;
 
@@ -60,6 +62,8 @@ public class Model implements IModel {
 
         // Check if player is in bounds of the screen
         checkPlayerOutOfBounds(player);
+
+        checkEndCollision(player);
 
         // multiply by delta time, so we know how far we go in this frame
         player.velocity.scl(deltaTime);
@@ -318,15 +322,16 @@ public class Model implements IModel {
     }
 
 
-
-
-    //meg
+    /**
+     * Sets the start position for the player
+     */
     public void setStartPosition() {
         for (int y = 0; y <= this.startPosLayer.getHeight(); y++) {
             for (int x = 0; x <= this.startPosLayer.getWidth(); x++) {
                 TiledMapTileLayer.Cell cell = this.startPosLayer.getCell(x, y);
                 if (cell != null) {
                     this.player.setPosition(new Vector2(x, y));
+                    setEndPosition();
                     return;
                 }
             }
@@ -334,8 +339,27 @@ public class Model implements IModel {
     }
 
 
+    /**
+     * Checks if the player has reached the end position
+     */
+    public void setEndPosition() {
+        for (int y = 0; y <= this.endPosLayer.getHeight(); y++) {
+            for (int x = 0; x <= this.endPosLayer.getWidth(); x++) {
+                TiledMapTileLayer.Cell cell = this.endPosLayer.getCell(x, y);
+                if (cell != null) {
+                    this.endPos = new Vector2(x, y);
+                    return;
+                }
+            }
+        }
+    }
 
 
-    private void getEndPosition(Player player) {
+    private void checkEndCollision(Player player) {
+        float diffX = Math.abs(player.position.x - endPos.x);
+        float diffY = Math.abs(player.position.y - endPos.y);
+        if (diffX < 1.0 && diffY < 1.0) {
+            game.setScreen(new LevelScreen(game));
+        }
     }
 }
