@@ -57,7 +57,6 @@ public class Player implements ViewableCharacter, ControllablePlayer {
         return position;
     }
 
-
     @Override
     public void setPosition(Vector2 pos) {
         if (pos == position) {

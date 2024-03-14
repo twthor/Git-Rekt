@@ -11,10 +11,14 @@ import inf112.moustachmania.app.player.Player;
 import inf112.moustachmania.app.screens.GameOverScreen;
 import inf112.moustachmania.app.screens.LevelScreen;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public class Model implements IModel {
 
     private final Player player;
     private final MoustacheMania game;
+    private final ArrayList<Monster> monsters;
     private TiledMapTileLayer collisionMap;
     private TiledMapTileLayer powerUpsLayer;
     private TiledMapTileLayer coinsLayer;
@@ -31,11 +35,13 @@ public class Model implements IModel {
             return new Rectangle();
         }
     };
+    private Random rand = new Random();
 
 
     public Model(final MoustacheMania game, Player player) {
         this.game = game;
         this.player = player;
+        this.monsters = new Monster().getNewMonsters();
     }
 
     /**
@@ -47,6 +53,8 @@ public class Model implements IModel {
         player.velocity.add(0, GRAVITY);
         checkYCollision(player);
         player.position.add(player.velocity);
+
+        moveMonstersAround();
 
         pickUpCoins(player);
 
@@ -73,6 +81,8 @@ public class Model implements IModel {
 
         // Check if player has reached the end position
         checkEndCollision(player);
+
+        eliminateMonster(player);
 
         // multiply by delta time, so we know how far we go in this frame
         player.velocity.scl(deltaTime);
@@ -103,6 +113,46 @@ public class Model implements IModel {
             }
             player.grounded = false;
         }
+    }
+
+    private void moveMonstersAround() {
+        for (Monster monster : monsters) {
+            int movement = rand.nextInt(-1, 1);
+            monster.velocity.x = movement * Monster.MAX_VELOCITY;
+            // TODO: få monster og player til å extende samme klasse så det kan være likt i checkXCollision
+            //checkXCollision(monster); // does not work.
+            // 5 so it stays on the ground
+            monster.getPosition().add(monster.velocity);
+        }
+    }
+
+    private void eliminateMonster(Player player) {
+        Rectangle playerRect = rectPool.obtain();
+        playerRect.set(player.position.x, player.position.y, Player.WIDTH, Player.HEIGHT);
+
+        for (Monster monster : monsters) {
+            Rectangle monsterRect = rectPool.obtain();
+            monsterRect.set(monster.getPosition().x, monster.getPosition().y, Monster.WIDTH, Monster.HEIGHT);
+
+            float diffX = Math.abs(player.position.x - monster.getPosition().x);
+            float diffY = Math.abs(player.position.y - monster.getPosition().y);
+
+            if (player.position.y > monster.getPosition().y && diffY < 1.0 && diffX < 1.0) { // Player comes from above
+                // Check if player's bottom overlaps with monster's top
+                if (player.position.y + Player.HEIGHT >= monster.getPosition().y + Monster.HEIGHT) {
+                    System.out.println("kill monster");
+                    monster.eliminate(monster); // Player comes from above, eliminate monster
+                    break;
+                }
+            } else if (diffX < 0.005) { // Player collides horizontally
+                // Check if player's right side overlaps with monster's left side
+                if (player.position.x + Player.WIDTH >= monster.getPosition().x) {
+                    game.setScreen(new GameOverScreen(game)); // Player dies, set game over screen
+                }
+            }
+            rectPool.free(monsterRect); // Free monster rectangle from the pool
+        }
+        rectPool.free(playerRect); // Free player rectangle from the pool
     }
 
     private void pickUpCoins(Player player) {
@@ -325,6 +375,7 @@ public class Model implements IModel {
         return player;
     }
 
+    public ArrayList<Monster> getMonsters() { return monsters; }
 
     /**
      * Sets the start position for the player
