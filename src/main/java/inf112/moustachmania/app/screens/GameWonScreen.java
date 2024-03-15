@@ -14,6 +14,7 @@ import inf112.moustachmania.app.controller.Controller;
 import inf112.moustachmania.app.controller.IController;
 import inf112.moustachmania.app.model.Model;
 import inf112.moustachmania.app.player.Player;
+import inf112.moustachmania.app.utils.Constants;
 import inf112.moustachmania.app.view.IView;
 import inf112.moustachmania.app.view.View;
 
@@ -92,6 +93,7 @@ public class GameWonScreen implements Screen {
         show();
     }
 
+    // Need to fix issues with "play again" and what happens when "play next" being on the last level
     public void nextLevel(boolean nextLevel) {
         int currentLevel = game.levelScreen.currentLevel();
         int levelToLoad;
@@ -109,9 +111,10 @@ public class GameWonScreen implements Screen {
 
         game.gameScreen = new GameScreen(game, view, controller, model);
         game.setScreen(game.gameScreen);
-        model.setStartPosition(); // Ensure model.setStartPosition() is appropriately defined to reset the player position
+        model.setStartPosition();
         dispose();
     }
+
 
 
     /*
