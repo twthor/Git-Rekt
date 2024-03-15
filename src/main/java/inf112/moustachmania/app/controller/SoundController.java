@@ -75,7 +75,7 @@ public class SoundController {
             backgroundMusic.stop();
         }
 
-        if (gameState == GameState.START_SCREEN) {
+        if (gameState == GameState.START_SCREEN || gameState == GameState.HELP_SCREEN || gameState == GameState.LEVEL_SELECT) {
             mainMenuMusic.setLooping(true);
             mainMenuMusic.play();
         } else {
