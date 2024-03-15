@@ -6,6 +6,7 @@ import inf112.moustachmania.app.model.Model;
 import inf112.moustachmania.app.MoustacheMania;
 import inf112.moustachmania.app.player.Player;
 import inf112.moustachmania.app.screens.GameOverScreen;
+import inf112.moustachmania.app.screens.GameWonScreen;
 import inf112.moustachmania.app.screens.PauseScreen;
 
 public class Controller implements IController {
@@ -26,7 +27,8 @@ public class Controller implements IController {
         Player player = model.getPlayer();
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-            game.setScreen(new PauseScreen(game));
+            //game.setScreen(new PauseScreen(game));
+            game.setScreen(new GameWonScreen(game));
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT)) {

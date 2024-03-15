@@ -5,7 +5,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -13,25 +12,22 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import inf112.moustachmania.app.MoustacheMania;
 import inf112.moustachmania.app.controller.Controller;
 import inf112.moustachmania.app.controller.IController;
-import inf112.moustachmania.app.model.IModel;
 import inf112.moustachmania.app.model.Model;
 import inf112.moustachmania.app.player.Player;
-import inf112.moustachmania.app.utils.Constants;
 import inf112.moustachmania.app.view.IView;
 import inf112.moustachmania.app.view.View;
 
-public class GameOverScreen implements Screen {
-    private final Stage stage;
-    private Texture imageTexture;
+public class GameWonScreen implements Screen {
+
     MoustacheMania game;
+    Stage stage;
+    private Texture imageTexture;
 
-    public GameOverScreen(MoustacheMania game) {
-        this.stage = new Stage();
+    public GameWonScreen(MoustacheMania game) {
         this.game = game;
-        game.gameOverScreen = this;
+        this.stage = new Stage();
+        game.gameWonScreen = this;
         game.setScreen(this);
-
-        addBackgroundImage(Constants.gameOverPicture);
 
         Table table = new Table();
         table.setFillParent(true);
@@ -39,23 +35,36 @@ public class GameOverScreen implements Screen {
         Table buttonTable = new Table();
         buttonTable.padLeft(10.0f);
 
-        // Sets up "try again" button and event handling
-        TextButton tryAgainButton = new TextButton("Try again", game.getSkin());
-        tryAgainButton.addListener(new ClickListener() {
+        //addImage(Constants.)
+
+        // Play next level
+        TextButton nextLevelButton = new TextButton("Play next level", game.getSkin());
+        nextLevelButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float a, float b) {
-                tryAgainEventHandler();
+                //nextLevelEventHandler();
+                nextLevel(true);
             }
         });
 
-        //sets up "play another level" button and event handling
-        TextButton playOtherLevelButton = new TextButton("Play another level", game.getSkin());
-        playOtherLevelButton.addListener(new ClickListener() {
-             @Override
-             public void clicked(InputEvent event, float a, float b) {
-                 playOtherLevelEventHandler();
-             }
-         });
+
+        // Sets up "play agin" button and event handling
+        TextButton playAgainButton = new TextButton("Play again", game.getSkin());
+        playAgainButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float a, float b) {
+                //playAgainEventHandler();
+                nextLevel(false);
+            }
+        });
+
+        TextButton levelsButton = new TextButton("play another level", game.getSkin());
+        levelsButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float a, float b) {
+                anotherLevelScreenEventHandler();
+            }
+        });
 
         // sets up "exit game" button and event handling
         TextButton exitGameButton = new TextButton("Back to main menu", game.getSkin());
@@ -66,10 +75,13 @@ public class GameOverScreen implements Screen {
             }
         });
 
-        buttonTable.add(tryAgainButton).spaceBottom(10).fillX().padTop(400);
+        buttonTable.add(nextLevelButton).spaceBottom(10).fillX().padTop(400);
         buttonTable.row();
 
-        buttonTable.add(playOtherLevelButton).spaceBottom(10).fillX();
+        buttonTable.add(playAgainButton).spaceBottom(10).fillX();
+        buttonTable.row();
+
+        buttonTable.add(levelsButton).spaceBottom(10).fillX();
         buttonTable.row();
 
         buttonTable.add(exitGameButton).spaceBottom(10).fillX();
@@ -79,7 +91,44 @@ public class GameOverScreen implements Screen {
         stage.addActor(table);
         show();
     }
-    public void tryAgainEventHandler() {
+
+    public void nextLevel(boolean nextLevel) {
+        int currentLevel = game.levelScreen.currentLevel();
+        int levelToLoad;
+
+        if (nextLevel) {
+            levelToLoad = currentLevel + 1;
+        } else {
+            levelToLoad = currentLevel;
+        }
+
+        Player player = new Player();
+        Model model = new Model(game, player);
+        IView view = new View(game, model, levelToLoad);
+        IController controller = new Controller(game, model);
+
+        game.gameScreen = new GameScreen(game, view, controller, model);
+        game.setScreen(game.gameScreen);
+        model.setStartPosition(); // Ensure model.setStartPosition() is appropriately defined to reset the player position
+        dispose();
+    }
+
+
+    /*
+    public void nextLevelEventHandler() {
+        // Need new instances of these classes to "create" a new game when trying a level again
+        Player player = new Player();
+        Model model = new Model(game, player);
+        IView view = new View(game, model, game.levelScreen.currentLevel() + 1);
+        IController controller = new Controller(game, model);
+
+        game.gameScreen = new GameScreen(game, view, controller, model);
+        game.setScreen(game.gameScreen);
+        model.setStartPosition(); // Sets the player to the start position of the level
+        dispose();
+    }
+
+    public void playAgainEventHandler() {
         // Need new instances of these classes to "create" a new game when trying a level again
         Player player = new Player();
         Model model = new Model(game, player);
@@ -92,10 +141,11 @@ public class GameOverScreen implements Screen {
         dispose();
     }
 
-    public void playOtherLevelEventHandler() {
+     */
+
+    public void anotherLevelScreenEventHandler() {
         game.levelScreen = new LevelScreen(game);
         game.setScreen(game.levelScreen);
-        dispose();
     }
 
     public void backToStartScreenEventHandler() {
@@ -103,13 +153,7 @@ public class GameOverScreen implements Screen {
         game.setScreen(game.startScreen);
         dispose();
     }
-    private void addBackgroundImage(String imagePath) {
-        imageTexture = new Texture(Gdx.files.internal(imagePath));
-        Image backgroundImage = new Image(imageTexture);
-        backgroundImage.setColor(1,1,1,0.4f);
-        backgroundImage.setSize(stage.getWidth(), stage.getHeight());
-        stage.addActor(backgroundImage); // Adds background image to the stage
-    }
+
     @Override
     public void show() {
         Gdx.input.setInputProcessor(stage);
@@ -123,8 +167,8 @@ public class GameOverScreen implements Screen {
     }
 
     @Override
-    public void resize(int width, int height) {
-        stage.getViewport().update(width, height, true);
+    public void resize(int i, int i1) {
+
     }
 
     @Override
@@ -144,9 +188,6 @@ public class GameOverScreen implements Screen {
 
     @Override
     public void dispose() {
-        if (imageTexture != null) {
-            imageTexture.dispose();
-        }
         stage.dispose();
     }
 }
