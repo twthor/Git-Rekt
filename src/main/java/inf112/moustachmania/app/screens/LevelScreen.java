@@ -2,8 +2,10 @@ package inf112.moustachmania.app.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -23,6 +25,7 @@ public class LevelScreen implements Screen {
     private final Stage stage;
     private final MoustacheMania game;
     private int currentLevelNumber = -1; // "placeholder" bane-indeks
+    private Texture imageTexture;
 
 
     public LevelScreen(final MoustacheMania game) {
@@ -31,6 +34,9 @@ public class LevelScreen implements Screen {
 
         Table uiRoot = new Table();
         uiRoot.setFillParent(true);
+
+        // adds backgroundImage
+        addImage(Constants.levelScreenBackground);
 
         //add buttons for level selection
         for (int levelNumber = 0; levelNumber < Constants.mapPaths.length; levelNumber++) {
@@ -71,6 +77,16 @@ public class LevelScreen implements Screen {
         }
     }
 
+    /*
+    adds an internal image to the stage
+     */
+    private void addImage(String imagePath) {
+        imageTexture = new Texture(Gdx.files.internal(imagePath));
+        Image image = new Image(imageTexture);
+        image.setColor(1,1,1,0.5f);
+        image.setSize(stage.getWidth(), stage.getHeight());
+        stage.addActor(image);
+    }
 
     @Override
     public void show() {
@@ -94,6 +110,9 @@ public class LevelScreen implements Screen {
 
     @Override
     public void dispose() {
+        if (imageTexture != null) {
+            imageTexture.dispose();
+        }
         stage.dispose();
     }
 
