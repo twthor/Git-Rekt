@@ -13,6 +13,8 @@ public class Monster implements IEntity {
     public Vector2 position;
     public Vector2 velocity;
     private boolean grounded;
+    public boolean movesRight;
+    public Vector2 startPosition;
 
     public static float WIDTH;
     public static float HEIGHT;
@@ -23,6 +25,7 @@ public class Monster implements IEntity {
         this.position = new Vector2(rand.nextInt(10, 20), 5);
         this.velocity = new Vector2();
         this.grounded = true;
+        this.startPosition = new Vector2(10, 5);
 
         WIDTH = 1 / 16f;
         HEIGHT = 1 / 16f;
@@ -33,8 +36,8 @@ public class Monster implements IEntity {
     }
 
     public void eliminate(Monster monster) {
-        this.alive = false;
-        monsters.remove(monster);
+        this.alive = false; // so the view know not to draw the monster anymore.
+        monsters.remove(monster); // removing it from the list to prevent the player from colliding with a dead monster
     }
 
     @Override
@@ -48,8 +51,12 @@ public class Monster implements IEntity {
     }
 
     @Override
-    public boolean setGrounded(boolean b) {
-        return grounded = b;
+    public void setGrounded(boolean b) {
+        this.grounded = b;
+    }
+
+    public boolean getGrounded() {
+        return this.grounded;
     }
 
     public void setPosition(Vector2 pos) {

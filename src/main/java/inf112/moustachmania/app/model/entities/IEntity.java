@@ -9,5 +9,5 @@ public interface IEntity {
 
     Vector2 getVelocity();
 
-    boolean setGrounded(boolean b);
+    void setGrounded(boolean b);
 }

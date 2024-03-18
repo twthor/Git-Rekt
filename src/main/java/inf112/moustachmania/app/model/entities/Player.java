@@ -63,8 +63,8 @@ public class Player implements IEntity  {
     }
 
     @Override
-    public boolean setGrounded(boolean b) {
-        return this.grounded = b;
+    public void setGrounded(boolean b) {
+        this.grounded = b;
     }
 
     public void setPosition(Vector2 pos) {

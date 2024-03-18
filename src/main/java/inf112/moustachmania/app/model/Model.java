@@ -119,12 +119,23 @@ public class Model implements IModel {
 
     private void moveMonstersAround() {
         for (Monster monster : monsters) {
-            int movement = rand.nextInt(-1, 1);
-            monster.velocity.x = movement * Monster.MAX_VELOCITY;
-            // TODO: få monster og player til å extende samme klasse så det kan være likt i checkXCollision
-            checkXCollision(monster); // does not work.
-            // 5 so it stays on the ground
-            monster.getPosition().add(monster.velocity);
+            monster.velocity.add(0, GRAVITY);
+            checkYCollision(monster);
+            checkXCollision(monster);
+
+            if (monster.movesRight) {
+                monster.velocity.x = 1 * Monster.MAX_VELOCITY;
+                monster.getPosition().add(monster.velocity);
+                if (monster.getPosition().x >= monster.startPosition.x + 10 ) {
+                    monster.movesRight = false;
+                }
+            } else {
+                monster.velocity.x = -1 * Monster.MAX_VELOCITY;
+                monster.getPosition().add(monster.velocity);
+                if (monster.getPosition().x <= monster.startPosition.x) {
+                    monster.movesRight = true;
+                }
+            }
         }
     }
 
@@ -220,67 +231,67 @@ public class Model implements IModel {
 
     /**
      * Check for collision in the x-axis.
-     * @param player checks collision for the current player object in regard to the collision layer from the Tiled map.
+     * @param unit checks collision for the current unit in regard to the collision layer from the Tiled map.
      */
-    private void checkXCollision(IEntity player) {
+    private void checkXCollision(IEntity unit) {
         Rectangle playerRect = rectPool.obtain();
-        playerRect.set(player.getPosition().x, player.getPosition().y, Player.WIDTH, Player.HEIGHT);
+        playerRect.set(unit.getPosition().x, unit.getPosition().y, Player.WIDTH, Player.HEIGHT);
         int startX, startY, endX, endY;
         // finds the x-position of the player - both if the player is moving and standing still
-        if (player.getVelocity().x > 0) {
-            startX = endX = (int)(player.getVelocity().x + Player.WIDTH + player.getVelocity().x);
+        if (unit.getVelocity().x > 0) {
+            startX = endX = (int)(unit.getVelocity().x + Player.WIDTH + unit.getVelocity().x);
         } else {
-            startX = endX = (int)(player.getPosition().x + player.getVelocity().x);
+            startX = endX = (int)(unit.getPosition().x + unit.getVelocity().x);
         }
-        startY = (int)(player.getPosition().y);
-        endY = (int)(player.getPosition().y + Player.HEIGHT);
+        startY = (int)(unit.getPosition().y);
+        endY = (int)(unit.getPosition().y + Player.HEIGHT);
         getTiles(startX, startY, endX, endY, tiles, collisionMap);
-        playerRect.x += player.getVelocity().x;
+        playerRect.x += unit.getVelocity().x;
         for (Rectangle tile : tiles) {
             if (playerRect.overlaps(tile)) {
-                player.getVelocity().x = 0;
+                unit.getVelocity().x = 0;
                 break;
             }
         }
-        playerRect.x = player.getPosition().x;
+        playerRect.x = unit.getPosition().x;
         rectPool.free(playerRect);
-        checkYCollision(player);
+        checkYCollision(unit);
     }
 
     /**
-     * Checks collision in the y-axis for the current player object in regard to the collision layer from the Tiled map.
-     * @param player Current player object for the game
+     * Checks collision in the y-axis for the current unit in regard to the collision layer from the Tiled map.
+     * @param unit Current unit you want to check collision for in the game
      */
-    private void checkYCollision(IEntity player) {
+    private void checkYCollision(IEntity unit) {
         Rectangle playerRect = rectPool.obtain();
-        playerRect.set(player.getPosition().x, player.getPosition().y, Player.WIDTH, Player.HEIGHT);
+        playerRect.set(unit.getPosition().x, unit.getPosition().y, Player.WIDTH, Player.HEIGHT);
         int startX, startY, endX, endY;
-        if (player.getVelocity().y > 0) {
-            startY = endY = (int)(player.getPosition().y + Player.HEIGHT + player.getVelocity().y);
+        if (unit.getVelocity().y > 0) {
+            startY = endY = (int)(unit.getPosition().y + Player.HEIGHT + unit.getVelocity().y);
         } else {
-            startY = endY = (int)(player.getPosition().y + player.getVelocity().y);
+            startY = endY = (int)(unit.getPosition().y + unit.getVelocity().y);
         }
-        startX = (int)(player.getPosition().x);
-        endX = (int)(player.getPosition().x + Player.WIDTH);
+        startX = (int)(unit.getPosition().x);
+        endX = (int)(unit.getPosition().x + Player.WIDTH);
         getTiles(startX, startY, endX, endY, tiles, collisionMap);
-        playerRect.y += player.getVelocity().y;
+        playerRect.y += unit.getVelocity().y;
         for (Rectangle tile : tiles) {
             if (playerRect.overlaps(tile)) {
                 // we actually reset the players y-position here
                 // So its just below/above the tile we collided with this should remove bouncing.
 
                 // If the player jumps up into a block:
-                if (player.getVelocity().y > 0) {
-                    player.getPosition().y = tile.y - Player.HEIGHT;
+                if (unit.getVelocity().y > 0) {
+                    unit.getPosition().y = tile.y - Player.HEIGHT;
                     // TODO: implement breaking blocks.
                     // we hit a block jumping upwards, let's destroy it!
                     //collisionMap.setCell((int)tile.x, (int)tile.y, null);
                 } else {
-                    player.getPosition().y = tile.y + tile.height;
+                    unit.getPosition().y = tile.y + tile.height;
                     // if we hit the ground, mark us as grounded, so we can jump again
-                    player.setGrounded(true);
+                    unit.setGrounded(true);
                 }
-                player.getVelocity().y = 0;
+                unit.getVelocity().y = 0;
                 break;
             }
         }
