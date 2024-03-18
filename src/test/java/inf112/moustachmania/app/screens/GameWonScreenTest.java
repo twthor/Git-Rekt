@@ -3,46 +3,49 @@ package inf112.moustachmania.app.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl3.TestApplication;
 import inf112.moustachmania.app.MoustacheMania;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.AfterClass;
 import org.junit.jupiter.api.Test;
 
 public class GameWonScreenTest {
 
-    private static MoustacheMania game;
-    private static TestApplication testApp; // Reference to your custom TestApplication
+    private final MoustacheMania game;
 
-    @BeforeAll
-    public static void setup() {
-        // Assuming TestApplication correctly initializes your LibGDX environment
-        game = new MoustacheMania();
-        testApp = new TestApplication(game); // Initialize your game and TestApplication
+    public GameWonScreenTest() {
+        this.game = new MoustacheMania();
+        new TestApplication(game);
+
         game.create();
     }
 
-    @AfterAll
-    public static void cleanup() {
-        Gdx.app.exit(); // Properly exit and cleanup the LibGDX environment
+    @AfterClass
+    public static void afterAll() {
+        Gdx.app.exit();
     }
 
     @Test
     public void render() {
-        GameWonScreen gameWonScreen = new GameWonScreen(game);
+        GameWonScreen gameWonScreen = createScreen();
         gameWonScreen.render(1);
         gameWonScreen.dispose();
     }
 
     @Test
     public void pause() {
-        GameWonScreen gameWonScreen = new GameWonScreen(game);
+        GameWonScreen gameWonScreen = createScreen();
         gameWonScreen.pause();
         gameWonScreen.dispose();
     }
 
     @Test
     public void resume() {
-        GameWonScreen gameWonScreen = new GameWonScreen(game);
+        GameWonScreen gameWonScreen = createScreen();
         gameWonScreen.resume();
         gameWonScreen.dispose();
     }
+    private GameWonScreen createScreen() {
+        game.levelScreen = new LevelScreen(game);
+        game.levelScreen.setCurrentLevel(1);
+        return new GameWonScreen(game);
+    }
+
 }
