@@ -14,23 +14,23 @@ import inf112.moustachmania.app.MoustacheMania;
 import inf112.moustachmania.app.controller.Controller;
 import inf112.moustachmania.app.controller.IController;
 import inf112.moustachmania.app.model.Model;
-import inf112.moustachmania.app.model.entities.Player;
+import inf112.moustachmania.app.player.Player;
 import inf112.moustachmania.app.utils.Constants;
 import inf112.moustachmania.app.view.IView;
 import inf112.moustachmania.app.view.View;
 
-public class GameOverScreen implements Screen {
-    private final Stage stage;
-    private Texture imageTexture;
+public class GameWonScreen implements Screen {
+
     MoustacheMania game;
-
-    public GameOverScreen(MoustacheMania game) {
-        this.stage = new Stage();
+    Stage stage;
+    private Texture imageTexture; // will implement soon
+    int levelCount;
+    public GameWonScreen(MoustacheMania game) {
         this.game = game;
-        game.gameOverScreen = this;
+        this.stage = new Stage();
+        game.gameWonScreen = this;
         game.setScreen(this);
-
-        addBackgroundImage(Constants.gameOverPicture);
+        levelCount = game.levelScreen.currentLevel();
 
         Table table = new Table();
         table.setFillParent(true);
@@ -38,23 +38,34 @@ public class GameOverScreen implements Screen {
         Table buttonTable = new Table();
         buttonTable.padLeft(10.0f);
 
-        // Sets up "try again" button and event handling
-        TextButton tryAgainButton = new TextButton("Try again", game.getSkin());
-        tryAgainButton.addListener(new ClickListener() {
+        addImage(Constants.gameWonScreenBackground);
+
+        // Play next level
+        TextButton nextLevelButton = new TextButton("Play next level", game.getSkin());
+        nextLevelButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float a, float b) {
-                tryAgainEventHandler();
+                nextLevelEventHandler();
             }
         });
 
-        //sets up "play another level" button and event handling
-        TextButton playOtherLevelButton = new TextButton("Play another level", game.getSkin());
-        playOtherLevelButton.addListener(new ClickListener() {
-             @Override
-             public void clicked(InputEvent event, float a, float b) {
-                 playOtherLevelEventHandler();
-             }
-         });
+
+        // Sets up "play agin" button and event handling
+        TextButton playAgainButton = new TextButton("Play again", game.getSkin());
+        playAgainButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float a, float b) {
+                playAgainEventHandler();
+            }
+        });
+
+        TextButton levelsButton = new TextButton("play another level", game.getSkin());
+        levelsButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float a, float b) {
+                anotherLevelScreenEventHandler();
+            }
+        });
 
         // sets up "exit game" button and event handling
         TextButton exitGameButton = new TextButton("Back to main menu", game.getSkin());
@@ -65,10 +76,13 @@ public class GameOverScreen implements Screen {
             }
         });
 
-        buttonTable.add(tryAgainButton).spaceBottom(10).fillX().padTop(400);
+        buttonTable.add(nextLevelButton).spaceBottom(10).fillX().padTop(620);
         buttonTable.row();
 
-        buttonTable.add(playOtherLevelButton).spaceBottom(10).fillX();
+        buttonTable.add(playAgainButton).spaceBottom(10).fillX();
+        buttonTable.row();
+
+        buttonTable.add(levelsButton).spaceBottom(10).fillX();
         buttonTable.row();
 
         buttonTable.add(exitGameButton).spaceBottom(10).fillX();
@@ -78,20 +92,40 @@ public class GameOverScreen implements Screen {
         stage.addActor(table);
         show();
     }
-    public void tryAgainEventHandler() {
-        // Need new instances of these classes to "create" a new game when trying a level again
+
+    public void nextLevelEventHandler() {
+        int nextLevelNumber = game.levelScreen.currentLevel() + 1;
+        // Checks if the next level exists.
+        if (nextLevelNumber >= Constants.mapPaths.length) {
+            // Redirects back to the levelScreen when playing next after completing the last level.
+            game.levelScreen = new LevelScreen(game);
+            game.setScreen(game.levelScreen);
+        } else {
+            // Loads the next level.
+            loadLevel(nextLevelNumber);
+        }
+    }
+
+    public void playAgainEventHandler() {
+        int currentLevelNumber = game.levelScreen.currentLevel();
+        loadLevel(currentLevelNumber);
+    }
+
+    private void loadLevel(int levelIndex) {
+        // Creates new components to make up the newly loaded level.
         Player player = new Player();
         Model model = new Model(game, player);
-        IView view = new View(game, model, game.levelScreen.currentLevel());
+        IView view = new View(game, model, levelIndex);
         IController controller = new Controller(game, model);
 
         game.gameScreen = new GameScreen(game, view, controller, model);
         game.setScreen(game.gameScreen);
-        model.setStartPosition(); // Sets the player to the start position of the level
+        game.levelScreen.setCurrentLevel(levelIndex);
+        model.setEndPosition(); // Ensures the end-position is reset when a level is loaded such that the game registeres when the playrt has reached the goal.
         dispose();
     }
 
-    public void playOtherLevelEventHandler() {
+    public void anotherLevelScreenEventHandler() {
         game.levelScreen = new LevelScreen(game);
         game.setScreen(game.levelScreen);
         dispose();
@@ -102,13 +136,14 @@ public class GameOverScreen implements Screen {
         game.setScreen(game.startScreen);
         dispose();
     }
-    private void addBackgroundImage(String imagePath) {
+
+    private void addImage(String imagePath) {
         imageTexture = new Texture(Gdx.files.internal(imagePath));
-        Image backgroundImage = new Image(imageTexture);
-        backgroundImage.setColor(1,1,1,0.4f);
-        backgroundImage.setSize(stage.getWidth(), stage.getHeight());
-        stage.addActor(backgroundImage); // Adds background image to the stage
+        Image image = new Image(imageTexture);
+        image.setSize(stage.getWidth(), stage.getHeight());
+        stage.addActor(image);
     }
+
     @Override
     public void show() {
         Gdx.input.setInputProcessor(stage);
