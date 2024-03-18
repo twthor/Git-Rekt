@@ -1,8 +1,7 @@
 package inf112.moustachmania.app.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.backends.headless.HeadlessApplication;
-import com.badlogic.gdx.backends.headless.HeadlessApplicationConfiguration;
+import com.badlogic.gdx.backends.lwjgl3.TestApplication;
 import inf112.moustachmania.app.MoustacheMania;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -11,45 +10,39 @@ import org.junit.jupiter.api.Test;
 public class GameWonScreenTest {
 
     private static MoustacheMania game;
-    private static HeadlessApplication application;
+    private static TestApplication testApp; // Reference to your custom TestApplication
 
     @BeforeAll
-    public static void setUp() {
-        HeadlessApplicationConfiguration config = new HeadlessApplicationConfiguration();
+    public static void setup() {
+        // Assuming TestApplication correctly initializes your LibGDX environment
         game = new MoustacheMania();
-        application = new HeadlessApplication(game, config);
-        // Since you're running in a headless environment, game.create() is not necessary if your game's
-        // initialization happens within the MoustacheMania constructor or the create method triggered by the application.
+        testApp = new TestApplication(game); // Initialize your game and TestApplication
+        game.create();
     }
 
     @AfterAll
-    public static void afterAll() {
-        if (application != null) {
-            application.exit();
-            application = null;
-        }
-        // Ensure LibGDX's application reference is cleaned up.
-        Gdx.app = null;
+    public static void cleanup() {
+        Gdx.app.exit(); // Properly exit and cleanup the LibGDX environment
     }
 
     @Test
     public void render() {
-        GameWonScreen gameWonScreen = createScreen();
-        // Simulate rendering
-        gameWonScreen.render(1f);
-        // Ensure to dispose of resources to prevent memory leaks
+        GameWonScreen gameWonScreen = new GameWonScreen(game);
+        gameWonScreen.render(1);
         gameWonScreen.dispose();
     }
 
     @Test
     public void pause() {
-        GameWonScreen gameWonScreen = createScreen();
+        GameWonScreen gameWonScreen = new GameWonScreen(game);
         gameWonScreen.pause();
         gameWonScreen.dispose();
     }
 
-    private GameWonScreen createScreen() {
-        // Return a new instance of GameWonScreen
-        return new GameWonScreen(game);
+    @Test
+    public void resume() {
+        GameWonScreen gameWonScreen = new GameWonScreen(game);
+        gameWonScreen.resume();
+        gameWonScreen.dispose();
     }
 }
