@@ -132,7 +132,9 @@ public class LevelScreen implements Screen {
     public int currentLevel() {
         return currentLevelNumber;
     }
-
+    /*
+    setCurrentLevel method updates the current level of the game.
+     */
     public void setCurrentLevel(int level) {
         this.currentLevelNumber = level;
     }

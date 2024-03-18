@@ -362,20 +362,11 @@ public class Model implements IModel {
      * Checks if the player has reached the end position
      * @param player The player
      */
-
     private void checkEndCollision(Player player) {
-        // Added this if-statement, ensures endPos is checked for null before accessing its fields
-        if (this.endPos == null) {
-            return;
-        }
-
         float diffX = Math.abs(player.position.x - endPos.x);
         float diffY = Math.abs(player.position.y - endPos.y);
-
         if (diffX < 1.0 && diffY < 1.0) {
             game.setScreen(new GameWonScreen(game));
         }
     }
-
-
 }

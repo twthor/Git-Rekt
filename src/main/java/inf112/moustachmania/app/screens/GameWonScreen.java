@@ -22,7 +22,7 @@ public class GameWonScreen implements Screen {
 
     MoustacheMania game;
     Stage stage;
-    private Texture imageTexture;
+    private Texture imageTexture; // will implement soon
     int levelCount;
     public GameWonScreen(MoustacheMania game) {
         this.game = game;
@@ -37,7 +37,7 @@ public class GameWonScreen implements Screen {
         Table buttonTable = new Table();
         buttonTable.padLeft(10.0f);
 
-        //addImage(Constants.)
+        //addImage(Constants.) coming soon...
 
         // Play next level
         TextButton nextLevelButton = new TextButton("Play next level", game.getSkin());
@@ -149,8 +149,8 @@ public class GameWonScreen implements Screen {
     }
 
     @Override
-    public void resize(int i, int i1) {
-
+    public void resize(int width, int height) {
+        stage.getViewport().update(width, height, true);
     }
 
     @Override
