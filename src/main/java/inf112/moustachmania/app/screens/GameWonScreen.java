@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -37,7 +38,7 @@ public class GameWonScreen implements Screen {
         Table buttonTable = new Table();
         buttonTable.padLeft(10.0f);
 
-        //addImage(Constants.) coming soon...
+        addImage(Constants.gameWonScreenBackground);
 
         // Play next level
         TextButton nextLevelButton = new TextButton("Play next level", game.getSkin());
@@ -75,7 +76,7 @@ public class GameWonScreen implements Screen {
             }
         });
 
-        buttonTable.add(nextLevelButton).spaceBottom(10).fillX().padTop(400);
+        buttonTable.add(nextLevelButton).spaceBottom(10).fillX().padTop(620);
         buttonTable.row();
 
         buttonTable.add(playAgainButton).spaceBottom(10).fillX();
@@ -134,6 +135,13 @@ public class GameWonScreen implements Screen {
         game.startScreen = new StartScreen(game);
         game.setScreen(game.startScreen);
         dispose();
+    }
+
+    private void addImage(String imagePath) {
+        imageTexture = new Texture(Gdx.files.internal(imagePath));
+        Image image = new Image(imageTexture);
+        image.setSize(stage.getWidth(), stage.getHeight());
+        stage.addActor(image);
     }
 
     @Override

@@ -13,5 +13,6 @@ public class Constants {
     public static final String playerTexturePU = "assets/karakterPU.png";
     public static final String powerUpTexture = "assets/powerUp.png";
     public static final String levelScreenBackground = "assets/levelbackground.png";
+    public static final String gameWonScreenBackground = "assets/gameWon.png";
 
 }
