@@ -25,7 +25,7 @@ public class Monster implements IEntity {
         this.position = new Vector2(rand.nextInt(10, 20), 5);
         this.velocity = new Vector2();
         this.grounded = true;
-        this.startPosition = new Vector2(10, 5);
+        this.startPosition = new Vector2(position.x, 5);
 
         WIDTH = 1 / 16f;
         HEIGHT = 1 / 16f;
