@@ -7,15 +7,21 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
 import inf112.moustachmania.app.MoustacheMania;
 import inf112.moustachmania.app.controller.SoundController;
-import inf112.moustachmania.app.player.Player;
+import inf112.moustachmania.app.model.entities.IEntity;
+import inf112.moustachmania.app.model.entities.Monster;
+import inf112.moustachmania.app.model.entities.Player;
 import inf112.moustachmania.app.screens.GameOverScreen;
 import inf112.moustachmania.app.screens.GameWonScreen;
 import inf112.moustachmania.app.screens.LevelScreen;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 public class Model implements IModel {
 
     private final Player player;
     private final MoustacheMania game;
+    private final ArrayList<Monster> monsters;
     private TiledMapTileLayer collisionMap;
     private TiledMapTileLayer powerUpsLayer;
     private TiledMapTileLayer coinsLayer;
@@ -32,11 +38,13 @@ public class Model implements IModel {
             return new Rectangle();
         }
     };
+    private Random rand = new Random();
 
 
     public Model(final MoustacheMania game, Player player) {
         this.game = game;
         this.player = player;
+        this.monsters = new Monster().getNewMonsters();
     }
 
     /**
@@ -48,6 +56,8 @@ public class Model implements IModel {
         player.velocity.add(0, GRAVITY);
         checkYCollision(player);
         player.position.add(player.velocity);
+
+        moveMonstersAround();
 
         pickUpCoins(player);
 
@@ -74,6 +84,8 @@ public class Model implements IModel {
 
         // Check if player has reached the end position
         checkEndCollision(player);
+
+        eliminateMonster(player);
 
         // multiply by delta time, so we know how far we go in this frame
         player.velocity.scl(deltaTime);
@@ -104,6 +116,57 @@ public class Model implements IModel {
             }
             player.grounded = false;
         }
+    }
+
+    private void moveMonstersAround() {
+        for (Monster monster : monsters) {
+            monster.velocity.add(0, GRAVITY);
+            checkYCollision(monster);
+            checkXCollision(monster);
+
+            if (monster.movesRight) {
+                monster.velocity.x = 1 * Monster.MAX_VELOCITY;
+                monster.getPosition().add(monster.velocity);
+                if (monster.getPosition().x >= monster.startPosition.x + 10 ) {
+                    monster.movesRight = false;
+                }
+            } else {
+                monster.velocity.x = -1 * Monster.MAX_VELOCITY;
+                monster.getPosition().add(monster.velocity);
+                if (monster.getPosition().x <= monster.startPosition.x) {
+                    monster.movesRight = true;
+                }
+            }
+        }
+    }
+
+    private void eliminateMonster(Player player) {
+        Rectangle playerRect = rectPool.obtain();
+        playerRect.set(player.position.x, player.position.y, Player.WIDTH, Player.HEIGHT);
+
+        for (Monster monster : monsters) {
+            Rectangle monsterRect = rectPool.obtain();
+            monsterRect.set(monster.getPosition().x, monster.getPosition().y, Monster.WIDTH, Monster.HEIGHT);
+
+            float diffX = Math.abs(player.position.x - monster.getPosition().x);
+            float diffY = Math.abs(player.position.y - monster.getPosition().y);
+
+            if (player.position.y > monster.getPosition().y && diffY < 1.0 && diffX < 1.0) { // Player comes from above
+                // Check if player's bottom overlaps with monster's top
+                if (player.position.y + Player.HEIGHT >= monster.getPosition().y + Monster.HEIGHT) {
+                    System.out.println("kill monster");
+                    monster.eliminate(monster); // Player comes from above, eliminate monster
+                    break;
+                }
+            } else if (diffX < 0.005) { // Player collides horizontally
+                // Check if player's right side overlaps with monster's left side
+                if (player.position.x + Player.WIDTH >= monster.getPosition().x) {
+                    game.setScreen(new GameOverScreen(game)); // Player dies, set game over screen
+                }
+            }
+            rectPool.free(monsterRect); // Free monster rectangle from the pool
+        }
+        rectPool.free(playerRect); // Free player rectangle from the pool
     }
 
     private void pickUpCoins(Player player) {
@@ -169,67 +232,67 @@ public class Model implements IModel {
 
     /**
      * Check for collision in the x-axis.
-     * @param player checks collision for the current player object in regard to the collision layer from the Tiled map.
+     * @param unit checks collision for the current unit in regard to the collision layer from the Tiled map.
      */
-    private void checkXCollision(Player player) {
+    private void checkXCollision(IEntity unit) {
         Rectangle playerRect = rectPool.obtain();
-        playerRect.set(player.position.x, player.position.y, Player.WIDTH, Player.HEIGHT);
+        playerRect.set(unit.getPosition().x, unit.getPosition().y, Player.WIDTH, Player.HEIGHT);
         int startX, startY, endX, endY;
         // finds the x-position of the player - both if the player is moving and standing still
-        if (player.velocity.x > 0) {
-            startX = endX = (int)(player.position.x + Player.WIDTH + player.velocity.x);
+        if (unit.getVelocity().x > 0) {
+            startX = endX = (int)(unit.getVelocity().x + Player.WIDTH + unit.getVelocity().x);
         } else {
-            startX = endX = (int)(player.position.x + player.velocity.x);
+            startX = endX = (int)(unit.getPosition().x + unit.getVelocity().x);
         }
-        startY = (int)(player.position.y);
-        endY = (int)(player.position.y + Player.HEIGHT);
+        startY = (int)(unit.getPosition().y);
+        endY = (int)(unit.getPosition().y + Player.HEIGHT);
         getTiles(startX, startY, endX, endY, tiles, collisionMap);
-        playerRect.x += player.velocity.x;
+        playerRect.x += unit.getVelocity().x;
         for (Rectangle tile : tiles) {
             if (playerRect.overlaps(tile)) {
-                player.velocity.x = 0;
+                unit.getVelocity().x = 0;
                 break;
             }
         }
-        playerRect.x = player.position.x;
+        playerRect.x = unit.getPosition().x;
         rectPool.free(playerRect);
-        checkYCollision(player);
+        checkYCollision(unit);
     }
 
     /**
-     * Checks collision in the y-axis for the current player object in regard to the collision layer from the Tiled map.
-     * @param player Current player object for the game
+     * Checks collision in the y-axis for the current unit in regard to the collision layer from the Tiled map.
+     * @param unit Current unit you want to check collision for in the game
      */
-    private void checkYCollision(Player player) {
+    private void checkYCollision(IEntity unit) {
         Rectangle playerRect = rectPool.obtain();
-        playerRect.set(player.position.x, player.position.y, Player.WIDTH, Player.HEIGHT);
+        playerRect.set(unit.getPosition().x, unit.getPosition().y, Player.WIDTH, Player.HEIGHT);
         int startX, startY, endX, endY;
-        if (player.velocity.y > 0) {
-            startY = endY = (int)(player.position.y + Player.HEIGHT + player.velocity.y);
+        if (unit.getVelocity().y > 0) {
+            startY = endY = (int)(unit.getPosition().y + Player.HEIGHT + unit.getVelocity().y);
         } else {
-            startY = endY = (int)(player.position.y + player.velocity.y);
+            startY = endY = (int)(unit.getPosition().y + unit.getVelocity().y);
         }
-        startX = (int)(player.position.x);
-        endX = (int)(player.position.x + Player.WIDTH);
+        startX = (int)(unit.getPosition().x);
+        endX = (int)(unit.getPosition().x + Player.WIDTH);
         getTiles(startX, startY, endX, endY, tiles, collisionMap);
-        playerRect.y += player.velocity.y;
+        playerRect.y += unit.getVelocity().y;
         for (Rectangle tile : tiles) {
             if (playerRect.overlaps(tile)) {
                 // we actually reset the players y-position here
                 // So its just below/above the tile we collided with this should remove bouncing.
 
                 // If the player jumps up into a block:
-                if (player.velocity.y > 0) {
-                    player.position.y = tile.y - Player.HEIGHT;
+                if (unit.getVelocity().y > 0) {
+                    unit.getPosition().y = tile.y - Player.HEIGHT;
                     // TODO: implement breaking blocks.
                     // we hit a block jumping upwards, let's destroy it!
                     //collisionMap.setCell((int)tile.x, (int)tile.y, null);
                 } else {
-                    player.position.y = tile.y + tile.height;
+                    unit.getPosition().y = tile.y + tile.height;
                     // if we hit the ground, mark us as grounded, so we can jump again
-                    player.grounded = true;
+                    unit.setGrounded(true);
                 }
-                player.velocity.y = 0;
+                unit.getVelocity().y = 0;
                 break;
             }
         }
@@ -326,6 +389,7 @@ public class Model implements IModel {
         return player;
     }
 
+    public ArrayList<Monster> getMonsters() { return monsters; }
 
     /**
      * Sets the start position for the player

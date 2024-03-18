@@ -1,8 +1,8 @@
-package inf112.moustachmania.app.player;
+package inf112.moustachmania.app.model.entities;
 
 import com.badlogic.gdx.math.Vector2;
 
-public class Player implements ViewableCharacter, ControllablePlayer {
+public class Player implements IEntity  {
 
     public Vector2 position;
     public Vector2 velocity;
@@ -54,11 +54,19 @@ public class Player implements ViewableCharacter, ControllablePlayer {
 
     @Override
     public Vector2 getPosition() {
-        return position;
+        return this.position;
     }
 
+    @Override
+    public Vector2 getVelocity() {
+        return this.velocity;
+    }
 
     @Override
+    public void setGrounded(boolean b) {
+        this.grounded = b;
+    }
+
     public void setPosition(Vector2 pos) {
         if (pos == position) {
             return;

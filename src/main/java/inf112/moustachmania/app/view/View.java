@@ -14,10 +14,12 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import inf112.moustachmania.app.MoustacheMania;
 import inf112.moustachmania.app.model.Model;
-import inf112.moustachmania.app.player.Player;
+import inf112.moustachmania.app.model.entities.Monster;
+import inf112.moustachmania.app.model.entities.Player;
 import inf112.moustachmania.app.screens.GameState;
 import inf112.moustachmania.app.utils.Constants;
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class View implements IView {
@@ -32,12 +34,15 @@ public class View implements IView {
     private Texture playerTexture;
     private Texture coinTexture;
     private Texture powerUpTexture;
+    private Texture monsterTexture;
     private Animation<TextureRegion> stand;
     private Animation<TextureRegion> walk;
     private Animation<TextureRegion> jump;
     private Animation<TextureRegion> coinSpin;
+    private Animation<TextureRegion> monsterWalk;
     private final int levelNumber;
-
+    Random rand = new Random();
+    int numMonsters = rand.nextInt(4);
 
     public View(MoustacheMania game, Model model, int levelNumber) {
         this.game = game;
@@ -54,9 +59,12 @@ public class View implements IView {
         coinSpin = new Animation<>(0.1f, coinRegions[0], coinRegions[1], coinRegions[2], coinRegions[3], coinRegions[4], coinRegions[5], coinRegions[6]);
         coinSpin.setPlayMode(Animation.PlayMode.LOOP);
 
-        // power up
+        // power up & monster
         powerUpTexture = new Texture(Constants.powerUpTexture);
-
+        monsterTexture = new Texture(Constants.monsterTexture);
+        TextureRegion[] monsterRegions = TextureRegion.split(monsterTexture, 16, 16)[0];
+        monsterWalk = new Animation<>(0.1f, monsterRegions[0], monsterRegions[1], monsterRegions[2]);
+        monsterWalk.setPlayMode(Animation.PlayMode.LOOP);
 
         // Size of the player - for collision detection
         // 1 unit == 16 pixels
@@ -86,6 +94,7 @@ public class View implements IView {
         renderCoins();
         renderCoinScore();
         renderPowerUps();
+        renderMonsters();
     }
 
     @Override
@@ -157,6 +166,7 @@ public class View implements IView {
         }
     }
 
+
     private void renderCoins() {
         Player player = model.getPlayer();
         TiledMapTileLayer coins = (TiledMapTileLayer) mapLayers.get("coins");
@@ -205,6 +215,22 @@ public class View implements IView {
 
     private void renderMap() {
         tiledMapRenderer.render();
+    }
+
+    private void renderMonsters() {
+        Player player = model.getPlayer();
+        ArrayList<Monster> monsters = model.getMonsters();
+        //TiledMapTileLayer mapLayer = (TiledMapTileLayer) mapLayers.get("bane");
+        float monsterHeight = 1f;
+        float monsterWidth = 1f;
+
+        // draw the monsters
+        game.getBatch().begin();
+        for (Monster monster : monsters) {
+            if (monster.isAlive())
+                game.getBatch().draw(monsterWalk.getKeyFrame(player.stateTime), monster.getPosition().x, monster.getPosition().y, monsterWidth, monsterHeight);
+        }
+        game.getBatch().end();
     }
 
     private void renderPlayer() {

@@ -2,12 +2,9 @@ package inf112.moustachmania.app.model;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import inf112.moustachmania.app.MoustacheMania;
-import inf112.moustachmania.app.player.Player;
-import inf112.moustachmania.app.utils.Constants;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import inf112.moustachmania.app.model.entities.Player;
+
 public class ModelTest {
 
     private Model model;
