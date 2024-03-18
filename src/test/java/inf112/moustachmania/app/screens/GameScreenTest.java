@@ -57,4 +57,5 @@ public class GameScreenTest {
 
         return new GameScreen(game, view, controller, model);
     }
+
 }
