@@ -27,8 +27,7 @@ public class Controller implements IController {
         Player player = model.getPlayer();
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-            //game.setScreen(new PauseScreen(game));
-            game.setScreen(new GameWonScreen(game));
+            game.setScreen(new PauseScreen(game));
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT)) {

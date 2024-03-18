@@ -24,7 +24,7 @@ public class LevelScreen implements Screen {
 
     private final Stage stage;
     private final MoustacheMania game;
-    private int currentLevelNumber = -1; // "placeholder" bane-indeks
+    private int currentLevelNumber = 0; // "placeholder" bane-indeks
     private Texture imageTexture;
 
 
@@ -116,8 +116,6 @@ public class LevelScreen implements Screen {
         stage.dispose();
     }
 
-
-
     @Override
     public void pause() {
     }
@@ -133,5 +131,9 @@ public class LevelScreen implements Screen {
      */
     public int currentLevel() {
         return currentLevelNumber;
+    }
+
+    public void setCurrentLevel(int level) {
+        this.currentLevelNumber = level;
     }
 }

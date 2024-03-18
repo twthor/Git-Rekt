@@ -23,12 +23,13 @@ public class GameWonScreen implements Screen {
     MoustacheMania game;
     Stage stage;
     private Texture imageTexture;
-
+    int levelCount;
     public GameWonScreen(MoustacheMania game) {
         this.game = game;
         this.stage = new Stage();
         game.gameWonScreen = this;
         game.setScreen(this);
+        levelCount = game.levelScreen.currentLevel();
 
         Table table = new Table();
         table.setFillParent(true);
@@ -43,8 +44,7 @@ public class GameWonScreen implements Screen {
         nextLevelButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float a, float b) {
-                //nextLevelEventHandler();
-                nextLevel(true);
+                nextLevelEventHandler();
             }
         });
 
@@ -54,8 +54,7 @@ public class GameWonScreen implements Screen {
         playAgainButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float a, float b) {
-                //playAgainEventHandler();
-                nextLevel(false);
+                playAgainEventHandler();
             }
         });
 
@@ -93,62 +92,42 @@ public class GameWonScreen implements Screen {
         show();
     }
 
-    // Need to fix issues with "play again" and what happens when "play next" being on the last level
-    public void nextLevel(boolean nextLevel) {
-        int currentLevel = game.levelScreen.currentLevel();
-        int levelToLoad;
-
-        if (nextLevel) {
-            levelToLoad = currentLevel + 1;
-        } else {
-            levelToLoad = currentLevel;
-        }
-
-        Player player = new Player();
-        Model model = new Model(game, player);
-        IView view = new View(game, model, levelToLoad);
-        IController controller = new Controller(game, model);
-
-        game.gameScreen = new GameScreen(game, view, controller, model);
-        game.setScreen(game.gameScreen);
-        model.setStartPosition();
-        dispose();
-    }
-
-
-
-    /*
     public void nextLevelEventHandler() {
-        // Need new instances of these classes to "create" a new game when trying a level again
-        Player player = new Player();
-        Model model = new Model(game, player);
-        IView view = new View(game, model, game.levelScreen.currentLevel() + 1);
-        IController controller = new Controller(game, model);
-
-        game.gameScreen = new GameScreen(game, view, controller, model);
-        game.setScreen(game.gameScreen);
-        model.setStartPosition(); // Sets the player to the start position of the level
-        dispose();
+        int nextLevelNumber = game.levelScreen.currentLevel() + 1;
+        // Checks if the next level exists.
+        if (nextLevelNumber >= Constants.mapPaths.length) {
+            // Redirects back to the levelScreen when playing next after completing the last level.
+            game.levelScreen = new LevelScreen(game);
+            game.setScreen(game.levelScreen);
+        } else {
+            // Loads the next level.
+            loadLevel(nextLevelNumber);
+        }
     }
 
     public void playAgainEventHandler() {
-        // Need new instances of these classes to "create" a new game when trying a level again
+        int currentLevelNumber = game.levelScreen.currentLevel();
+        loadLevel(currentLevelNumber);
+    }
+
+    private void loadLevel(int levelIndex) {
+        // Creates new components to make up the newly loaded level.
         Player player = new Player();
         Model model = new Model(game, player);
-        IView view = new View(game, model, game.levelScreen.currentLevel());
+        IView view = new View(game, model, levelIndex);
         IController controller = new Controller(game, model);
 
         game.gameScreen = new GameScreen(game, view, controller, model);
         game.setScreen(game.gameScreen);
-        model.setStartPosition(); // Sets the player to the start position of the level
+        game.levelScreen.setCurrentLevel(levelIndex);
+        model.setEndPosition(); // Ensures the end-position is reset when a level is loaded such that the game registeres when the playrt has reached the goal.
         dispose();
     }
-
-     */
 
     public void anotherLevelScreenEventHandler() {
         game.levelScreen = new LevelScreen(game);
         game.setScreen(game.levelScreen);
+        dispose();
     }
 
     public void backToStartScreenEventHandler() {
@@ -191,6 +170,9 @@ public class GameWonScreen implements Screen {
 
     @Override
     public void dispose() {
+        if (imageTexture != null) {
+            imageTexture.dispose();
+        }
         stage.dispose();
     }
 }
