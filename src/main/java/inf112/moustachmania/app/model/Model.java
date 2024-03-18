@@ -9,6 +9,7 @@ import inf112.moustachmania.app.MoustacheMania;
 import inf112.moustachmania.app.controller.SoundController;
 import inf112.moustachmania.app.player.Player;
 import inf112.moustachmania.app.screens.GameOverScreen;
+import inf112.moustachmania.app.screens.GameWonScreen;
 import inf112.moustachmania.app.screens.LevelScreen;
 
 public class Model implements IModel {
@@ -365,7 +366,7 @@ public class Model implements IModel {
         float diffX = Math.abs(player.position.x - endPos.x);
         float diffY = Math.abs(player.position.y - endPos.y);
         if (diffX < 1.0 && diffY < 1.0) {
-            game.setScreen(new LevelScreen(game));
+            game.setScreen(new GameWonScreen(game));
         }
     }
 }
