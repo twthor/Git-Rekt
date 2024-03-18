@@ -1,17 +1,18 @@
-package inf112.moustachmania.app.model;
+package inf112.moustachmania.app.model.entities;
 
 import com.badlogic.gdx.math.Vector2;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Monster {
+public class Monster implements IEntity {
 
     public static float MAX_VELOCITY = 0.08f;
     private boolean alive;
     private final ArrayList<Monster> monsters;
     public Vector2 position;
     public Vector2 velocity;
+    private boolean grounded;
 
     public static float WIDTH;
     public static float HEIGHT;
@@ -21,6 +22,7 @@ public class Monster {
         this.monsters = new ArrayList<>();
         this.position = new Vector2(rand.nextInt(10, 20), 5);
         this.velocity = new Vector2();
+        this.grounded = true;
 
         WIDTH = 1 / 16f;
         HEIGHT = 1 / 16f;
@@ -35,8 +37,19 @@ public class Monster {
         monsters.remove(monster);
     }
 
+    @Override
     public Vector2 getPosition() {
         return this.position;
+    }
+
+    @Override
+    public Vector2 getVelocity() {
+        return this.velocity;
+    }
+
+    @Override
+    public boolean setGrounded(boolean b) {
+        return grounded = b;
     }
 
     public void setPosition(Vector2 pos) {

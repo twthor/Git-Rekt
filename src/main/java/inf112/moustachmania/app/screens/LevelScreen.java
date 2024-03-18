@@ -13,7 +13,7 @@ import inf112.moustachmania.app.controller.Controller;
 import inf112.moustachmania.app.controller.IController;
 import inf112.moustachmania.app.controller.SoundController;
 import inf112.moustachmania.app.model.Model;
-import inf112.moustachmania.app.player.Player;
+import inf112.moustachmania.app.model.entities.Player;
 import inf112.moustachmania.app.utils.Constants;
 import inf112.moustachmania.app.view.IView;
 import inf112.moustachmania.app.view.View;

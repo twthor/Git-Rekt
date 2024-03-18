@@ -1,6 +1,7 @@
-package inf112.moustachmania.app.player;
+package inf112.moustachmania.app.model.entities;
 
 import com.badlogic.gdx.math.Vector2;
+import inf112.moustachmania.app.model.entities.Player;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
