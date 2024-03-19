@@ -23,7 +23,7 @@ public class GameWonScreen implements Screen {
 
     MoustacheMania game;
     Stage stage;
-    private Texture imageTexture; // will implement soon
+    private Texture imageTexture;
     int levelCount;
     public GameWonScreen(MoustacheMania game) {
         this.game = game;
