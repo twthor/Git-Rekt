@@ -3,7 +3,7 @@ package inf112.moustachmania.app.utils;
 public class Constants {
 
     public static final String skinPath = "assets/skin/uiskin.json";
-    public static final String[] mapPaths = {"assets/maps/map_1.tmx", "assets/maps/map_2.tmx"};
+    public static final String[] mapPaths = {"assets/maps/map_1.tmx", "assets/maps/map_2.tmx", "assets/maps/map_3.tmx"};
     public static final float scale = 1 / 16f;
     public static final String backgroundPicture= "assets/screen_images/background.png";
     public static final String logoPicture = "assets/moustachemania.png";
