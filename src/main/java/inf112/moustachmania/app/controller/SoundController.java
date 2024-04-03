@@ -3,9 +3,11 @@ package inf112.moustachmania.app.controller;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.files.FileHandle;
 import inf112.moustachmania.app.MoustacheMania;
 import inf112.moustachmania.app.model.entities.Player;
 import inf112.moustachmania.app.screens.GameState;
+import inf112.moustachmania.app.utils.Constants;
 
 public class SoundController {
 
@@ -62,11 +64,6 @@ public class SoundController {
             backgroundMusic.setVolume(0.3f);
             backgroundMusic.setLooping(true);
             backgroundMusic.play();
-
-            /*
-            if (player.powerUp) {
-                powerUpSound.play();
-            } */
         } else {
             backgroundMusic.stop();
         }

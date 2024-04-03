@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import inf112.moustachmania.app.MoustacheMania;
+import inf112.moustachmania.app.model.IModel;
 import inf112.moustachmania.app.model.Model;
 import inf112.moustachmania.app.model.entities.Monster;
 import inf112.moustachmania.app.model.entities.Player;

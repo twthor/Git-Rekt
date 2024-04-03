@@ -5,6 +5,7 @@ import com.badlogic.gdx.backends.lwjgl3.TestApplication;
 import inf112.moustachmania.app.MoustacheMania;
 import inf112.moustachmania.app.controller.Controller;
 import inf112.moustachmania.app.controller.IController;
+import inf112.moustachmania.app.model.IModel;
 import inf112.moustachmania.app.model.Model;
 import inf112.moustachmania.app.model.entities.Player;
 import inf112.moustachmania.app.view.IView;
@@ -54,6 +55,7 @@ public class GameScreenTest {
         final Model model = new Model(game, new Player());
         final IView view = new View(game, model, 1);
         final IController controller = new Controller(game, model);
+        model.setStartPosition();
 
         return new GameScreen(game, view, controller, model);
     }
