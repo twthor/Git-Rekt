@@ -5,28 +5,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.backends.headless.HeadlessFiles;
 import com.badlogic.gdx.files.FileHandle;
-import inf112.moustachmania.app.MoustacheMania;
-import inf112.moustachmania.app.model.entities.Player;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
 public class SoundControllerTest {
-
-    public SoundController soundController;
-    private Player playerMock;
-    private MoustacheMania gameMock;
-
-
-    /*
-    public SoundControllerTest() {
-        soundController = SoundController.getInstance();
-        playerMock = new Player();
-        gameMock = new MoustacheMania();
-        soundController.setPlayer(playerMock);
-        soundController.setGame(gameMock);
-    } */
 
     @Test
     public void haveOneInstance() {
@@ -42,7 +25,8 @@ public class SoundControllerTest {
     @Test
     public void testPlayCoinSound() {
         Gdx.files = new HeadlessFiles();
-        Sound coinSound = mock(Sound.class); // Mocking the Music object
+        // Mocking the Music object
+        Sound coinSound = mock(Sound.class);
         Gdx.audio = mock(Audio.class);
         // Mocking the newSound method to return the mock Sound object
         when(Gdx.audio.newSound(any(FileHandle.class))).thenReturn(coinSound);
