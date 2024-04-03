@@ -154,7 +154,6 @@ public class Model implements IModel {
             if (player.position.y > monster.getPosition().y && diffY < 1.0 && diffX < 1.0) { // Player comes from above
                 // Check if player's bottom overlaps with monster's top
                 if (player.position.y + Player.HEIGHT >= monster.getPosition().y + Monster.HEIGHT) {
-                    System.out.println("kill monster");
                     monster.eliminate(monster); // Player comes from above, eliminate monster
                     break;
                 }
