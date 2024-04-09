@@ -168,7 +168,7 @@ public class Model implements IModel {
         rectPool.free(playerRect); // Free player rectangle from the pool
     }
 
-    private void pickUpCoins(Player player) {
+    void pickUpCoins(Player player) {
         Rectangle playerRect = rectPool.obtain();
         playerRect.set(player.position.x, player.position.y, Player.WIDTH, Player.HEIGHT);
         int startX, startY, endX, endY;

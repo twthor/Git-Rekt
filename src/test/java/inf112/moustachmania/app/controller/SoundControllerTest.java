@@ -1,15 +1,63 @@
 package inf112.moustachmania.app.controller;
 
+import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Audio;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.backends.headless.HeadlessApplication;
+import com.badlogic.gdx.backends.headless.HeadlessApplicationConfiguration;
 import com.badlogic.gdx.backends.headless.HeadlessFiles;
 import com.badlogic.gdx.files.FileHandle;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
 public class SoundControllerTest {
+
+    @BeforeAll
+    static void setUpBeforeAll() {
+        HeadlessApplicationConfiguration config = new HeadlessApplicationConfiguration();
+        ApplicationListener listener = new ApplicationListener() {
+
+            @Override
+            public void create() {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void resize(int width, int height) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void render() {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void pause() {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void resume() {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void dispose() {
+                // TODO Auto-generated method stub
+
+            }};
+        new HeadlessApplication(listener, config);
+    }
 
     @Test
     public void haveOneInstance() {
@@ -19,6 +67,20 @@ public class SoundControllerTest {
         SoundController first = SoundController.getInstance();
         SoundController second = SoundController.getInstance();
         assert(first.equals(second));
+    }
+
+    /**
+    * Simple test case
+    */
+    @Test
+    void findMusicFiles() {
+        // check that we can find a file using the LibGDX file API
+        assertNotNull(Gdx.files.internal("backgroundMusic.mp3"));
+        assertNotNull(Gdx.files.internal("coinSound.mp3"));
+        assertNotNull(Gdx.files.internal("gameOver.wav"));
+        assertNotNull(Gdx.files.internal("levelCompleted.wav"));
+        assertNotNull(Gdx.files.internal("mainMenuMusic.mp3"));
+        assertNotNull(Gdx.files.internal("powerUpSound.mp3"));
     }
 
 
