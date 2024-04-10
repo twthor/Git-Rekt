@@ -1,4 +1,4 @@
-# Prosjektrapport - oblig 2
+# Prosjektrapport - oblig 3
 **Team:** Git Rekt – Mina Tolfsen, Tobias With Thorsen, Emil Johannessen
 
 
@@ -13,67 +13,48 @@ Første uken tok det litt tid for meg å komme tilbake til rutinene etter påske
 Andre uken satt jeg plutselig med 3 obliger på en gang. Den ene av dem har fått litt mer oppmerksomhet enn INF112 prosjektet denne siste uken før oblig3 fristen. 
 Teamet har fortsatt fungert ganske bra sammen og vi har hatt god dialog om hvordan vi skal løse de siste resterende utfordringene før oblig4 (03. mai).
 
-**Grafisk designer/utvikler (Mina)** - 
+**Grafisk designer/utvikler (Mina)** - Jeg trives fortsatt i rollen som grafisk designer og utvikler, spesielt med å kunne leke meg med former og farger.
+Etter å ha fullført oblig 2, har jeg vært mer aktiv i kodingsdelen. Jeg har taklet individuelle oppgaver godt og føler mer mestring i kodingen.
+Etter oblig 2, fokuserte jeg mye på INF112, men dessverre har det blitt nedprioritert etter påsken på grunn av andre obligatoriske oppgaver.
+Likevel mener jeg at gruppen har hatt god kommunikasjon, og vi har motivert hverandre til å nærme oss ferdigstillelse av prosjektet.
+Vi står overfor noen utfordringer som må løses før den endelige innleveringen, oblig 4.
 
-**Utvikler (Emil)** - 
+**Utvikler (Emil)** - Jeg har mesteparten av tiden jobbet med å implementere nye screens og håndtering av disse. Jeg synes dette har vært greit og det har vært lett å prate og jobbe dynamisk med de andre i teamet for å komme fram til løsinger.
+Tydelige arbedisoppgaver og jevn arbeidsflyt, også tatt i betraktning at arbeidsmengden og flyten har latt seg lett og dynamisk justeres i teamet når andre ting, også krever oppmerksomhet og tid.
 
 
 ## Prosjektmetodikk
 **Tobias** - Fra sist gang merker jeg at resten av gruppen har blitt betydelig bedre på å ta i bruk Kanban boardet. Både som et referansepunkt for hva som skal gjøres, men at de også legger inn egne ting de ønsker å gjøre/holde oversikt over.
 Git flyten fungerer fortsatt veldig bra og vi har en ganske jevn fordeling av commits mellom gruppemedlemmene.
 
-**Mina** - 
-Fra forrige gang:
-Jeg deler Tobias' synspunkt om at vi bør forbedre bruken av KanBan-brettet og være mer konsekvente med å skrive TODOs i koden. Personlig har jeg en tendens til å bare legge inn // og deretter skrive korte kommentarer, men det ville være mer hensiktsmessig å inkludere flere TODOs. Dette vil bidra til å skape en mer organisert struktur i koden. Utenom dette er jeg svært tilfreds med dynamikken i gruppen vår. Vi kommuniserer effektivt på skolen og holder hverandre alltid oppdatert om eventuelle problemer eller løsninger. Vi har også forbedret vår evne til å parprogrammere og generelt sett jobbe mer sammen, selv om vi fokuserer på ulike utfordringer. Jeg mener også at Emil og jeg bør engasjere oss mer i å støtte Tobias med overordnet oversikt, spesielt når det kommer til obligatoriske steg.
+**Mina** - Jeg merker at gruppen har blitt flinkere til å bruke KanBan-boardet, og det har virkelig gitt oss en bedre oversikt over oppgavene og tidsplanen vår. Når det gjelder min egen praksis, har jeg lagt merke til at jeg er flinkere til å bruke JavaDocs i stedet for å legge inn // kommentarer.
+Generelt sett er jeg veldig fornøyd med dynamikken og kommunikasjonen i gruppen vår.
 
-**Emil** - 
-Fra forrige gang:
-Jeg synes dynamikken og arbeidsmetodikken i teamet er veldig bra, spesielt fysisk og vi har et godt miljø som gruppe. Enig med Tobias at jeg bør benytte Kanban boardet på git mer som hjelpemiddel, men ellers avklarer vi og diskuterer effektivt og med åpenhet rundt mål, progresjon og ideer, da mye fysisk som jeg synes funker bra.
+**Emil** - Blitt glad i å bruke Kanban-boardet mer, synes det er et ryddig og nyttig verktøy for å holde oversikt over arbeidsoppgaver, samt se hva resten av teamet holder på med og har planer om.  
 
 
 ## Gruppedynamikk og kommunikasjon
-**Tobias** - 
+**Tobias** - I uke 11 var jeg i Trondheim. Det gjorde at gruppen måtte kommunisere mer over Discord. Dette gikk overraskende bra.
+Jeg fryktet at vi skulle slite mer med samarbeidet, men vi var flinke til å være innpå Discord og følge med på hva hverandre skrev.
+Jeg og Mina hadde også voicechat en dag for å diskutere en oppgave.
 
+**Mina** - Jeg opplever at gruppen fortsatt har et godt samarbeid og kommuniserer effektivt. Vi tar hensyn til hverandres tidsplaner og forpliktelser, og selv når noen av oss er borte eller utilgjengelige, har vi klart å opprettholde kommunikasjonen på en god måte. Dette har fungert svært bra for oss.
 
-Fra forrige gang:
-Synes gruppedynamikken funker ganske bra. Vi prater oss fint imellom og stiller opp for hverandre dersom man har spørsmål eller trenger hjelp. Vi bruker discord for å kommunisere merge requests dersom vi ikke er fysisk til stede og kan spørre. Ellers bruker vi discord for å avtale møtetidspunkt eller andre ting som eventuelt kommer i veien for de vanlige rutinene.
-
-**Mina** - 
-
-Fra forrige gang:
-Jeg opplever at gruppen har et svært positivt samarbeid. Vi har kjent hverandre siden studiestart, så dynamikken og kommunikasjonen mellom oss er problemfri. Vi viser også stor forståelse for hverandres tidsplaner og krav, og som en samlet gruppe utgjør vi et sterkt team både i og utenfor skolesammenheng.
-
-**Emil** - 
-
-
-Fra forrige gang:
-Sett på gruppedynamikk på et mer personlig perspektiv, istedenfor rolle og gruppemessig synes jeg også personlighetene i gruppa fungerer bra. Vi har en fin tone både når vi samles fysisk og over andre kanaler, der det er lav terskel til å ta opp noe eller få hjelp. Mye bra fysisk tilstedeværelse og kommunikasjon, lett å ta opp og håndtere ting. Ellers bruker vi discord til å sende filer, sette opp møter eller andre ting som måtte komme opp. Jeg synes det er velfungerende.
+**Emil** - Jeg synes gruppedynamikken fortsetter å fungere bra. Lett og god stemning i teamet og det er lett å komme i kontakt med og kommunisere med de andre. Regelmessige møter og oppdateringer samt lav-terskel kommunikajson over discord. Discord fungerer spesielt bra løsing når deler av teamet er bortreist, men er osgå en bra løsning når vi sender filer eller merge requests. Fortsatt bra fysisk oppmøte og tilstedeværelse.
 
 
 ## Retrospektiv
 
-Vi hadde en uken der Tobias var i Trondheim og jobbet. Det funket ganske bra. Vi holdt dialogen over Discord, og meldte ifra til hverandre når vi trengte approval på en merge request. Dette viser at vi har gode rutiner på Git og Kanban slik at vi klarer å holde flyten tross kanskje mindre kommunikasjon. 
+Vi hadde en uke der Tobias var i Trondheim og jobbet. Det funket ganske bra. Vi holdt dialogen over Discord, og meldte ifra til hverandre når vi trengte approval på en merge request. Dette viser at vi har gode rutiner på Git og Kanban slik at vi klarer å holde flyten tross kanskje mindre kommunikasjon.
+Ellers har vi fortsatt sitte mye på bachelor-lesesalen for informatikk og har kunnet snakke direkte til hverandre ganske fritt gjennom ukene.
+Kanban board blir hyppig brukt til å fordele oppgaver og holde oversikt over hva som skal gjøres frem til neste frist.
+Vi er ganske lik i antall commits, noe som vi føler er en bra indikasjon på at det er en grei fordeling av arbeid i gruppen.
 
 Vi ligger ganske bra an. MVP er i bunn og grunn dekket, men kravet om objektfabrikk sliter vi litt med.
 Vi har en foreløpig plan om å lage flere monstre og ha en MonsterFactory som da velger tilfeldige monstre i det du velger en bane man ønsker å spille.
 
-
-
-#### Fra forrige gang (skal fjernes):
-Vi har klart ganske mye til nå tørr jeg påstå. Vi har lagd flere skjermer; startskjerm, levelskjerm, spillskjerm, pauseskjerm, og vi har fått opp banen, bakgrunnsmusikk og at spilleren kan løpe rundt på banen med animerte bevegelser.
-
-Vi sitter nesten hver dag samlet på bachelor-lesesalen for informatikk, så vi har veldig flytende dialog og kan lett nå hverandre i “arbeidstiden”.
-Gjennom kanban boardet kan vi lett fordele oppgaver og assigne hvem som holder på å jobbe med dem, samt en tidsfrist fram til de ukentlige møtene eller oblig fristene.
-Som sagt så sitter vi ofte sammen på lesesalen, så vi kan lett muntlig delegere oppgaver oss i mellom for så å føre opp dette i kanban boardet.
-Per nå er det en liten skjevfordeling i commits. Mina har en del flere commits enn Tobias og Emil. Dette har skjedd litt fordi Mina håndterte ganske mye grafikk før vi kodingen skjøt skikkelig fart, og commitet disse endringene.
-I tillegg så var det en dag Tobias, endte opp med å kode på Minas PC istedenfor min (disse commitsene er markert med ‘Tobias på Minas PC:’ i commit meldingene det gjelder).
-Mina har også vært den som har commited møtereferatene, så har fått litt ekstra antall commits der. Vi tenker at vi rullerere litt på dette for å jevne ut commitsene som kommer fra møtereferatene.
-Emil og Tobias har holdt oss på ganske likt antall commits fram til oblig 2.
-Møtereferat for ukene fram til oblig 2 fristen finnes under ‘doc/møte_referat’. det er møtereferat uke8 til uke10
-Forbedringspunkter fra retrospektivet, som skal følges opp under neste sprint:
-Alle bruke kanban board mer aktivt. Allerede sett forbedringer på før oblig2 innleveringsfristen.
-Jevne ut antall commits per person.
-Bli bedre til å dokumentere og holde koden ryddig underveis.
+Møtereferater finnes under `doc/møte_referat`. Gjelder uke 11 til uke 15.
+Påske uke 13 er det ingen møtereferat fra grunnet ferie.
 
 
 # Krav og spesifikasjon
@@ -121,7 +102,7 @@ Fullførte akseptansekriterier markeres mer ✅.
 
 3. **Som en spiller ønsker jeg å kunne hoppe med min karakter ved å trykke på en knapp slik at jeg kan unngå hindringer og nå høyere plattformer.  ** ✅
      - Akseptansekriterier:
-       - Karakteren hopper når hoppeknappen trykkes. ✅
+       - Karakteren hopper når hoppeknappen trykkes. ✅ 
          - Arbeidsoppgaver:
            - Det finnes en egen type metode i libGDX biblioteket som skjekker om spilleren holder inne knappen eller ikke. Den heter `Gdx.input.isKeyPressed()` ✅
        - Karakteren lander trygt på plattformen og ikke faller gjennom den. ✅
@@ -184,7 +165,8 @@ Fullførte akseptansekriterier markeres mer ✅.
                 - Implementere alternativer i GAME_WON klassen der spilleren kan navigere/trykke seg til StartScreen eller tilbake til skjermen som viser valg av bane.✅
 
 
-# FORESLÅR AT VI FJERNER
+Denne brukerhistorien ønsker gruppen å fjerne. Ettersom dette ikke er et direkte krav, så ønsker vi å fokusere på objektfabrikk, bugs, og kræsjkurs med hverandre slik at vi er klare til fremføring.
+I tillegg det blir innspurt i andre emner også, så vi ønsker ikke ta oss vann over hodet.
 8. **Som en spiller ønsker jeg å kunne lagre spillet mitt slik at jeg kan fortsette fra der jeg slapp senere.** 
    - Akseptansekriterier:
         - Etter spilleren har fullført en bane, så vil progresjonen lagres. Altså om spilleren har fullført gitt bane eller ei.
@@ -196,11 +178,11 @@ Fullførte akseptansekriterier markeres mer ✅.
 Disse akseptansekriteriene vil bidra til å veilede utviklingen av spillet ved å definere klare krav som må oppfylles for at hver brukerhistorie skal anses som fullført og akseptabel.
 Vi har holdt oss til å kun legge inn arbeidsoppgavene i Kanban board istedenfor å inkludere i milestones. Blir for mange holdepunkter og mer rot dersom vi inkluderer milestones.
    
-   
 ## Prioriteringer for videre arbeid:
 Ting vi skal jobbe med videre:
 - Objektfabrikk for fiender som tilfeldig velger monstre som skal plasseres på banen.
 - Mer dokumentasjon av public-metoder
+- Rydding av koden
 - Skrive så mange tester vi klarer så vi er godt over kravet om 75% test coverage.
 
 Ting vi satt oss som mål å jobbe videre med forrige gang:
@@ -211,7 +193,7 @@ Ting vi satt oss som mål å jobbe videre med forrige gang:
 - Få spilleren til å starte på riktig posisjon. ✅ Fullført.
 - Fikse slik at banen dekker hele skjermen/spillvinduet, slik at det ikke lenger er svarte bokser på skjermen øverst og til venstre. ✅ Fullført.
 - Power-Up ✅ Fullført.
-- I LevelScreen skal vi legge til en “back to main menu”-knapp. 
+- I LevelScreen skal vi legge til en “back to main menu”-knapp. ✅
 
 ## Bugs som skal prioriteres for videre arbeid:
 Nye bugs:
@@ -228,6 +210,7 @@ Utbedring av feil: Vi fikk påpekelse om at vi manglet objektfabrikk og abstrakt
 Grunnet mye tid krevd av oss fra andre emner, så har dette blitt litt nedprioritert frem mot oblig3. Det er en slags objektfabrikk med at monstre får tilfeldig posisjon på banen og tilfeldig antall monstre.
 Objektfabrikk er noe av det vi skal jobbe videre med mot siste oblig.
 Vi fikk også beskjed om at public-metoder trengte dokumentasjon. Dette er nå forbedret.
+Vi fikk påpekt at det manglet lyd ved en hendelse. Nå er det lyd når man plukker opp mynter og power-up.
 
 ## Kontroll av OS kompatibilitet:
 På gruppen har vi macOS og Windows, som kjører spillet helt fint.
@@ -239,8 +222,10 @@ Klassediagram finnes i ‘/doc/diagram-oblig3’.
 Siden oblig2 har det ikke skjedd altfor store endringer som gjør at vi ønsker å endre for mye på klassediagrammet, men vi har lagt inn de ekstra Screens-ene vi har laget siden oblig2.
 
 ### Tester
-Vi har dekket kravet om 75% test coverage med at vi har 76% foreløpig.
+Vi har dekket kravet om 75% test coverage med at vi har 75-76% foreløpig.
 For MVC strever vi litt med å lage tester. Det er ikke alt som naturlig la seg teste da de tre klassene henger en del sammen og er ganske avhengig av LibGDX og TiledMap. Dette skaper kluss når man prøver å feks lese map-et fra "assets/maps/map_1.tmx" i feks ModelTest.java. LibGDX klarer ikke finne filen / i feilmeldingen sier den at objektet er `null`. Vi har forsøkt noe med HeadlessApplication osv. men sliter litt.
 Tar gjerne imot tilbakemelding for hvordan man skal løse det. 
 
-Det er også en rar ting med MoustacheManiaTest.java hvor den kjører helt fint alene og klarer testene, men om du kjører alle tester samtidig, så feiler den. Har derfor valgt å kommentere ut testen for at vi kompilering av prosjektet skal gå gjennom fint. 
+Det er også en rar ting med MoustacheManiaTest.java hvor den kjører helt fint alene og klarer testene, men om du kjører alle tester samtidig, så feiler den. Vi har foreløpig forsøkt å lage mock objekter for game slik at vi kan teste create(), render() og dispose() ettersom de samhandler med andre klasser.
+
+
