@@ -50,8 +50,19 @@ public class LevelScreen implements Screen {
                 }
             });
             uiRoot.add(levelButton).spaceBottom(10).fillX().row();
-            stage.addActor(uiRoot);
         }
+
+        // sets up "exit game" button and event handling
+        TextButton exitGameButton = new TextButton("Back to main menu", game.getSkin());
+        exitGameButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float a, float b) {
+                backToStartScreenEventHandler();
+            }
+        });
+
+        uiRoot.add(exitGameButton).spaceBottom(10).fillX().row();
+        stage.addActor(uiRoot);
     }
 
 
@@ -75,6 +86,12 @@ public class LevelScreen implements Screen {
         else {
             Gdx.app.log("LevelScreen", "Invalid level number: " + levelNumber);
         }
+    }
+
+    public void backToStartScreenEventHandler() {
+        game.startScreen = new StartScreen(game);
+        game.setScreen(game.startScreen);
+        dispose();
     }
 
     /*
