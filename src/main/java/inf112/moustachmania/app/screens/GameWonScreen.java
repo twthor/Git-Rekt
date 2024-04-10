@@ -93,6 +93,13 @@ public class GameWonScreen implements Screen {
         show();
     }
 
+
+    /**
+     * nextLevelEventHandler handles whether there exist a next level, loads the next level or
+     * send the player back to the levelscreen if no new level are available. Variable nextLevelNumber
+     * keeps track of the next level from the current levels standpoint. If the next level index is
+     * larger or equal to the number of maps/levels, game is set to level-screen.
+     */
     public void nextLevelEventHandler() {
         int nextLevelNumber = game.levelScreen.currentLevel() + 1;
         // Checks if the next level exists.
@@ -106,11 +113,22 @@ public class GameWonScreen implements Screen {
         }
     }
 
+    /**
+     * playAgainEventHandler handles the case where the player want to play the same level again
+     * after completion. Variable currentLevelNumber keeps track of the active level. When handling
+     * play again, the current level is loaded fresh.
+     */
     public void playAgainEventHandler() {
         int currentLevelNumber = game.levelScreen.currentLevel();
         loadLevel(currentLevelNumber);
     }
 
+    /**
+     * loadLevel readies a new game after completion of a current game. Initiates new components
+     * of the game and sets up the structure for the game to load and function "fresh".
+     * @param levelIndex are given the level index of the new level to be loaded.
+     * After the fresh game are initiated and set up properly dispose() is called to avoid memory leakage.
+     */
     private void loadLevel(int levelIndex) {
         // Creates new components to make up the newly loaded level.
         Player player = new Player();
@@ -121,16 +139,24 @@ public class GameWonScreen implements Screen {
         game.gameScreen = new GameScreen(game, view, controller, model);
         game.setScreen(game.gameScreen);
         game.levelScreen.setCurrentLevel(levelIndex);
-        model.setEndPosition(); // Ensures the end-position is reset when a level is loaded such that the game registeres when the playrt has reached the goal.
+        model.setEndPosition(); // Ensures the end-position is reset when a level is loaded such that the game registeres when the player has reached the goal.
         dispose();
     }
 
+    /**
+     * anotherLevelScreenEventHandler handles the case where the player wants to play another
+     * level than the next or current one again after completion. Creates a new level-screen
+     * and puts level-screen active. Calls dispose() to avoid memory leakage after handling the case.
+     */
     public void anotherLevelScreenEventHandler() {
         game.levelScreen = new LevelScreen(game);
         game.setScreen(game.levelScreen);
         dispose();
     }
 
+    /**
+     *
+     */
     public void backToStartScreenEventHandler() {
         game.startScreen = new StartScreen(game);
         game.setScreen(game.startScreen);
