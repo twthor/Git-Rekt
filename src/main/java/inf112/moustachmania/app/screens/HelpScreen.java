@@ -37,6 +37,10 @@ public class HelpScreen implements Screen {
     }
 
 
+    /**
+     * Creates a table and add it to th stage. Specifies the table of which the button should
+     * be added, and interacting with.
+     */
     private void setupUiTable() {
         Table uiRoot = new Table();
         uiRoot.setFillParent(true);
@@ -52,7 +56,7 @@ public class HelpScreen implements Screen {
 
     /**
      * Adds a table to the given uiRoot, containing a description of the game controls
-     * @param uiRoot The root table to add the controlsTable to
+     * @param uiRoot The table of which to  add the controlsTable into.
      */
     // set up description of the controls and lables to controlsTable
     private void setupControllerDescription(Table uiRoot) {
@@ -97,7 +101,7 @@ public class HelpScreen implements Screen {
 
     /**
      * Adds a back to start-screen button to the given uiRoot
-     * @param uiRoot The root table to add the button to
+     * @param uiRoot The table of which the button should be added into.
      */
     private void backTostartScreenButton(Table uiRoot) {
         TextButton helpButton = new TextButton("Back to start-screen", game.getSkin());

@@ -97,10 +97,10 @@ public class GameWonScreen implements Screen {
     /**
      * nextLevelEventHandler handles whether there exist a next level, loads the next level or
      * send the player back to the levelscreen if no new level are available. Variable nextLevelNumber
-     * keeps track of the next level from the current levels standpoint. If the next level index is
+     * keeps track of the next level from the current level's standpoint. If the next level index is
      * larger or equal to the number of maps/levels, game is set to level-screen.
      */
-    public void nextLevelEventHandler() {
+    private void nextLevelEventHandler() {
         int nextLevelNumber = game.levelScreen.currentLevel() + 1;
         // Checks if the next level exists.
         if (nextLevelNumber >= Constants.mapPaths.length) {
@@ -118,7 +118,7 @@ public class GameWonScreen implements Screen {
      * after completion. Variable currentLevelNumber keeps track of the active level. When handling
      * play again, the current level is loaded fresh.
      */
-    public void playAgainEventHandler() {
+    private void playAgainEventHandler() {
         int currentLevelNumber = game.levelScreen.currentLevel();
         loadLevel(currentLevelNumber);
     }
@@ -148,21 +148,26 @@ public class GameWonScreen implements Screen {
      * level than the next or current one again after completion. Creates a new level-screen
      * and puts level-screen active. Calls dispose() to avoid memory leakage after handling the case.
      */
-    public void anotherLevelScreenEventHandler() {
+    private void anotherLevelScreenEventHandler() {
         game.levelScreen = new LevelScreen(game);
         game.setScreen(game.levelScreen);
         dispose();
     }
 
     /**
-     *
+     * backToStartScreenEventHandler creates a new instance of start-game and then set the
+     * current game to start-screen. Calls dispose() to avoid memory leakage after handling the case.
      */
-    public void backToStartScreenEventHandler() {
+    private void backToStartScreenEventHandler() {
         game.startScreen = new StartScreen(game);
         game.setScreen(game.startScreen);
         dispose();
     }
 
+    /**
+     * addImage Adds and format a background image when the game is won.
+     * @param imagePath takes in the local constant path of the image.
+     */
     private void addImage(String imagePath) {
         imageTexture = new Texture(Gdx.files.internal(imagePath));
         Image image = new Image(imageTexture);
