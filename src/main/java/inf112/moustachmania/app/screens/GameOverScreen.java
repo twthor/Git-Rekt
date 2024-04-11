@@ -78,7 +78,13 @@ public class GameOverScreen implements Screen {
         stage.addActor(table);
         show();
     }
-    public void tryAgainEventHandler() {
+
+    /**
+     * tryAgainEventHandler readies a new game after failing a current game. Initiates new components
+     * of the game and sets up the structure for the game to load and start over.
+     * After the game are initiated and set up properly, dispose() is called to avoid memory leakage.
+     */
+    private void tryAgainEventHandler() {
         // Need new instances of these classes to "create" a new game when trying a level again
         Player player = new Player();
         Model model = new Model(game, player);
@@ -91,17 +97,31 @@ public class GameOverScreen implements Screen {
         dispose();
     }
 
-    public void playOtherLevelEventHandler() {
+    /**
+     * playOtherLevelEventHandler handles the case where the player wants to play another
+     * level than the next or current one again after completion. Creates a new level-screen
+     * and puts level-screen active. Calls dispose() to avoid memory leakage after handling the case.
+     */
+    private void playOtherLevelEventHandler() {
         game.levelScreen = new LevelScreen(game);
         game.setScreen(game.levelScreen);
         dispose();
     }
 
-    public void backToStartScreenEventHandler() {
+    /**
+     * backToStartScreenEventHandler creates a new instance of start-game and then set the
+     * current game to start-screen. Calls dispose() to avoid memory leakage after handling the case.
+     */
+    private void backToStartScreenEventHandler() {
         game.startScreen = new StartScreen(game);
         game.setScreen(game.startScreen);
         dispose();
     }
+
+    /**
+     * addBackgroundImage Adds and format a background image when the game is over.
+     * @param imagePath takes in the local constant path of the image.
+     */
     private void addBackgroundImage(String imagePath) {
         imageTexture = new Texture(Gdx.files.internal(imagePath));
         Image backgroundImage = new Image(imageTexture);
