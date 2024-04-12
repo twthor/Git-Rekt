@@ -4,6 +4,7 @@ import com.badlogic.gdx.*;
 import com.badlogic.gdx.backends.headless.*;
 import com.badlogic.gdx.backends.headless.mock.audio.MockAudio;
 import com.badlogic.gdx.backends.lwjgl3.audio.Lwjgl3Audio;
+import com.badlogic.gdx.backends.lwjgl3.audio.OpenALLwjgl3Audio;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Clipboard;
@@ -46,7 +47,7 @@ public class TestApplication implements Application, Lwjgl3ApplicationBase {
         this.applicationListener = applicationListener;
 
         Gdx.app = this;
-        Gdx.audio = this.audio = new MockAudio();
+        Gdx.audio = this.audio = createAudio(new Lwjgl3ApplicationConfiguration());
         Gdx.files = this.files = new HeadlessFiles();
         Gdx.net = this.net = new HeadlessNet(new HeadlessApplicationConfiguration());
 
@@ -233,7 +234,7 @@ public class TestApplication implements Application, Lwjgl3ApplicationBase {
 
     @Override
     public Lwjgl3Audio createAudio(Lwjgl3ApplicationConfiguration config) {
-        return null;
+        return new OpenALLwjgl3Audio(config.audioDeviceSimultaneousSources, config.audioDeviceBufferCount, config.audioDeviceBufferSize);
     }
 
     @Override

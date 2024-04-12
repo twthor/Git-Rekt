@@ -61,8 +61,8 @@ public class SoundControllerTest {
 
     @Test
     public void haveOneInstance() {
-        Gdx.files = new HeadlessFiles();
-        Gdx.audio = mock(Audio.class);
+        //Gdx.files = new HeadlessFiles();
+        //Gdx.audio = mock(Audio.class);
 
         SoundController first = SoundController.getInstance();
         SoundController second = SoundController.getInstance();
@@ -75,12 +75,12 @@ public class SoundControllerTest {
     @Test
     void findMusicFiles() {
         // check that we can find a file using the LibGDX file API
-        assertNotNull(Gdx.files.internal("backgroundMusic.mp3"));
-        assertNotNull(Gdx.files.internal("coinSound.mp3"));
-        assertNotNull(Gdx.files.internal("gameOver.wav"));
-        assertNotNull(Gdx.files.internal("levelCompleted.wav"));
-        assertNotNull(Gdx.files.internal("mainMenuMusic.mp3"));
-        assertNotNull(Gdx.files.internal("powerUpSound.mp3"));
+        assertNotNull(Gdx.files.internal("assets/sounds/backgroundMusic.mp3"));
+        assertNotNull(Gdx.files.internal("assets/sounds/coinSound.mp3"));
+        assertNotNull(Gdx.files.internal("assets/sounds/gameOver.wav"));
+        assertNotNull(Gdx.files.internal("assets/sounds/levelCompleted.wav"));
+        assertNotNull(Gdx.files.internal("assets/sounds/mainMenuMusic.mp3"));
+        assertNotNull(Gdx.files.internal("assets/sounds/powerUpSound.mp3"));
     }
 
 

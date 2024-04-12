@@ -12,8 +12,6 @@ import inf112.moustachmania.app.model.entities.Monster;
 import inf112.moustachmania.app.model.entities.Player;
 import inf112.moustachmania.app.screens.GameOverScreen;
 import inf112.moustachmania.app.screens.GameWonScreen;
-import inf112.moustachmania.app.screens.LevelScreen;
-
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -405,10 +403,9 @@ public class Model implements IModel {
         return player;
     }
 
-
     /**
-     * Gets the monsters
-     * @return The monsters
+     * Method that returns an arraylist of the monsters that the model has generated.
+     * @return ArrayList of Monsters
      */
     public ArrayList<Monster> getMonsters() { return monsters; }
 

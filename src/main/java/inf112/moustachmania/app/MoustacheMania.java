@@ -77,6 +77,7 @@ public class MoustacheMania extends Game {
      * Dispose of the game
      */
     public void dispose() {
+        skin.dispose();
         batch.dispose();
         font.dispose();
         soundController.dispose();
@@ -84,7 +85,8 @@ public class MoustacheMania extends Game {
 
 
     /**
-     * Get the current game state
+     * Fetches the current gamestate
+     * @return GameState
      */
     public GameState getGameState() {
         if (this.getScreen().getClass() == StartScreen.class) {
