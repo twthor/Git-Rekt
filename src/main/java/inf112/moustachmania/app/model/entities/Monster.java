@@ -19,6 +19,8 @@ public class Monster implements IEntity {
     public static float WIDTH;
     public static float HEIGHT;
     Random rand = new Random();
+
+
     public Monster() {
         this.alive = true;
         this.monsters = new ArrayList<>();
@@ -31,34 +33,55 @@ public class Monster implements IEntity {
         HEIGHT = 1 / 16f;
     }
 
+
+    /**
+     * Checks if the monster is alive
+     */
     public boolean isAlive() {
         return this.alive;
     }
 
+
+    /**
+     * Eliminates the monster
+     * @param monster the monster to eliminate
+     */
     public void eliminate(Monster monster) {
         this.alive = false; // so the view know not to draw the monster anymore.
         monsters.remove(monster); // removing it from the list to prevent the player from colliding with a dead monster
     }
+
 
     @Override
     public Vector2 getPosition() {
         return this.position;
     }
 
+
     @Override
     public Vector2 getVelocity() {
         return this.velocity;
     }
+
 
     @Override
     public void setGrounded(boolean b) {
         this.grounded = b;
     }
 
+
+    /**
+     * Checks if the monster is grounded
+     */
     public boolean getGrounded() {
         return this.grounded;
     }
 
+
+    /**
+     * Sets the position of the monster
+     * @param pos the position to set
+     */
     public void setPosition(Vector2 pos) {
         if (pos == position) {
             return;
@@ -66,6 +89,10 @@ public class Monster implements IEntity {
         this.position = pos;
     }
 
+
+    /**
+     * Gets the new monsters
+     */
     public ArrayList<Monster> getNewMonsters() {
 
         int numMonsters = rand.nextInt(4) + 1; // Generate a random integer between 1 and 4
@@ -75,6 +102,10 @@ public class Monster implements IEntity {
         return this.monsters;
     }
 
+
+    /**
+     * Gets the monsters
+     */
     public ArrayList<Monster> getMonsters() {
         return this.monsters;
     }

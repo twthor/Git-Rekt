@@ -99,6 +99,7 @@ public class HelpScreen implements Screen {
         texturesToDispose.add(imageTexture);
     }
 
+
     /**
      * Adds a back to start-screen button to the given uiRoot
      * @param uiRoot The table of which the button should be added into.
@@ -143,7 +144,6 @@ public class HelpScreen implements Screen {
             texture.dispose();
         }
     }
-
 
 
     @Override

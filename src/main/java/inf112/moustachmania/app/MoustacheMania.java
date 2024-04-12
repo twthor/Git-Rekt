@@ -23,6 +23,7 @@ public class MoustacheMania extends Game {
     private Skin skin;
     private SoundController soundController;
 
+
     /**
      * Create the game
      */
@@ -38,6 +39,7 @@ public class MoustacheMania extends Game {
         this.setScreen(new StartScreen(this));
     }
 
+
     /**
      * Render the game
     */
@@ -46,6 +48,7 @@ public class MoustacheMania extends Game {
         SoundController.getInstance().update();
     }
 
+
     /**
      * Get the skin
      */
@@ -53,12 +56,14 @@ public class MoustacheMania extends Game {
         return this.skin;
     }
 
+
     /**
      * Get the batch
      */
     public SpriteBatch getBatch() {
         return this.batch;
     }
+
 
     /**
      * Get the font
@@ -68,6 +73,9 @@ public class MoustacheMania extends Game {
     }
 
 
+    /**
+     * Dispose of the game
+     */
     public void dispose() {
         batch.dispose();
         font.dispose();
@@ -75,6 +83,9 @@ public class MoustacheMania extends Game {
     }
 
 
+    /**
+     * Get the current game state
+     */
     public GameState getGameState() {
         if (this.getScreen().getClass() == StartScreen.class) {
             return GameState.START_SCREEN;

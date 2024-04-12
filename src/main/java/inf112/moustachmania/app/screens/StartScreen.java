@@ -17,6 +17,7 @@ public class StartScreen implements Screen {
     private final Stage stage;
     private final MoustacheMania game;
 
+
     public StartScreen(final MoustacheMania game) {
         this.game = game;
         stage = new Stage();
@@ -64,6 +65,7 @@ public class StartScreen implements Screen {
         stage.addActor(uiRoot);
     }
 
+
     @Override
     public void show() {
         Gdx.input.setInputProcessor(stage);
@@ -94,6 +96,7 @@ public class StartScreen implements Screen {
         dispose();
     }
 
+
     /**
      * Handles the event when the controls help button is clicked. Creates a new help-screen and
      * sets the current state of the game to that. Disposes the previous stage.
@@ -104,6 +107,7 @@ public class StartScreen implements Screen {
         dispose();
     }
 
+
     /**
      * Closes the game window.
      */
@@ -111,10 +115,12 @@ public class StartScreen implements Screen {
         Gdx.app.exit();
     }
 
+
     @Override
     public void dispose() {
         stage.dispose();
     }
+
 
     @Override
     public void pause() {}
@@ -122,5 +128,4 @@ public class StartScreen implements Screen {
     public void resume() {}
     @Override
     public void hide() {}
-
 }

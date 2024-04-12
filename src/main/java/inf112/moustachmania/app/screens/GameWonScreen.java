@@ -25,6 +25,8 @@ public class GameWonScreen implements Screen {
     Stage stage;
     private Texture imageTexture;
     int levelCount;
+
+
     public GameWonScreen(MoustacheMania game) {
         this.game = game;
         this.stage = new Stage();
@@ -113,6 +115,7 @@ public class GameWonScreen implements Screen {
         }
     }
 
+
     /**
      * playAgainEventHandler handles the case where the player want to play the same level again
      * after completion. Variable currentLevelNumber keeps track of the active level. When handling
@@ -122,6 +125,7 @@ public class GameWonScreen implements Screen {
         int currentLevelNumber = game.levelScreen.currentLevel();
         loadLevel(currentLevelNumber);
     }
+
 
     /**
      * loadLevel readies a new game after completion of a current game. Initiates new components
@@ -143,6 +147,7 @@ public class GameWonScreen implements Screen {
         dispose();
     }
 
+
     /**
      * anotherLevelScreenEventHandler handles the case where the player wants to play another
      * level than the next or current one again after completion. Creates a new level-screen
@@ -154,6 +159,7 @@ public class GameWonScreen implements Screen {
         dispose();
     }
 
+
     /**
      * backToStartScreenEventHandler creates a new instance of start-game and then set the
      * current game to start-screen. Calls dispose() to avoid memory leakage after handling the case.
@@ -163,6 +169,7 @@ public class GameWonScreen implements Screen {
         game.setScreen(game.startScreen);
         dispose();
     }
+
 
     /**
      * addImage Adds and format a background image when the game is won.
@@ -175,10 +182,12 @@ public class GameWonScreen implements Screen {
         stage.addActor(image);
     }
 
+
     @Override
     public void show() {
         Gdx.input.setInputProcessor(stage);
     }
+
 
     @Override
     public void render(float v) {
@@ -187,25 +196,12 @@ public class GameWonScreen implements Screen {
         stage.draw();
     }
 
+
     @Override
     public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);
     }
 
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void hide() {
-
-    }
 
     @Override
     public void dispose() {
@@ -213,5 +209,16 @@ public class GameWonScreen implements Screen {
             imageTexture.dispose();
         }
         stage.dispose();
+    }
+
+
+    @Override
+    public void pause() {
+    }
+    @Override
+    public void resume() {
+    }
+    @Override
+    public void hide() {
     }
 }
