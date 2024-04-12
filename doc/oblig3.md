@@ -226,6 +226,9 @@ Vi har dekket kravet om 75% test coverage med at vi har 75-76% foreløpig.
 For MVC strever vi litt med å lage tester. Det er ikke alt som naturlig la seg teste da de tre klassene henger en del sammen og er ganske avhengig av LibGDX og TiledMap. Dette skaper kluss når man prøver å feks lese map-et fra "assets/maps/map_1.tmx" i feks ModelTest.java. LibGDX klarer ikke finne filen / i feilmeldingen sier den at objektet er `null`. Vi har forsøkt noe med HeadlessApplication osv. men sliter litt.
 Tar gjerne imot tilbakemelding for hvordan man skal løse det. 
 
-Det er også en rar ting med MoustacheManiaTest.java hvor den kjører helt fint alene og klarer testene, men om du kjører alle tester samtidig, så feiler den. Vi har foreløpig forsøkt å lage mock objekter for game slik at vi kan teste create(), render() og dispose() ettersom de samhandler med andre klasser.
-
-
+Det var også en rar ting med MoustacheManiaTest.java hvor den kjører helt fint alene og klarer testene, men om du kjører alle tester samtidig, så feiler den. 
+Vi har foreløpig forsøkt å lage mock objekter for game slik at vi kan teste create(), render() og dispose() ettersom de samhandler med andre klasser.
+Fredag 12.04 klarte vi å løse det. Av en eller annen grunn så ble det ikke nullpointer exception i soundcontroller.dispose() når man gjorde et metodekall
+på backgroundMusic-objektet i SoundController-konstruktøren. Men, da feilet testen haveOneInstance() i SoundControllerTest.java. Dette fikset vi
+med å gjøre at de IKKE lenger var mock objekter ettersom det at de var mock gjorde at de ikke kunne gjøre et metodekall på et objekt
+som var null.
