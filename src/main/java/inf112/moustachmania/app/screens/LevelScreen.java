@@ -100,7 +100,7 @@ public class LevelScreen implements Screen {
     }
 
 
-    /*
+    /**
     adds an internal image to the stage
      */
     private void addImage(String imagePath) {
@@ -112,7 +112,7 @@ public class LevelScreen implements Screen {
     }
 
 
-    /*
+    /**
    currentLevel method return the current level the player is playing.
     */
     public int currentLevel() {
@@ -120,7 +120,7 @@ public class LevelScreen implements Screen {
     }
 
 
-    /*
+    /**
     setCurrentLevel method updates the current level of the game.
      */
     public void setCurrentLevel(int level) {
