@@ -4,6 +4,7 @@ import inf112.moustachmania.app.screens.GameState;
 
 public interface IView {
 
+
     /**
      * Renders the game, updating the screen
      * @param delta time since last render

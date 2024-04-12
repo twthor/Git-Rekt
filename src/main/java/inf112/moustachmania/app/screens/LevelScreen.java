@@ -88,13 +88,19 @@ public class LevelScreen implements Screen {
         }
     }
 
+
+    /**
+     * Adds a back to start-screen button to the given uiRoot
+     * @param uiRoot The table of which the button should be added into.
+     */
     public void backToStartScreenEventHandler() {
         game.startScreen = new StartScreen(game);
         game.setScreen(game.startScreen);
         dispose();
     }
 
-    /*
+
+    /**
     adds an internal image to the stage
      */
     private void addImage(String imagePath) {
@@ -104,6 +110,23 @@ public class LevelScreen implements Screen {
         image.setSize(stage.getWidth(), stage.getHeight());
         stage.addActor(image);
     }
+
+
+    /**
+   currentLevel method return the current level the player is playing.
+    */
+    public int currentLevel() {
+        return currentLevelNumber;
+    }
+
+
+    /**
+    setCurrentLevel method updates the current level of the game.
+     */
+    public void setCurrentLevel(int level) {
+        this.currentLevelNumber = level;
+    }
+
 
     @Override
     public void show() {
@@ -133,6 +156,8 @@ public class LevelScreen implements Screen {
         stage.dispose();
     }
 
+
+
     @Override
     public void pause() {
     }
@@ -141,18 +166,5 @@ public class LevelScreen implements Screen {
     }
     @Override
     public void hide() {
-    }
-
-    /*
-    currentLevel method return the current level the player is playing.
-     */
-    public int currentLevel() {
-        return currentLevelNumber;
-    }
-    /*
-    setCurrentLevel method updates the current level of the game.
-     */
-    public void setCurrentLevel(int level) {
-        this.currentLevelNumber = level;
     }
 }

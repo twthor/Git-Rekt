@@ -17,6 +17,7 @@ public class PauseScreen implements Screen {
     private final Stage stage;
     MoustacheMania game;
 
+
     public PauseScreen(MoustacheMania game) {
         this.stage = new Stage();
         this.game = game;
@@ -61,15 +62,13 @@ public class PauseScreen implements Screen {
 
     }
 
-    // Readies current stage for user input and interaction I think???
+
     @Override
     public void show() {
         Gdx.input.setInputProcessor(stage);
     }
 
-    /*
-    Updates the screen.
-     */
+
     @Override
     public void render(float v) {
         ScreenUtils.clear(0, 0, 0, 1);
@@ -77,34 +76,19 @@ public class PauseScreen implements Screen {
         stage.draw();
     }
 
-    /*
-    Ensures that resume and exit button still work when resizing the screen.
-     */
+
     @Override
     public void resize(int width, int height)  {
         stage.getViewport().update(width, height, true);
     }
 
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void hide() {
-
-    }
 
     @Override
     public void dispose() {
         stage.dispose();
 
     }
+
 
     /**
      * backToStartScreenEventHandler creates a new instance of start-game and then set the
@@ -116,6 +100,7 @@ public class PauseScreen implements Screen {
         dispose();
     }
 
+
     /**
      * handleResumeGameButtonEvent resumes the game after being paused. Puts the game back to
      * the previous current state, then calls dispose afterwards getting rid of textures or similar
@@ -125,6 +110,7 @@ public class PauseScreen implements Screen {
         game.setScreen(game.gameScreen);
         dispose();
     }
+
 
     /**
      * addBackgroundImage Adds and format a background image when the game is paused.
@@ -138,4 +124,14 @@ public class PauseScreen implements Screen {
         stage.addActor(pausedBackgroundImage); // Adds background image to the stage
     }
 
+
+    @Override
+    public void pause() {
+    }
+    @Override
+    public void resume() {
+    }
+    @Override
+    public void hide() {
+    }
 }

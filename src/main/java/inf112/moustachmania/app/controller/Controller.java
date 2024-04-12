@@ -20,6 +20,7 @@ public class Controller implements IController {
         this.model = model;
     }
 
+
     /**
      * Handles player input
      */
@@ -47,6 +48,7 @@ public class Controller implements IController {
             if (!player.grounded) player.state = Player.State.Jumping;
         }
     }
+
 
     @Override
     public void update(float delta) {

@@ -89,13 +89,22 @@ public class SoundController {
         currentGameState = gameState;
     }
 
+
+    /**
+     * Plays the coin sound effect
+     */
     public void playCoinSound() {
         coinSound.play();
     }
 
+
+    /**
+     * Plays the power up sound effect
+     */
     public void playPowerUpSound() {
         powerUpSound.play();
     }
+
 
     /**
      * Sets the player instance to be used by the SoundController.
