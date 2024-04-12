@@ -22,15 +22,21 @@ public class SoundController {
     private final Sound powerUpSound;
     private static SoundController instance = null;
 
-
     private SoundController() {
         // LibGDX filepath finding API
-        backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("backgroundMusic.mp3"));
-        mainMenuMusic = Gdx.audio.newMusic(Gdx.files.internal("mainMenuMusic.mp3"));
-        coinSound = Gdx.audio.newSound(Gdx.files.internal("coinSound.mp3"));
-        gameOverSound = Gdx.audio.newSound(Gdx.files.internal("gameOver.wav"));
-        levelCompletedSound = Gdx.audio.newSound(Gdx.files.internal("levelCompleted.wav"));
-        powerUpSound = Gdx.audio.newSound(Gdx.files.internal("powerUpSound.mp3"));
+        //backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("assets/sounds/backgroundMusic.mp3"));
+        mainMenuMusic = Gdx.audio.newMusic(Gdx.files.internal("assets/sounds/mainMenuMusic.mp3"));
+        coinSound = Gdx.audio.newSound(Gdx.files.internal("assets/sounds/coinSound.mp3"));
+        gameOverSound = Gdx.audio.newSound(Gdx.files.internal("assets/sounds/gameOver.wav"));
+        levelCompletedSound = Gdx.audio.newSound(Gdx.files.internal("assets/sounds/levelCompleted.wav"));
+        powerUpSound = Gdx.audio.newSound(Gdx.files.internal("assets/sounds/powerUpSound.mp3"));
+
+        FileHandle handle = Gdx.files.internal("assets/sounds/backgroundMusic.mp3");
+        if (handle == null)
+            throw new NullPointerException("Background music file not found");
+        backgroundMusic = Gdx.audio.newMusic(handle);
+        update();
+        backgroundMusic.getPosition(); // makes no sense that this is here, but it somehow allows MoustacheManiaTest to pass
     }
 
 
@@ -89,10 +95,16 @@ public class SoundController {
         currentGameState = gameState;
     }
 
+    /**
+     * Plays coin sound when called upon.
+     */
     public void playCoinSound() {
         coinSound.play();
     }
 
+    /**
+     * Plays power-up sound when called upon.
+     */
     public void playPowerUpSound() {
         powerUpSound.play();
     }

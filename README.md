@@ -32,7 +32,7 @@ Musikk:
 - Bakgrunnsmusikk for spillingen - Music by Maksym Dudchyk from Pixabay
   - https://pixabay.com/users/white_records-32584949/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=164704
   - https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=164704
-- Power-up-lyd
+- Plukke-opp-mynt-lyd
   - https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=6768
 - Startskjermmusikk
   - https://pixabay.com/users/jimgor33-5579676/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=145077
@@ -45,3 +45,4 @@ Musikk:
 Bilder/sprites:
 - Mynter
   - https://opengameart.org/content/16x16-spinning-coin-pickup-animation
+- Bildet på LevelScreen, GameWon, GameOver og StartScreen er generert av DALL-E fra ChatGPT.

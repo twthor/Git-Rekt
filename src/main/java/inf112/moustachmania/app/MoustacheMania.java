@@ -68,13 +68,21 @@ public class MoustacheMania extends Game {
     }
 
 
+    /**
+     * Disposes skin, batch, font and sound controller
+     */
     public void dispose() {
+        skin.dispose();
         batch.dispose();
         font.dispose();
         soundController.dispose();
     }
 
 
+    /**
+     * Fetches the current gamestate
+     * @return GameState
+     */
     public GameState getGameState() {
         if (this.getScreen().getClass() == StartScreen.class) {
             return GameState.START_SCREEN;

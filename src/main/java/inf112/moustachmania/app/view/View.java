@@ -1,26 +1,25 @@
 package inf112.moustachmania.app.view;
 
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayers;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import inf112.moustachmania.app.MoustacheMania;
-import inf112.moustachmania.app.model.IModel;
 import inf112.moustachmania.app.model.Model;
 import inf112.moustachmania.app.model.entities.Monster;
 import inf112.moustachmania.app.model.entities.Player;
 import inf112.moustachmania.app.screens.GameState;
 import inf112.moustachmania.app.utils.Constants;
+
 import java.util.ArrayList;
-import java.util.Random;
 
 
 public class View implements IView {
@@ -42,8 +41,6 @@ public class View implements IView {
     private Animation<TextureRegion> coinSpin;
     private Animation<TextureRegion> monsterWalk;
     private final int levelNumber;
-    Random rand = new Random();
-    int numMonsters = rand.nextInt(4);
 
     public View(MoustacheMania game, Model model, int levelNumber) {
         this.game = game;

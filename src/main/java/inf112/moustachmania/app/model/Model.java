@@ -12,8 +12,6 @@ import inf112.moustachmania.app.model.entities.Monster;
 import inf112.moustachmania.app.model.entities.Player;
 import inf112.moustachmania.app.screens.GameOverScreen;
 import inf112.moustachmania.app.screens.GameWonScreen;
-import inf112.moustachmania.app.screens.LevelScreen;
-
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -140,6 +138,10 @@ public class Model implements IModel {
         }
     }
 
+    /**
+     * If a player is landing on top of a monster, it eliminates the monster.
+     * @param player
+     */
     private void eliminateMonster(Player player) {
         Rectangle playerRect = rectPool.obtain();
         playerRect.set(player.position.x, player.position.y, Player.WIDTH, Player.HEIGHT);
@@ -168,6 +170,10 @@ public class Model implements IModel {
         rectPool.free(playerRect); // Free player rectangle from the pool
     }
 
+    /**
+     * If the player overlaps with a coin, the player picks it up.
+     * @param player
+     */
     void pickUpCoins(Player player) {
         Rectangle playerRect = rectPool.obtain();
         playerRect.set(player.position.x, player.position.y, Player.WIDTH, Player.HEIGHT);
@@ -199,6 +205,11 @@ public class Model implements IModel {
         rectPool.free(playerRect);
     }
 
+    /**
+     * Checks to see if the player is overlapping with a power up.
+     * Sets power-up boolean to true on the player if that is the case.
+     * @param player
+     */
     private void checkForPowerUp(Player player) {
         Rectangle playerRect = rectPool.obtain();
         playerRect.set(player.position.x, player.position.y, Player.WIDTH, Player.HEIGHT);
@@ -388,6 +399,10 @@ public class Model implements IModel {
         return player;
     }
 
+    /**
+     * Method that returns an arraylist of the monsters that the model has generated.
+     * @return ArrayList of Monsters
+     */
     public ArrayList<Monster> getMonsters() { return monsters; }
 
     /**
