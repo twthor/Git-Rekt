@@ -42,6 +42,7 @@ public class View implements IView {
     private Animation<TextureRegion> monsterWalk;
     private final int levelNumber;
 
+
     public View(MoustacheMania game, Model model, int levelNumber) {
         this.game = game;
         this.model = model;
@@ -76,6 +77,7 @@ public class View implements IView {
         camera.setToOrtho(false, 30, 20);
     }
 
+
     @Override
     public void render(float delta) {
         ScreenUtils.clear(0, 0, 0, 1);
@@ -95,11 +97,13 @@ public class View implements IView {
         renderMonsters();
     }
 
+
     @Override
     public void dispose() {
         playerTexture.dispose();
         tiledMap.dispose();
     }
+
 
     private void loadMap() {
         tiledMap = new TmxMapLoader().load(Constants.mapPaths[levelNumber]);
@@ -120,6 +124,7 @@ public class View implements IView {
 
     }
 
+
     private void setCameraPosition() {
         // Get the width of the level
         float levelWidth = model.getLevelWidth();
@@ -139,6 +144,7 @@ public class View implements IView {
         // Ensure the interpolated camera position stays within the level bounds
         camera.position.x = Math.max(minX, Math.min(maxX, interpolatedX));
     }
+
 
     private void renderPowerUps() {
         TiledMapTileLayer powerUps = (TiledMapTileLayer) mapLayers.get("powerUp");
@@ -190,6 +196,7 @@ public class View implements IView {
         game.getBatch().end();
     }
 
+
     private void renderCoinScore() {
         Player player = model.getPlayer();
         game.getFont().getData().setScale(0.1f);
@@ -211,9 +218,11 @@ public class View implements IView {
         game.getBatch().end();
     }
 
+
     private void renderMap() {
         tiledMapRenderer.render();
     }
+
 
     private void renderMonsters() {
         Player player = model.getPlayer();
@@ -230,6 +239,7 @@ public class View implements IView {
         }
         game.getBatch().end();
     }
+
 
     private void renderPlayer() {
         Player player = model.getPlayer();
@@ -258,6 +268,7 @@ public class View implements IView {
         game.getBatch().end();
     }
 
+
     private void setNormalPlayerTexture() {
         playerTexture = new Texture(Constants.playerTexture);
         TextureRegion[] regions = TextureRegion.split(playerTexture, 16, 16)[0];
@@ -267,6 +278,7 @@ public class View implements IView {
         jump = new Animation<>(0.1f, regions[5]);
     }
 
+
     private void setPowerUpTexture() {
         playerTexture = new Texture(Constants.playerTexturePU);
         TextureRegion[] regions = TextureRegion.split(playerTexture, 16, 16)[0];
@@ -275,6 +287,7 @@ public class View implements IView {
         walk.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
         jump = new Animation<>(0.1f, regions[5]);
     }
+
 
     @Override
     public GameState getGameState() {

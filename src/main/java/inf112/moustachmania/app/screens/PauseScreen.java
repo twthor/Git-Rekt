@@ -15,8 +15,8 @@ import inf112.moustachmania.app.utils.Constants;
 
 public class PauseScreen implements Screen {
     private final Stage stage;
-    private Texture imageTexture;
     MoustacheMania game;
+
 
     public PauseScreen(MoustacheMania game) {
         this.stage = new Stage();
@@ -42,7 +42,6 @@ public class PauseScreen implements Screen {
             }
         });
         buttonTable.add(resumeGameButton).spaceBottom(10).fillX();
-        //buttonTable.add(resumeGameButton); ???
         buttonTable.row();
 
 
@@ -55,7 +54,6 @@ public class PauseScreen implements Screen {
             }
         });
         buttonTable.add(exitGameButton).spaceBottom(10).fillX();
-        //buttonTable.add(exitGameButton);
         buttonTable.row();
 
         table.add(buttonTable).expand().fill(); // Add buttons to the main table and formats and fill up available space in the table
@@ -64,15 +62,13 @@ public class PauseScreen implements Screen {
 
     }
 
-    // Readies current stage for user input and interaction I think???
+
     @Override
     public void show() {
         Gdx.input.setInputProcessor(stage);
     }
 
-    /*
-    Updates the screen.
-     */
+
     @Override
     public void render(float v) {
         ScreenUtils.clear(0, 0, 0, 1);
@@ -80,28 +76,12 @@ public class PauseScreen implements Screen {
         stage.draw();
     }
 
-    /*
-    Ensures that resume and exit button still work when resizing the screen.
-     */
+
     @Override
     public void resize(int width, int height)  {
         stage.getViewport().update(width, height, true);
     }
 
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void hide() {
-
-    }
 
     @Override
     public void dispose() {
@@ -109,19 +89,32 @@ public class PauseScreen implements Screen {
 
     }
 
+
+    /**
+     * backToStartScreenEventHandler creates a new instance of start-game and then set the
+     * current game to start-screen. Calls dispose() to avoid memory leakage after handling the case.
+     */
     private void handleBackToStartScreenButtonEvent() {
         game.startScreen = new StartScreen(game);
         game.setScreen(game.startScreen);
         dispose();
     }
 
+
+    /**
+     * handleResumeGameButtonEvent resumes the game after being paused. Puts the game back to
+     * the previous current state, then calls dispose afterwards getting rid of textures or similar
+     * which can lead to memory leakage.
+     */
     private void handleResumeGameButtonEvent() {
         game.setScreen(game.gameScreen);
         dispose();
     }
 
-    /*
-    Adds and format background image to the stage
+
+    /**
+     * addBackgroundImage Adds and format a background image when the game is paused.
+     * @param imagePath takes in the local constant path of the image.
      */
     private void addBackgroundImage(String imagePath) {
         Texture imageTexture = new Texture(Gdx.files.internal(imagePath));
@@ -131,4 +124,14 @@ public class PauseScreen implements Screen {
         stage.addActor(pausedBackgroundImage); // Adds background image to the stage
     }
 
+
+    @Override
+    public void pause() {
+    }
+    @Override
+    public void resume() {
+    }
+    @Override
+    public void hide() {
+    }
 }

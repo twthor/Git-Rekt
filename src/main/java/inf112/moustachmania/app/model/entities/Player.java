@@ -29,13 +29,22 @@ public class Player implements IEntity  {
         this.velocity = new Vector2();
     }
 
+
+    /**
+     * Increment the players coin score
+     */
     public void incrementCoinScore() {
         this.coinScore++;
     }
 
+
+    /**
+     * Get the players coin score
+     */
     public int getCoinScore() {
         return this.coinScore;
     }
+
 
     /**
      * Set players power-up boolean
@@ -45,6 +54,7 @@ public class Player implements IEntity  {
         this.powerUp = b;
     }
 
+
     /**
      * The different states the player can be in
      */
@@ -52,21 +62,29 @@ public class Player implements IEntity  {
         Standing, Walking, Jumping
     }
 
+
     @Override
     public Vector2 getPosition() {
         return this.position;
     }
+
 
     @Override
     public Vector2 getVelocity() {
         return this.velocity;
     }
 
+
     @Override
     public void setGrounded(boolean b) {
         this.grounded = b;
     }
 
+
+    /**
+     * Sets the position of the player
+     * @param pos the position to set
+     */
     public void setPosition(Vector2 pos) {
         if (pos == position) {
             return;

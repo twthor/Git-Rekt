@@ -17,6 +17,7 @@ public class StartScreen implements Screen {
     private final Stage stage;
     private final MoustacheMania game;
 
+
     public StartScreen(final MoustacheMania game) {
         this.game = game;
         stage = new Stage();
@@ -32,29 +33,14 @@ public class StartScreen implements Screen {
         Image titleImage = new Image(titleTexture);
         buttonTable.add(titleImage).padBottom(20).row(); // row() puts the image on its own row in buttonTable.
 
-        TextButton textButton = new TextButton("New game", game.getSkin());        //textButton.getLabel().setColor(1, 1, 1, 1);
+        TextButton textButton = new TextButton("New game", game.getSkin());
         textButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 handleNewGameButtonEvent();
             }
         });
-        buttonTable.add(textButton).spaceBottom(10).fillX();
-
-        buttonTable.row();
-        textButton = new TextButton("Continue game?", game.getSkin());
-        textButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                //handleNewGameButtonEvent();
-
-                //mulig flytte dette opp eller til en egen metode
-                game.startScreen = new StartScreen(game);
-                game.setScreen(game.startScreen);
-                //dispose();
-            }
-        });
-        buttonTable.add(textButton).spaceBottom(10).fillX();
+        buttonTable.add(textButton).spaceBottom(12).fillX().row();
 
         // Controller help button
         buttonTable.row();
@@ -63,7 +49,7 @@ public class StartScreen implements Screen {
             public void clicked(InputEvent event, float x, float y) {
                 handleControlsHelpGameButtonEvent();
             }});
-        buttonTable.add(textButton).spaceBottom(10).fillX();
+        buttonTable.add(textButton).spaceBottom(12).fillX();
 
         // Quit game button
         buttonTable.row();
@@ -72,12 +58,11 @@ public class StartScreen implements Screen {
             public void clicked(InputEvent event, float x, float y) {
                 handleExitGameButtonEvent();
         }});
-        buttonTable.add(textButton).spaceBottom(10).fillX();
+        buttonTable.add(textButton).spaceBottom(12).fillX();
 
         // Putting buttons on the screens:
         uiRoot.add(buttonTable).expand().fill();
         stage.addActor(uiRoot);
-
     }
 
 
@@ -102,7 +87,8 @@ public class StartScreen implements Screen {
 
 
     /**
-     * Handles the event when the new game button is clicked
+     * Handles the event when the new game button is clicked. Creates a new level-screen and
+     * sets the current game to that. Disposes the previous stage.
      */
     private void handleNewGameButtonEvent() {
         game.levelScreen = new LevelScreen(game);
@@ -110,8 +96,10 @@ public class StartScreen implements Screen {
         dispose();
     }
 
+
     /**
-     * Handles the event when the controls help button is clicked
+     * Handles the event when the controls help button is clicked. Creates a new help-screen and
+     * sets the current state of the game to that. Disposes the previous stage.
      */
     private void handleControlsHelpGameButtonEvent() {
         game.helpScreen = new HelpScreen(game);
@@ -120,15 +108,19 @@ public class StartScreen implements Screen {
     }
 
 
-    // Closes the game window
+    /**
+     * Closes the game window.
+     */
     private void handleExitGameButtonEvent() {
         Gdx.app.exit();
     }
+
 
     @Override
     public void dispose() {
         stage.dispose();
     }
+
 
     @Override
     public void pause() {}
@@ -136,5 +128,4 @@ public class StartScreen implements Screen {
     public void resume() {}
     @Override
     public void hide() {}
-
 }

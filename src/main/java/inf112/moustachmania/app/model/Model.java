@@ -45,6 +45,7 @@ public class Model implements IModel {
         this.monsters = new Monster().getNewMonsters();
     }
 
+
     /**
      * Updates the model
      * @param deltaTime The time since the last update
@@ -90,6 +91,7 @@ public class Model implements IModel {
         player.velocity.scl(1 / deltaTime);
     }
 
+
     /**
      * When called upon from the controller, the model moves the player to the desired position.
      * @param x input speed from controller. Always 1, but is multiplied with MAX_VELOCITY from Player.java
@@ -99,6 +101,7 @@ public class Model implements IModel {
         checkXCollision(player);
         player.position.add(player.velocity);
     }
+
 
     /**
      * When called upon from the controller, the model makes the player jump
@@ -115,6 +118,7 @@ public class Model implements IModel {
             player.grounded = false;
         }
     }
+
 
     private void moveMonstersAround() {
         for (Monster monster : monsters) {
@@ -138,10 +142,7 @@ public class Model implements IModel {
         }
     }
 
-    /**
-     * If a player is landing on top of a monster, it eliminates the monster.
-     * @param player
-     */
+
     private void eliminateMonster(Player player) {
         Rectangle playerRect = rectPool.obtain();
         playerRect.set(player.position.x, player.position.y, Player.WIDTH, Player.HEIGHT);
@@ -170,10 +171,7 @@ public class Model implements IModel {
         rectPool.free(playerRect); // Free player rectangle from the pool
     }
 
-    /**
-     * If the player overlaps with a coin, the player picks it up.
-     * @param player
-     */
+
     void pickUpCoins(Player player) {
         Rectangle playerRect = rectPool.obtain();
         playerRect.set(player.position.x, player.position.y, Player.WIDTH, Player.HEIGHT);
@@ -205,11 +203,7 @@ public class Model implements IModel {
         rectPool.free(playerRect);
     }
 
-    /**
-     * Checks to see if the player is overlapping with a power up.
-     * Sets power-up boolean to true on the player if that is the case.
-     * @param player
-     */
+
     private void checkForPowerUp(Player player) {
         Rectangle playerRect = rectPool.obtain();
         playerRect.set(player.position.x, player.position.y, Player.WIDTH, Player.HEIGHT);
@@ -240,6 +234,7 @@ public class Model implements IModel {
         rectPool.free(playerRect);
     }
 
+
     /**
      * Check for collision in the x-axis.
      * @param unit checks collision for the current unit in regard to the collision layer from the Tiled map.
@@ -268,6 +263,7 @@ public class Model implements IModel {
         rectPool.free(playerRect);
         checkYCollision(unit);
     }
+
 
     /**
      * Checks collision in the y-axis for the current unit in regard to the collision layer from the Tiled map.
@@ -309,6 +305,7 @@ public class Model implements IModel {
         rectPool.free(playerRect);
     }
 
+
     private void checkPlayerOutOfBounds(Player player) {
         float playerX = player.position.x;
         float playerY = player.position.y;
@@ -322,6 +319,7 @@ public class Model implements IModel {
         }
     }
 
+
     /**
      * Sets the collision map for the model
      * @param collisionLayer The collision map
@@ -329,6 +327,7 @@ public class Model implements IModel {
     public void setCollisionMap(TiledMapTileLayer collisionLayer) {
         this.collisionMap = collisionLayer;
     }
+
 
     /**
      * Sets the models power up layer
@@ -338,6 +337,7 @@ public class Model implements IModel {
         this.powerUpsLayer = powerUps;
     }
 
+
     /**
      * Sets the models coin layer
      * @param coinsLayer TiledMap layer for where the coins are placed
@@ -345,6 +345,7 @@ public class Model implements IModel {
     public void setCoinsLayer(TiledMapTileLayer coinsLayer) {
         this.coinsLayer = coinsLayer;
     }
+
 
     /**
      * Sets the models start position layer
@@ -354,6 +355,7 @@ public class Model implements IModel {
         this.startPosLayer = startPosLayer;
     }
 
+
     /**
      * Sets the models end position layer
      * @param endPosLayer TiledMap layer for where the end position is placed
@@ -361,6 +363,7 @@ public class Model implements IModel {
     public void setEndPosLayer(TiledMapTileLayer endPosLayer){
         this.endPosLayer = endPosLayer;
     }
+
 
     /**
      * Gets the collision map
@@ -391,6 +394,7 @@ public class Model implements IModel {
         return collisionMap.getWidth();
     }
 
+
     /**
      * Gets the player
      * @return The player
@@ -404,6 +408,7 @@ public class Model implements IModel {
      * @return ArrayList of Monsters
      */
     public ArrayList<Monster> getMonsters() { return monsters; }
+
 
     /**
      * Sets the start position for the player
@@ -421,6 +426,7 @@ public class Model implements IModel {
         }
     }
 
+
     /**
      * Sets the end position for the player
      */
@@ -435,6 +441,7 @@ public class Model implements IModel {
             }
         }
     }
+
 
     /**
      * Checks if the player has reached the end position
