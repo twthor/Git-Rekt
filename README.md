@@ -41,8 +41,12 @@ Musikk:
   - https://mixkit.co/free-sound-effects/game-over/
 - Power Up lyd
   - Sound Effect from Pixabay 
-  - https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=88510
+  - https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=88510  
+
 Bilder/sprites:
 - Mynter
   - https://opengameart.org/content/16x16-spinning-coin-pickup-animation
 - Bildet på LevelScreen, GameWon, GameOver og StartScreen er generert av DALL-E fra ChatGPT.
+
+Inspirasjon / hjelp til hvordan kode 2D platformer:
+https://github.com/libgdx/libgdx/blob/master/tests/gdx-tests/src/com/badlogic/gdx/tests/superkoalio/SuperKoalio.java

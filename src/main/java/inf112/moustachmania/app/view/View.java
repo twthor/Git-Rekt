@@ -234,8 +234,14 @@ public class View implements IView {
         // draw the monsters
         game.getBatch().begin();
         for (Monster monster : monsters) {
-            if (monster.isAlive())
-                game.getBatch().draw(monsterWalk.getKeyFrame(player.stateTime), monster.getPosition().x, monster.getPosition().y, monsterWidth, monsterHeight);
+            if (monster.isAlive()) {
+                switch(monster.getMonsterId()) {
+                    case 1:
+                        game.getBatch().draw(monsterWalk.getKeyFrame(player.stateTime), monster.getPosition().x, monster.getPosition().y, monsterWidth, monsterHeight);
+                    case 2:
+                        game.getBatch().draw(monsterWalk.getKeyFrame(player.stateTime), monster.getPosition().x, monster.getPosition().y, monsterWidth, monsterHeight);
+                }
+            }
         }
         game.getBatch().end();
     }
