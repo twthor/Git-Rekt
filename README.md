@@ -23,6 +23,7 @@ Hvordan spille:
   - Fikset.
 - Bug: Spilleren kan gå inn i klosser som egentlig er en del av kollisjon-layer. Dette er gjennom x-aksen. På grunn av dette kan spilleren kjapt gå av en plattform, falle litt ned og så gå tilbake slik at spilleren blir flyttet opp på plattformen igjen. Selv om spilleren treffer midt på boksen.
 Det kan også skje at spilleren løper mot boksen med fart og blir automatisk flytte oppå boksen.
+  - Dette er forbedret, men kan tilsynelatende skje av og til. 
 - Bug: Banen ligger ikke helt kant i kant med skjermen/spillvinduet. Så det er svarte bokser helt til venstre når man laster inn banen og over himmelen i banen.
   - Fikset. Kamera er nå innstilt til å ikke gå forbi kanten av banen samt at vi har økt himmelen i Tiled.
 

@@ -10,7 +10,7 @@ public class MonsterTest {
     Monster monster;
 
     public MonsterTest() {
-        this.monster = new Monster(1);
+        this.monster = new Monster();
     }
 
     /**
@@ -25,11 +25,6 @@ public class MonsterTest {
         monster.setPosition(new Vector2(10, 5));
         assertEquals(10, monster.getPosition().x);
         assertEquals(5, monster.getPosition().y);
-    }
-
-    @Test
-    public void testMonsterId() {
-        assertEquals(1, monster.getMonsterId());
     }
 
     @Test

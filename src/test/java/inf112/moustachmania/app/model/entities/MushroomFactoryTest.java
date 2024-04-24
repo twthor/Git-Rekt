@@ -6,17 +6,17 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class MonsterFactoryTest {
+public class MushroomFactoryTest {
 
-    MonsterFactory monsterFactory;
+    MushroomFactory mushroomFactory;
 
-    public MonsterFactoryTest() {
-        this.monsterFactory = new MonsterFactory();
+    public MushroomFactoryTest() {
+        this.mushroomFactory = new MushroomFactory();
     }
 
     @Test
     public void testCreateMonsters() {
-        ArrayList<Monster> monsters = monsterFactory.createMonsters();
+        ArrayList<Monster> monsters = mushroomFactory.createMonster().getMonsters();
         assertNotNull(monsters);
     }
 }

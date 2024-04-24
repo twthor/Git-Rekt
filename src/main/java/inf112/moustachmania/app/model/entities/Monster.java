@@ -18,18 +18,16 @@ public class Monster implements IEntity {
 
     public static float WIDTH;
     public static float HEIGHT;
-    private int monsterId;
     Random rand = new Random();
 
 
-    public Monster(int monsterId) {
+    public Monster() {
         this.alive = true;
         this.monsters = new ArrayList<>();
         this.position = new Vector2(rand.nextInt(10, 20), 5);
         this.velocity = new Vector2();
         this.grounded = true;
         this.startPosition = new Vector2(position.x, 5);
-        this.monsterId = monsterId;
 
         WIDTH = 1 / 16f;
         HEIGHT = 1 / 16f;
@@ -77,15 +75,6 @@ public class Monster implements IEntity {
      */
     public boolean getGrounded() {
         return this.grounded;
-    }
-
-    // TODO: skrive test
-    /**
-     * Gives you the ID of what kind of monster it is.
-     * @return int ID of monster type.
-     */
-    public int getMonsterId() {
-        return this.monsterId;
     }
 
     /**

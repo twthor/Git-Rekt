@@ -7,10 +7,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
 import inf112.moustachmania.app.MoustacheMania;
 import inf112.moustachmania.app.controller.SoundController;
-import inf112.moustachmania.app.model.entities.IEntity;
-import inf112.moustachmania.app.model.entities.Monster;
-import inf112.moustachmania.app.model.entities.MonsterFactory;
-import inf112.moustachmania.app.model.entities.Player;
+import inf112.moustachmania.app.model.entities.*;
 import inf112.moustachmania.app.screens.GameOverScreen;
 import inf112.moustachmania.app.screens.GameWonScreen;
 import java.util.ArrayList;
@@ -21,6 +18,7 @@ public class Model implements IModel {
     private final Player player;
     private final MoustacheMania game;
     private final ArrayList<Monster> monsters;
+    private final MonsterFactory monsterFactory;
     private TiledMapTileLayer collisionMap;
     private TiledMapTileLayer powerUpsLayer;
     private TiledMapTileLayer coinsLayer;
@@ -43,7 +41,12 @@ public class Model implements IModel {
     public Model(final MoustacheMania game, Player player) {
         this.game = game;
         this.player = player;
-        this.monsters = new MonsterFactory().createMonsters();
+        this.monsters = new ArrayList<>();
+        this.monsterFactory = new MushroomFactory();
+        int numMonsters = rand.nextInt(4) + 1;
+        for (int i = 0; i < numMonsters; i++) {
+            monsters.add(monsterFactory.createMonster());
+        }
     }
 
 
