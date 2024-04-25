@@ -3,8 +3,8 @@ package inf112.moustachmania.app.model.entities;
 public interface MonsterFactory {
 
     /**
-     * Creates an arraylist of monsters.
-     * @return ArrayList of Monster objects.
+     * Creates a monster object
+     * @return Monster
      */
     Monster createMonster();
 
