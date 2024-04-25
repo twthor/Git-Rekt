@@ -23,6 +23,7 @@ Hvordan spille:
   - Fikset.
 - Bug: Spilleren kan gå inn i klosser som egentlig er en del av kollisjon-layer. Dette er gjennom x-aksen. På grunn av dette kan spilleren kjapt gå av en plattform, falle litt ned og så gå tilbake slik at spilleren blir flyttet opp på plattformen igjen. Selv om spilleren treffer midt på boksen.
 Det kan også skje at spilleren løper mot boksen med fart og blir automatisk flytte oppå boksen.
+  - Dette er forbedret, men kan tilsynelatende skje av og til. 
 - Bug: Banen ligger ikke helt kant i kant med skjermen/spillvinduet. Så det er svarte bokser helt til venstre når man laster inn banen og over himmelen i banen.
   - Fikset. Kamera er nå innstilt til å ikke gå forbi kanten av banen samt at vi har økt himmelen i Tiled.
 
@@ -41,8 +42,12 @@ Musikk:
   - https://mixkit.co/free-sound-effects/game-over/
 - Power Up lyd
   - Sound Effect from Pixabay 
-  - https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=88510
+  - https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=88510  
+
 Bilder/sprites:
 - Mynter
   - https://opengameart.org/content/16x16-spinning-coin-pickup-animation
 - Bildet på LevelScreen, GameWon, GameOver og StartScreen er generert av DALL-E fra ChatGPT.
+
+Inspirasjon / hjelp til hvordan kode 2D platformer:
+https://github.com/libgdx/libgdx/blob/master/tests/gdx-tests/src/com/badlogic/gdx/tests/superkoalio/SuperKoalio.java

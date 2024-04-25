@@ -47,8 +47,8 @@ public class Monster implements IEntity {
      * @param monster the monster to eliminate
      */
     public void eliminate(Monster monster) {
-        this.alive = false; // so the view know not to draw the monster anymore.
         monsters.remove(monster); // removing it from the list to prevent the player from colliding with a dead monster
+        this.alive = false; // so the view know not to draw the monster anymore.
     }
 
 
@@ -77,7 +77,6 @@ public class Monster implements IEntity {
         return this.grounded;
     }
 
-
     /**
      * Sets the position of the monster
      * @param pos the position to set
@@ -88,20 +87,6 @@ public class Monster implements IEntity {
         }
         this.position = pos;
     }
-
-
-    /**
-     * Gets the new monsters
-     */
-    public ArrayList<Monster> getNewMonsters() {
-
-        int numMonsters = rand.nextInt(4) + 1; // Generate a random integer between 1 and 4
-        for (int i = 0; i < numMonsters; i++) {
-            monsters.add(new Monster()); // Add new monsters to the list
-        }
-        return this.monsters;
-    }
-
 
     /**
      * Gets the monsters

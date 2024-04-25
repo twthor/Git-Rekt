@@ -7,9 +7,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
 import inf112.moustachmania.app.MoustacheMania;
 import inf112.moustachmania.app.controller.SoundController;
-import inf112.moustachmania.app.model.entities.IEntity;
-import inf112.moustachmania.app.model.entities.Monster;
-import inf112.moustachmania.app.model.entities.Player;
+import inf112.moustachmania.app.model.entities.*;
 import inf112.moustachmania.app.screens.GameOverScreen;
 import inf112.moustachmania.app.screens.GameWonScreen;
 import java.util.ArrayList;
@@ -20,6 +18,7 @@ public class Model implements IModel {
     private final Player player;
     private final MoustacheMania game;
     private final ArrayList<Monster> monsters;
+    private final MonsterFactory monsterFactory;
     private TiledMapTileLayer collisionMap;
     private TiledMapTileLayer powerUpsLayer;
     private TiledMapTileLayer coinsLayer;
@@ -42,7 +41,12 @@ public class Model implements IModel {
     public Model(final MoustacheMania game, Player player) {
         this.game = game;
         this.player = player;
-        this.monsters = new Monster().getNewMonsters();
+        this.monsters = new ArrayList<>();
+        this.monsterFactory = new MushroomFactory();
+        int numMonsters = rand.nextInt(4) + 1;
+        for (int i = 0; i < numMonsters; i++) {
+            monsters.add(monsterFactory.createMonster());
+        }
     }
 
 
@@ -142,10 +146,10 @@ public class Model implements IModel {
         }
     }
 
-
     private void eliminateMonster(Player player) {
         Rectangle playerRect = rectPool.obtain();
         playerRect.set(player.position.x, player.position.y, Player.WIDTH, Player.HEIGHT);
+
 
         for (Monster monster : monsters) {
             Rectangle monsterRect = rectPool.obtain();
@@ -154,23 +158,27 @@ public class Model implements IModel {
             float diffX = Math.abs(player.position.x - monster.getPosition().x);
             float diffY = Math.abs(player.position.y - monster.getPosition().y);
 
-            if (player.position.y > monster.getPosition().y && diffY < 1.0 && diffX < 1.0) { // Player comes from above
-                // Check if player's bottom overlaps with monster's top
-                if (player.position.y + Player.HEIGHT >= monster.getPosition().y + Monster.HEIGHT) {
-                    monster.eliminate(monster); // Player comes from above, eliminate monster
-                    break;
+            if (monster.isAlive()) {
+                if (player.position.y > monster.getPosition().y && diffY < 1.0 && diffX < 1.5) { // Player comes from above
+                    // Check if player's bottom overlaps with monster's top
+                    if (player.position.y + Player.HEIGHT >= monster.getPosition().y + Monster.HEIGHT) {
+                        monster.eliminate(monster); // Player comes from above, eliminate monster
+                        break;
+                    }
+                } else if (diffX < 0.5 && player.position.y == monster.getPosition().y) { // Player collides horizontally
+                    // Check if player's right side overlaps with monster's left side
+                    if (player.position.x + Player.WIDTH >= monster.getPosition().x) {
+                        game.setScreen(new GameOverScreen(game)); // Player dies, set game over screen
+                    } // also want to see if monsters right side overlaps with players left side.
+                    else if (monster.getPosition().x + Monster.WIDTH >= player.position.x) {
+                        game.setScreen(new GameOverScreen(game));
+                    }
                 }
-            } else if (diffX < 0.005) { // Player collides horizontally
-                // Check if player's right side overlaps with monster's left side
-                if (player.position.x + Player.WIDTH >= monster.getPosition().x) {
-                    game.setScreen(new GameOverScreen(game)); // Player dies, set game over screen
-                }
+                rectPool.free(monsterRect); // Free monster rectangle from the pool
             }
-            rectPool.free(monsterRect); // Free monster rectangle from the pool
         }
         rectPool.free(playerRect); // Free player rectangle from the pool
     }
-
 
     void pickUpCoins(Player player) {
         Rectangle playerRect = rectPool.obtain();
