@@ -16,13 +16,4 @@ public interface IView {
      * Gets rid of the view
      */
     void dispose();
-
-
-    /**
-     * Gets the active state of the game
-     * @return the current state of the game
-     */
-    GameState getGameState();
-
-
 }

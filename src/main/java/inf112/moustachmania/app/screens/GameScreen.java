@@ -39,6 +39,7 @@ public class GameScreen implements Screen {
         controller.handleInput();
     }
 
+    
 
     @Override
     public void resize(int i, int i1) {

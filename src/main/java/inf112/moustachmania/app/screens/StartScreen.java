@@ -14,6 +14,7 @@ import inf112.moustachmania.app.MoustacheMania;
 import inf112.moustachmania.app.utils.Constants;
 
 public class StartScreen implements Screen {
+
     private final Stage stage;
     private final MoustacheMania game;
 
@@ -120,6 +121,7 @@ public class StartScreen implements Screen {
     public void dispose() {
         stage.dispose();
     }
+
 
 
     @Override

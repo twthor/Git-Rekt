@@ -146,6 +146,7 @@ public class Model implements IModel {
         }
     }
 
+    
     private void eliminateMonster(Player player) {
         Rectangle playerRect = rectPool.obtain();
         playerRect.set(player.position.x, player.position.y, Player.WIDTH, Player.HEIGHT);
@@ -180,6 +181,7 @@ public class Model implements IModel {
         rectPool.free(playerRect); // Free player rectangle from the pool
     }
 
+    
     void pickUpCoins(Player player) {
         Rectangle playerRect = rectPool.obtain();
         playerRect.set(player.position.x, player.position.y, Player.WIDTH, Player.HEIGHT);
@@ -298,9 +300,6 @@ public class Model implements IModel {
                 // If the player jumps up into a block:
                 if (unit.getVelocity().y > 0) {
                     unit.getPosition().y = tile.y - Player.HEIGHT;
-                    // TODO: implement breaking blocks.
-                    // we hit a block jumping upwards, let's destroy it!
-                    //collisionMap.setCell((int)tile.x, (int)tile.y, null);
                 } else {
                     unit.getPosition().y = tile.y + tile.height;
                     // if we hit the ground, mark us as grounded, so we can jump again

@@ -22,6 +22,7 @@ public class SoundController {
     private final Sound powerUpSound;
     private static SoundController instance = null;
 
+    
     private SoundController() {
         // LibGDX filepath finding API
         //backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("assets/sounds/backgroundMusic.mp3"));
@@ -140,5 +141,4 @@ public class SoundController {
         gameOverSound.dispose();
         levelCompletedSound.dispose();
     }
-
 }
