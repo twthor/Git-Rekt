@@ -32,12 +32,10 @@ Det kan også skje at spilleren løper mot boksen med fart og blir automatisk fl
 Musikk:
 - Bakgrunnsmusikk for spillingen - Music by Maksym Dudchyk from Pixabay
   - https://pixabay.com/users/white_records-32584949/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=164704
-  - https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=164704
 - Plukke-opp-mynt-lyd
   - https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=6768
 - Startskjermmusikk
   - https://pixabay.com/users/jimgor33-5579676/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=145077
-  - https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=145077
 - Game over lyd og level completed lyd
   - https://mixkit.co/free-sound-effects/game-over/
 - Power Up lyd

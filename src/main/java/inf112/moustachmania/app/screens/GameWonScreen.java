@@ -143,7 +143,7 @@ public class GameWonScreen implements Screen {
         game.gameScreen = new GameScreen(game, view, controller, model);
         game.setScreen(game.gameScreen);
         game.levelScreen.setCurrentLevel(levelIndex);
-        model.setEndPosition(); // Ensures the end-position is reset when a level is loaded such that the game registeres when the player has reached the goal.
+        model.setStartPosition(); // Ensures the end-position is reset when a level is loaded such that the game registeres when the player has reached the goal.
         dispose();
     }
 

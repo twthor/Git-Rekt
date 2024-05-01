@@ -6,7 +6,7 @@
 Ingen endringer i situasjonen på hvordan rollene og teamet har funkert.
 
 Det er fortsatt ikke hatt behov for mange andre roller ettersom vi er et lite team.
-Team lead og grafikk ansvarlig og utvikler er mer enn plenti for oss.
+Teamlead og grafikk ansvarlig og utvikler er mer enn plenti for oss.
 Tydelige rammer uten at man gir unødvendige roller for dette prosjektet.
 
 Denne gangen snakker vi mer om opplevelsen for prosjektet gjennom hele semesteret.
@@ -25,8 +25,8 @@ Samt at gruppen ble enig at vi har kommet såpass langt tidlig i prosessen, at �
 Under hele prosjektet har gruppen hatt god kommunikasjon, uavhengig hvem oss som var borte eller om kommunikasjonen var over nett.
 
 **Utvikler (Emil)** - Jeg har mesteparten av tiden jobbet med å implementere nye screens og håndtering av disse. Jeg synes dette har vært greit og det har vært lett å prate og jobbe dynamisk med de andre i teamet for å komme fram til løsinger.
-Tydelige arbedisoppgaver og jevn arbeidsflyt, også tatt i betraktning at arbeidsmengden og flyten har latt seg lett og dynamisk justeres i teamet når andre ting, også krever oppmerksomhet og tid.
-Jeg har trivdes som utvikler under dette prosjektet. Jeg synes oppgavene mine har vært utfordrene nok, gøy og motiverende å se utviklingen. Jeg synes teamet har fungert godt, og funnet ut at
+Tydelige arbedisoppgaver og jevn arbeidsflyt, også tatt i betraktning at arbeidsmengden og flyten har latt seg lett og dynamisk justeres i teamet når andre ting, også har krevet oppmerksomhet og tid.
+Jeg har trivdes som utvikler under dette prosjektet, og synes oppgavene mine har vært utfordrene nok, gøy og motiverende å se utviklingen. Jeg synes teamet har fungert godt, og funnet ut at
 jeg liker å jobbe i team og dynamisk jobbe med andre. Lært å bruke hjelpemidler som Kanban-board og blitt mer kjent med noen arbeidsmetodikker og andre teknikker. Alt i alt kan jeg ikke si annet enn
 at prosjektet vårt har vært en god erfaring og opplevelse.
 
@@ -67,7 +67,7 @@ I begynnelsen av prosjektet var vi litt fortvilet ettersom dette prosjektet var 
 Vi gruet oss også litt til hvordan det skulle gå, men det har i bunn og grunn gått ganske bra når vi ser tilbake på det.
 Vi har hatt god hjelp fra hverandre og medstudenter som har delt erfaringer fra da de hadde emnet selv.
 Mellom oblig1 til oblig2 så opplevde vi et lite gjennombrudd. Det var rundt dette tidspunktet vi klarte å få vist banen
-og plassert spilleren på kartet samt at spilleren kunne bevege seg. Dette var en kjempe boost for gruppen og motivasjoen
+og plassert spilleren på kartet samt at spilleren kunne bevege seg. Dette var en kjempeboost for gruppen og motivasjoen
 økte betraktelig. Etter oblig2 skjøt ting virkelig fart. Da raste vi gjennom MVP-kravene og vi kom oss nesten i mål til oblig3.
 Alle sammen sitter med en ganske positiv opplevelse i siste innspurt mot oblig4 innleveringsfristen.
 
@@ -76,9 +76,9 @@ Dette har fungert bra, og vi har klart å opprettholde god kommunikasjon uavheng
 Vi har også benyttet Git og KanBan-bord som en måte å opprettholde god flyt og kommunikasjon.
 
 Vi har nå til oblig4 ganske likt antall commits, noe vi føler er en bra indikasjon på at det er en grei fordeling av arbeid i gruppen. 
-Commits-ene ligger mellom 45-48, noe vi synes er bra og reflekter over at det er god fordeling av oppgavene mellom oss.
+Commits-ene ligger mellom 46-48, noe vi synes er bra og reflekter over at det er god fordeling av oppgavene mellom oss.
 
-Vi ligger ganske bra an. MVP-kravene er dekket. Brukerhistoriene er også dekket. Vi fjernet også siste kravet (nr. 8), til denne obligen.
+Vi ligger ganske bra an. MVP-kravene er dekket. Brukerhistoriene er også dekket. Vi fjernet også siste kravet (nr. 8), til denne obligen. Se oblig3.md for begrunnelse.
 
 Møtereferater finnes under `doc/møte_referat`. Gjelder uke 16 til uke 18.
 
@@ -114,7 +114,7 @@ Fullførte akseptansekriterier markeres mer ✅.
 
 
 2. **Som en spiller ønsker jeg å kunne styre karakteren min med piltastene slik at jeg kan navigere gjennom nivåene.** ✅
-   Akseptansekriterier:
+   - Akseptansekriterier:
    - Karakteren beveger seg i ønsket retning når piltastene trykkes. ✅
         - Arbeidsoppgaver:    
             - Implementer type event listeners i Controller.java slik at når en spiller trykker på piltast mot venstre så vil controller kalle på en metode hos model som da vil flytte på spilleren. View må da tolke posisjonen slik at den leser den nye posisjonen til spilleren. ✅
@@ -196,7 +196,7 @@ Vi har holdt oss til å kun legge inn arbeidsoppgavene i Kanban board istedenfor
    
 ## Prioriteringer for videre arbeid:
 
-Ting vi satt oss som mål å har fullført til oblig4:
+Ting vi satt oss som mål gjennom alle obligene og har fullført til oblig4:
 - Fikse kollisjon i x-aksen. ✅
 - Når spilleren detter ut, så “dør” spilleren og gamestate setter til GAME_OVER. ✅
 - Lage GAME_OVER screen og håndtere når spilleren dør. ✅
@@ -211,9 +211,12 @@ Ting vi satt oss som mål å har fullført til oblig4:
 - Skrive så mange tester vi klarer så vi er godt over kravet om 75% test coverage. ✅
 
 ## Bugs:
-- Det er en bug hvor man av og til "dør" med en gang man trykker "play again". Vi er ikke helt sikre på hvorfor det skjer.
+- Det er en bug hvor man av og til blir elminiert med en gang man trykker "play again". Vi er ikke helt sikre på hvorfor det skjer.
 En mistanke er at et monster spawner oppå der spilleren starter, men det burde ikke skje ettersom i koden står det at
-monstre skal spawne på et punkt på x-aksen foran spilleren.
+monstre skal spawne på et punkt på x-aksen foran spilleren. 
+Vi fant ut årsaken onsdag 01.05. Grunnen var at i GameWonScreen så ble ikke startposisjonen til spilleren satt. 
+Derfor startet spilleren innenfor rekkevideen til monstrene og et monster kunne dermed spawne oppå spilleren slik at 
+det gikk rett til GameOverScreen. Bug-en er fikset ✅.
 
 Eldre bugs:
 - Bug: spillet fortsetter selv om spilleren har detti ut av banen. ✅
