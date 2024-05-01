@@ -77,6 +77,7 @@ public class Monster implements IEntity {
         return this.grounded;
     }
 
+    
     /**
      * Sets the position of the monster
      * @param pos the position to set
@@ -88,6 +89,7 @@ public class Monster implements IEntity {
         this.position = pos;
     }
 
+    
     /**
      * Gets the monsters
      */

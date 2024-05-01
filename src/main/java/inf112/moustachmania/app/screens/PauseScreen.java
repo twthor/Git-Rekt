@@ -14,6 +14,7 @@ import inf112.moustachmania.app.MoustacheMania;
 import inf112.moustachmania.app.utils.Constants;
 
 public class PauseScreen implements Screen {
+
     private final Stage stage;
     MoustacheMania game;
 
@@ -123,6 +124,7 @@ public class PauseScreen implements Screen {
         pausedBackgroundImage.setSize(stage.getWidth(), stage.getHeight());
         stage.addActor(pausedBackgroundImage); // Adds background image to the stage
     }
+
 
 
     @Override

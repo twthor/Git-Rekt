@@ -91,7 +91,6 @@ public class LevelScreen implements Screen {
 
     /**
      * Adds a back to start-screen button to the given uiRoot
-     * @param uiRoot The table of which the button should be added into.
      */
     public void backToStartScreenEventHandler() {
         game.startScreen = new StartScreen(game);
@@ -101,7 +100,7 @@ public class LevelScreen implements Screen {
 
 
     /**
-    adds an internal image to the stage
+     * adds an internal image to the stage
      */
     private void addImage(String imagePath) {
         imageTexture = new Texture(Gdx.files.internal(imagePath));
@@ -113,7 +112,7 @@ public class LevelScreen implements Screen {
 
 
     /**
-   currentLevel method return the current level the player is playing.
+     * currentLevel method return the current level the player is playing.
     */
     public int currentLevel() {
         return currentLevelNumber;
@@ -121,7 +120,7 @@ public class LevelScreen implements Screen {
 
 
     /**
-    setCurrentLevel method updates the current level of the game.
+      * setCurrentLevel method updates the current level of the game.
      */
     public void setCurrentLevel(int level) {
         this.currentLevelNumber = level;

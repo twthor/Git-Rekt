@@ -16,7 +16,6 @@ import inf112.moustachmania.app.MoustacheMania;
 import inf112.moustachmania.app.model.Model;
 import inf112.moustachmania.app.model.entities.Monster;
 import inf112.moustachmania.app.model.entities.Player;
-import inf112.moustachmania.app.screens.GameState;
 import inf112.moustachmania.app.utils.Constants;
 
 import java.util.ArrayList;
@@ -28,7 +27,6 @@ public class View implements IView {
     private final Model model;
     private OrthogonalTiledMapRenderer tiledMapRenderer;
     private TiledMap tiledMap;
-    private String currentMapPath;
     private MapLayers mapLayers;
     private final OrthographicCamera camera;
     private Texture playerTexture;
@@ -287,12 +285,6 @@ public class View implements IView {
         walk = new Animation<>(0.1f, regions[1], regions[2], regions[3], regions[4]);
         walk.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
         jump = new Animation<>(0.1f, regions[5]);
-    }
-
-
-    @Override
-    public GameState getGameState() {
-        return game.getGameState();
     }
 }
 
